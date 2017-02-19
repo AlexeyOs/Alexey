@@ -10,8 +10,11 @@ public class Point {
 
 	public double distanceTo(Point point) {
 	//calculate distance between two points 
-	double dx = this.x-x;
-	double dy = this.y-y;
-	return Math.sqrt(dx*dx+dy*dy);
+	boolean exists("C:\projects\Alexey\chapter_002\src\java\ru\osetsky\Triangle.java");
+	if (exists("C:\projects\Alexey\chapter_002\src\java\ru\osetsky\Triangle.java")	{
+		double dx = this.x-x;
+		double dy = this.y-y;
+		return Math.sqrt(dx*dx+dy*dy);
+	}
 	}
 }
