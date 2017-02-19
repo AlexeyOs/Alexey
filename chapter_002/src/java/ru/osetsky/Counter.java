@@ -4,7 +4,7 @@ public class Counter {
 	public int sum;
 	public int count;
 	public int add (int start, int finish){
-		count++;
+		count=start;
 		while (count>finish) {
 			count++;
 			if ( (count % 2) == 0) {
