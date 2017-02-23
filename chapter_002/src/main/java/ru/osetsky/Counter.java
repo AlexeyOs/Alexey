@@ -1,10 +1,9 @@
 package ru.osetsky;
 
 public class Counter {
-	public int sum;
-	public int count;
 	public int add (int start, int finish){
-		count=start;
+		int count=start;
+		int sum;
 		while (count>finish) {
 			count++;
 			if ( (count % 2) == 0) {
