@@ -36,7 +36,7 @@
 						<phase>validate</phase>
 						<configuration>
 							<configLocation>checkstyle.xml</configLocation>
-							<enconding>UTF-8</enconding>
+							<encoding>UTF-8</encoding>
 							<consoleOutput>true</consoleOutput>
 							<failsOnError>true</failsOnError>
 							<includeTestSourceDirectory>true</includeTestSourceDirectory>
