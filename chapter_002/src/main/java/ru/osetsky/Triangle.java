@@ -40,7 +40,7 @@ public class Triangle {
 	 */
 	public double area() {
 	//calculate the triangle area
-	this.perimetr = distanceTo(a, b) + distanceTo(b, c) + distanceTo(c, a);
-	return Math.sqrt(perimetr * (perimetr - distanceTo(a, b)) * (primetr - distanceTo(b, c)) * (perimetr - distanceTo(c, a)));
+	this.perimetr = a.distanceTo(b) + b.distanceTo(c) + c.distanceTo(a);
+	return Math.sqrt(perimetr * (perimetr - a.distanceTo(b)) * (perimetr - b.distanceTo(c)) * (perimetr - c.distanceTo(a)));
 	}
 }
