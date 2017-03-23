@@ -13,9 +13,8 @@ public class OrderLiness {
 	 * @return a.
 	 */
 public boolean orderS(int[] a) {
-	boolean sort;
-	sort = true;
-	for (int i = 0; i < a.length; i++) {
+	boolean sort = true;
+	for (int i = 0; i < (a.length - 1); i++) {
 		if (a[i] >= a[i + 1]) {
 			sort = false;
 		}
