@@ -68,6 +68,17 @@ public class Tracker {
 		return result;
 	}
 	/**
+	 * Method getAll.
+	 * @return item Type is class Item.
+	 */
+	public Item[] getAll() {
+		Item[] result = new Item[this.position];
+		for (int i = 0; i != this.position; i++) {
+			result[i] = this.items[i];
+		}
+		return result;
+	}
+	/**
 	 * Method findByName.
 	 * @param name Type is String.
 	 * @return name Type is Item.
@@ -86,7 +97,7 @@ public class Tracker {
 	 * @param id Type is Spring.
 	 * @return result Type is Item.
 	 */
-	public Item findById(String id) {
+	protected Item findById(String id) {
 		Item result = null;
 		for (Item item : items) {
 				if (item != null && item.getId().equals(id)) {

@@ -6,16 +6,18 @@ package ru.osetsky.tracker;
 public class Task extends Item {
 	/**
 	 * Constructor Task.
+	 * @param name It is String.
+	 * @param desc It is String.
 	 */
-    public  Task() {
+    public  Task(String name, String desc) {
+    	this.name = name;
+    	this.description = desc;
 	}
 	/**
-	 * Constructor Task.
-	 * @param name It is String.
-	 * @param description It is String.
-	 * @param create It is long.
+	 * Method calculatePrice.
+	 * @return  100% It is String.
 	 */
-    public Task(String name, String description, long create) {
-        super(name, description, create);
+    public String calculatePrice() {
+    	return "100%";
     }
 }

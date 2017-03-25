@@ -12,11 +12,11 @@ public class Item {
 	/**
 	 * Fild is name.
 	 */
-	private String name;
+	public String name;
 	/**
 	 * Fild is description.
 	 */
-	private String description;
+	public String description;
 	/**
 	 * Fild is create.
 	 */
