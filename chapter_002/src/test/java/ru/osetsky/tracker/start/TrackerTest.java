@@ -3,7 +3,6 @@ package ru.osetsky.tracker.start;
 import org.junit.Before;
 import org.junit.Test;
 import ru.osetsky.tracker.models.Item;
-import ru.osetsky.tracker.models.Task;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -26,7 +25,9 @@ public class TrackerTest {
     @Before
     public final void initialize() {
         tracker = new Tracker();
-        firstTask = new Task("First task", "Task for testing");
+        firstTask = new Item();
+        firstTask.setName("First task");
+        firstTask.setDescription("Task for testing");
         tracker.add(firstTask);
     }
     /**
@@ -43,7 +44,9 @@ public class TrackerTest {
      */
     @Test
     public final void whenEditFirstTaskThenChangeOnTmp() throws Exception {
-        Item tmp = new Task("Edit name", "Edit description");
+        Item tmp = new Item();
+        tmp.setName("Edit name");
+        tmp.setDescription("Edit description");
         tmp.setId(firstTask.getId());
         tracker.update(tmp);
         assertThat(tmp, is(tracker.findAll()[0]));

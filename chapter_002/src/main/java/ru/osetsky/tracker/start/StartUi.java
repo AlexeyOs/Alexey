@@ -1,7 +1,6 @@
 package ru.osetsky.tracker.start;
 
 import ru.osetsky.tracker.models.Item;
-import ru.osetsky.tracker.models.Task;
 
 /**
  * Created by koldy on 25.03.2017.
@@ -43,7 +42,10 @@ public class StartUi {
         int c = input.comand();
         if (c == 0) {
             String name = input.ask("Please, enter the tak's name: ");
-            tracker.add(new Task(name, "first desc"));
+            Item item = new Item();
+            item.setName(name);
+            item.setDescription("first desc");
+            tracker.add(item);
         }
         if (c == 4) {
             String id = input.ask("Please, enter the tak's id: ");
