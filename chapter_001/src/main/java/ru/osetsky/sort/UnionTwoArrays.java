@@ -11,33 +11,30 @@ public class UnionTwoArrays {
      * @return union array.
      */
     public int[] unionTwo(int[] a1, int[] a2) {
-        int[] a = new int[a1.length + a2.length];
+        int l = a1.length + a2.length;
+        int[] a = new int[l];
             int i = 0;
-            for (int j1 = 0; j1 <= a1.length; j1++) {
+            for (int j1 = 0; j1 <= a1.length - 1; j1++) {
                 a[i] = a1[j1];
                 i++;
             }
-            for (int j2 = 0; j2 <= a2.length; j2++) {
+            for (int j2 = 0; j2 <= a2.length - 1; j2++) {
                 a[i] = a2[j2];
                 i++;
             }
-        int sort = 1;
-        int change = 1;
-        while (sort == a.length) {
-            for (i = 0; i < a.length; i++) {
-                if (a[i] >= a[i + 1]) {
+        boolean sort = false;
+        int change;
+        OrderLiness proverka = new OrderLiness();
+        while (!sort) {
+            for (i = 0; i < (a.length - 1); i++) {
+                if (a[i] > a[i + 1]) {
                     change = a[i];
                     a[i] = a[i + 1];
                     a[i + 1] = change;
                 }
             }
-            for (i = 0; i < a.length; i++) {
-                if (a[i] < a[i + 1]) {
-                 sort++;
-                }
-            }
+            sort = proverka.orderS(a);
         }
-
         return a;
     }
 }
