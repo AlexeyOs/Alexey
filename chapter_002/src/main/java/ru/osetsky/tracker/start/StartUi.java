@@ -26,6 +26,14 @@ public class StartUi {
     }
 
     /**
+     * ADD is constant.
+     */
+    static final int ADD = 0;
+    /**
+     * FIND_BY_ID is constant.
+     */
+    static final int FIND_BY_ID = 4;
+    /**
      * Method main.
      * @param args It is String.
      */
@@ -40,14 +48,14 @@ public class StartUi {
         System.out.println("5. Find items by name");
         System.out.println("6. Exit Program");
         int c = input.comand();
-        if (c == 0) {
+        if (c == ADD) {
             String name = input.ask("Please, enter the tak's name: ");
             Item item = new Item();
             item.setName(name);
             item.setDescription("first desc");
             tracker.add(item);
         }
-        if (c == 4) {
+        if (c == FIND_BY_ID) {
             String id = input.ask("Please, enter the tak's id: ");
             tracker.findById(id);
             for (Item item : tracker.getAll()) {
