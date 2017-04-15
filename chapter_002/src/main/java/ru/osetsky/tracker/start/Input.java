@@ -11,11 +11,4 @@ public interface Input {
      */
     String ask(String question);
 
-    /**
-     * Method ask.
-     * @param question It is inquiry.
-     * @param range .
-     * @return .
-     */
-    int ask(String question, int[] range);
 }

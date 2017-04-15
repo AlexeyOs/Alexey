@@ -24,22 +24,37 @@ public class StartUi {
         this.input = input;
         this.tracker = tracker;
     }
-
     /**
      * ADD is constant.
      */
     static final int ADD = 0;
     /**
+     * SHOW is constant.
+     */
+    static final int SHOW = 1;
+    /**
+     * EDIT is constant.
+     */
+    static final int EDIT = 2;
+    /**
+     * DELETE is constant.
+     */
+    static final int DELETE = 3;
+    /**
      * FIND_BY_ID is constant.
      */
     static final int FIND_BY_ID = 4;
     /**
-     * Method main.
-     * @param args It is String.
+     * FIND_BY_NAME is constant.
      */
-    public static void main(String[] args) {
-        ConsoleInput input = new ConsoleInput();
+    static final int FIND_BY_NAME = 5;
+    /**
+     * EXIT is constant.
+     */
+    static final int EXIT = 6;
+    public StartUi init() {
         Tracker tracker = new Tracker();
+        ConsoleInput input = new ConsoleInput();
         System.out.println("0. Add new Item");
         System.out.println("1. Show all items");
         System.out.println("2. Edit item");
@@ -50,18 +65,53 @@ public class StartUi {
         int c = input.comand();
         if (c == ADD) {
             String name = input.ask("Please, enter the tak's name: ");
-            Item item = new Item();
-            item.setName(name);
-            item.setDescription("first desc");
-            tracker.add(item);
+            Item itemStartUi = new Item();
+            itemStartUi.setName(name);
+            itemStartUi.setDescription("first desc");
+            tracker.add(itemStartUi);
+            for (Item item : tracker.getAll()) {
+                System.out.println(item.getName());
+            }
+        }
+        if (c == SHOW) {
+            for (Item item : tracker.getAll()) {
+                System.out.println(item.getName());
+            }
+        }
+        if (c == EDIT) {
+
+        }
+        if (c == DELETE) {
+
         }
         if (c == FIND_BY_ID) {
             String id = input.ask("Please, enter the tak's id: ");
             tracker.findById(id);
             for (Item item : tracker.getAll()) {
+                System.out.println(item.getId());
+                System.out.println(item.getDescription());
+            }
+        }
+        if (c == FIND_BY_NAME) {
+            String name = input.ask("Please, enter the tak's name: ");
+            tracker.findByName(name);
+            for (Item item : tracker.getAll()) {
                 System.out.println(item.getName());
                 System.out.println(item.getDescription());
             }
         }
+        if (c == EXIT) {
+        }
+        return null;
+    }
+
+    /**
+     * Method main.
+     * @param args It is String.
+     */
+    public static void main(String[] args) {
+       Input input = new ConsoleInput();
+       Tracker tracker = new Tracker();
+       new StartUi(input,tracker).init();
     }
 }

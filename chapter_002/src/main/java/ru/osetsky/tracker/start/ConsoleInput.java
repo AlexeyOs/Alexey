@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Created by koldy on 25.03.2017.
  */
-public class ConsoleInput {
+public class ConsoleInput implements Input {
     /**
      * Field is private for scanning information.
      */
