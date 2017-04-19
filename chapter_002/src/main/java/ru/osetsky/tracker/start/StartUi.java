@@ -62,48 +62,80 @@ public class StartUi {
         System.out.println("4. Find item by Id");
         System.out.println("5. Find items by name");
         System.out.println("6. Exit Program");
-        int c = input.comand();
-        if (c == ADD) {
-            String name = input.ask("Please, enter the tak's name: ");
-            Item itemStartUi = new Item();
-            itemStartUi.setName(name);
-            itemStartUi.setDescription("first desc");
-            tracker.add(itemStartUi);
-            for (Item item : tracker.getAll()) {
-                System.out.println(item.getName());
+        int c=input.comand();
+        int k=0;
+        while (c != EXIT) {
+            if (k != 0) {
+                c = input.comand();
             }
-        }
-        if (c == SHOW) {
-            for (Item item : tracker.getAll()) {
-                System.out.println(item.getName());
+            if (c == ADD) {
+                String name = input.ask("Please, enter the tak's name: ");
+                Item itemStartUi = new Item();
+                itemStartUi.setName(name);
+                itemStartUi.setDescription("first desc");
+                tracker.add(itemStartUi);
+                for (Item item : tracker.getAll()) {
+                    System.out.println(item.getName());
+                }
             }
-        }
-        if (c == EDIT) {
+            if (c == SHOW) {
+                for (Item item : tracker.getAll()) {
+                    System.out.println(item.getName());
+                }
+            }
+            if (c == EDIT) {
+                String name = input.ask("Please, enter the tak's name: ");
+                Item itemStartUi = new Item();
+                itemStartUi.setName(name);
+                itemStartUi.setDescription("first desc");
+                tracker.update(itemStartUi);
+                for (Item item : tracker.getAll()) {
+                    System.out.println(item.getName());
+                }
 
-        }
-        if (c == DELETE) {
+            }
+            if (c == DELETE) {
+                String name = input.ask("Please, enter the tak's name: ");
+                Item itemStartUi = new Item();
+                itemStartUi.setName(name);
+                tracker.delete(itemStartUi);
+                for (Item item : tracker.getAll()) {
+                    System.out.println(item.getName());
+                }
 
-        }
-        if (c == FIND_BY_ID) {
-            String id = input.ask("Please, enter the tak's id: ");
-            tracker.findById(id);
-            for (Item item : tracker.getAll()) {
-                System.out.println(item.getId());
-                System.out.println(item.getDescription());
             }
-        }
-        if (c == FIND_BY_NAME) {
-            String name = input.ask("Please, enter the tak's name: ");
-            tracker.findByName(name);
-            for (Item item : tracker.getAll()) {
-                System.out.println(item.getName());
-                System.out.println(item.getDescription());
+            if (c == FIND_BY_ID) {
+                String id = input.ask("Please, enter the tak's id: ");
+                tracker.findById(id);
+                for (Item item : tracker.getAll()) {
+                    System.out.println(item.getId());
+                    System.out.println(item.getDescription());
+                }
             }
-        }
-        if (c == EXIT) {
+            if (c == FIND_BY_NAME) {
+                String name = input.ask("Please, enter the tak's name: ");
+                tracker.findByName(name);
+                for (Item item : tracker.getAll()) {
+                    System.out.println(item.getName());
+                    System.out.println(item.getDescription());
+                }
+            }
+            if (c == EXIT) {
+            }
+            if (c != EXIT) {
+                System.out.println("0. Add new Item");
+                System.out.println("1. Show all items");
+                System.out.println("2. Edit item");
+                System.out.println("3. Delete item");
+                System.out.println("4. Find item by Id");
+                System.out.println("5. Find items by name");
+                System.out.println("6. Exit Program");
+            }
+            k++;
         }
         return null;
     }
+
 
     /**
      * Method main.
