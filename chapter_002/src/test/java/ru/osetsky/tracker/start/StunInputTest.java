@@ -17,6 +17,5 @@ public class StunInputTest {
         Input input = new StunInput(parametr);  //создаём StubInput с последовательностью действий
         StartUi sU = new StartUi(input,tracker).init();//   создаём StartUI и вызываем метод init()
         assertThat(tracker.getAll()[0].getName(), is("name"));// проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
-        assertThat(tracker.getAll()[0].getDescription(), is("desk"));
     }
 }

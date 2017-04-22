@@ -11,4 +11,5 @@ public interface Input {
      */
     String ask(String question);
 
+    int comand();
 }

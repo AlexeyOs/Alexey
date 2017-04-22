@@ -53,8 +53,10 @@ public class StartUi {
      */
     static final int EXIT = 6;
     public StartUi init() {
+        /**
         Tracker tracker = new Tracker();
         ConsoleInput input = new ConsoleInput();
+         */
         System.out.println("0. Add new Item");
         System.out.println("1. Show all items");
         System.out.println("2. Edit item");
@@ -72,7 +74,8 @@ public class StartUi {
                 String name = input.ask("Please, enter the tak's name: ");
                 Item itemStartUi = new Item();
                 itemStartUi.setName(name);
-                itemStartUi.setDescription("first desc");
+                String description = input.ask("Please, enter description");
+                itemStartUi.setDescription(description);
                 tracker.add(itemStartUi);
                 for (Item item : tracker.getAll()) {
                     System.out.println(item.getName());
@@ -121,6 +124,7 @@ public class StartUi {
                 }
             }
             if (c == EXIT) {
+                break;
             }
             if (c != EXIT) {
                 System.out.println("0. Add new Item");
