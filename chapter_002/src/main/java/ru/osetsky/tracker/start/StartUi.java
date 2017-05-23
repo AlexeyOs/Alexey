@@ -1,6 +1,9 @@
 package ru.osetsky.tracker.start;
 
+import ru.osetsky.paint.Strategy;
 import ru.osetsky.tracker.models.Item;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * Created by koldy on 25.03.2017.
@@ -64,11 +67,13 @@ public class StartUi {
         System.out.println("4. Find item by Id");
         System.out.println("5. Find items by name");
         System.out.println("6. Exit Program");
-        int c=input.comand();
+        String comand=input.ask("Select: ");
         int k=0;
+        int c = parseInt(comand);
         while (c != EXIT) {
             if (k != 0) {
-                c = input.comand();
+                comand = input.ask("Select: ");
+                c = parseInt(comand);
             }
             if (c == ADD) {
                 String name = input.ask("Please, enter the tak's name: ");
@@ -83,14 +88,16 @@ public class StartUi {
             }
             if (c == SHOW) {
                 for (Item item : tracker.getAll()) {
-                    System.out.println(item.getName());
+                    System.out.println("Name = "+ item.getName());
+                    System.out.println("Descption = " + item.getDescription());
                 }
             }
             if (c == EDIT) {
-                String name = input.ask("Please, enter the tak's name: ");
+                String name = input.ask("Please, enter the tak's id: ");
                 Item itemStartUi = new Item();
                 itemStartUi.setName(name);
-                itemStartUi.setDescription("first desc");
+                String description = input.ask("Please, enter description");
+                itemStartUi.setDescription(description);
                 tracker.update(itemStartUi);
                 for (Item item : tracker.getAll()) {
                     System.out.println(item.getName());
@@ -98,9 +105,9 @@ public class StartUi {
 
             }
             if (c == DELETE) {
-                String name = input.ask("Please, enter the tak's name: ");
+                String name = input.ask("Please, enter the tak's id: ");
                 Item itemStartUi = new Item();
-                itemStartUi.setName(name);
+                itemStartUi.setId(name);
                 tracker.delete(itemStartUi);
                 for (Item item : tracker.getAll()) {
                     System.out.println(item.getName());

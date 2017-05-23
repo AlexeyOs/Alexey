@@ -38,7 +38,7 @@ public class Tracker {
 	 */
 	public void update(Item item) {
 		for (int i = 0; i != this.items.length; i++) {
-			if (this.items[i] != null && this.items[i].getId() == item.getId()) {
+			if (this.items[i] != null && this.items[i].getId().equals(item.getId())) {
 				this.items[i] = item;
 				break;
 			}
@@ -50,7 +50,7 @@ public class Tracker {
 	 */
 	public void delete(Item item) {
 		for (int i = 0; i != this.items.length; i++) {
-			if (this.items[i] != null && this.items[i].getId() == item.getId()) {
+			if (this.items[i] != null && this.items[i].getId().equals(item.getId())) {
 				this.items[i] = item;
 				break;
 			}

@@ -10,6 +10,4 @@ public interface Input {
      * @return result of method ask.
      */
     String ask(String question);
-
-    int comand();
 }

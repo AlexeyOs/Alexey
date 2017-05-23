@@ -15,7 +15,4 @@ public class StunInput implements Input {
     public String ask(String question){
         return answers[position++];
     }
-    public int comand(){
-        return Integer.parseInt(answers[0]);
-    }
 }
