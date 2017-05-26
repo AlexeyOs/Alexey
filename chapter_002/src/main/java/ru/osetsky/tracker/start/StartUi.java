@@ -97,8 +97,10 @@ public class StartUi {
                 Item itemStartUi = new Item();
                 itemStartUi.setName(name);
                 String description = input.ask("Please, enter description");
+                String oldid = itemStartUi.getId();  //взял старый id
                 itemStartUi.setDescription(description);
                 tracker.update(itemStartUi);
+                itemStartUi.setId(oldid);  //привязал тот же id
                 for (Item item : tracker.getAll()) {
                     System.out.println(item.getName());
                 }
