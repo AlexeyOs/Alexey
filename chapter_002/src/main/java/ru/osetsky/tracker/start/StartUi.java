@@ -93,14 +93,17 @@ public class StartUi {
                 }
             }
             if (c == EDIT) {
-                String name = input.ask("Please, enter the tak's id: ");
+                String name = input.ask("Please, enter tak's name: ");
                 Item itemStartUi = new Item();
                 itemStartUi.setName(name);
                 String description = input.ask("Please, enter description");
-                String oldid = itemStartUi.getId();  //взял старый id
                 itemStartUi.setDescription(description);
-                tracker.update(itemStartUi);
-                itemStartUi.setId(oldid);  //привязал тот же id
+                                                     //как его засунуть в Tracker? это же класс
+                String oldid = itemStartUi.getId();  //взял старый id
+                Item itemStartUiNew = new Item();    //создал новый item
+                itemStartUiNew.setId(oldid);         //привязал тот же id
+                tracker.update(itemStartUiNew);      //вызвал метод update
+                                                     //проверка вроде правильная, я её не трогал
                 for (Item item : tracker.getAll()) {
                     System.out.println(item.getName());
                 }
