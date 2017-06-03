@@ -7,7 +7,7 @@ public class Square implements Shape {
     @Override
     public String pic() {
         StringBuilder builder = new StringBuilder();
-        int h=3;
+        int h = 3;
         for (int i = 0; i <= h; i++) {
             if ((i == 0) | (i == h)) {
                 for (int i2 = 0; i2 < h; i2++) {
