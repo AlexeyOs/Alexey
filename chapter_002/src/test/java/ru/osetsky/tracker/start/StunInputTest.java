@@ -1,10 +1,10 @@
 package ru.osetsky.tracker.start;
 
 import org.junit.Test;
-import ru.osetsky.tracker.models.Item;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.Matchers.nullValue;
 
 /**
  * Created by koldy on 14.04.2017.
@@ -17,7 +17,7 @@ public class StunInputTest {
     public void testStunInputHowUser() {
         Tracker tracker = new Tracker();
         String[] parametr = {"0", "name", "desc", "6"};
-        Input input = new StunInput(parametr);  //создаём StubInput с последовательностью действий
+        Input input = new StunInput(parametr);  //создаём StubInput с последовательносeтью действий
         StartUi sU = new StartUi(input, tracker).init(); // создаём StartUI и вызываем метод init()
         assertThat(tracker.getAll()[0].getName(), is("name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
@@ -27,49 +27,32 @@ public class StunInputTest {
     @Test
     public  void testHowUserAddItem() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item();
-        item1.setName("Alex");
-        item1.setDescription("coder");
-        tracker.add(item1);
-        Item item2 = new Item();
-        item2.setName("Petr");
-        item2.setDescription("teacher");
-        tracker.add(item2);
-        Item[] result = new Item[] {item1, item2};
-        assertThat(tracker.getAll(), is(result));
+        String[] parametr = {"0", "Alex", "coder", "6"};
+        Input input = new StunInput(parametr);
+        StartUi sAdd = new StartUi(input, tracker).init();
+        assertThat(tracker.getAll()[0].getDescription(), is("coder"));
     }
 	/**
-	 * Method is testHowUserFindByNameItem.
+	 * Method is testHowUserAddAndDeleteItem.
 	 */
     @Test
-    public  void testHowUserFindByNameItem() {
+    public  void testHowUserAddAndDeleteItem() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item();
-        item1.setName("Alex");
-        item1.setDescription("coder");
-        tracker.add(item1);
-        Item item2 = new Item();
-        item2.setName("Petr");
-        item2.setDescription("teacher");
-        tracker.add(item2);
-        assertThat(tracker.findByName("Alex"), is(item1));
+        String[] parametr = {"0", "Lala", "coder", "3", "6"};
+        Input input = new StunInput(parametr);
+        StartUi sDelete = new StartUi(input, tracker).init();
+        assertThat(tracker.getAll()[0].getDescription(), is(nullValue()));
     }
-	/**
-	 * Method is testHowUserFindByIdItem.
-	 */
+    /**
+     * Method is testHowUserAddAndDeleteItem2.
+     */
     @Test
-    public  void testHowUserFindByIdItem() {
+    public  void testHowUserAddAndDeleteItem2() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item();
-        item1.setName("Alex");
-        item1.setDescription("coder");
-        tracker.add(item1);
-        Item item2 = new Item();
-        item2.setName("Petr");
-        item2.setDescription("teacher");
-        tracker.add(item2);
-        String inputId = item1.getId();
-        assertThat(tracker.findById(inputId), is(item1));
+        String[] parametr = {"0", "Petr", "teacher", "3", "6"};
+        Input input = new StunInput(parametr);
+        StartUi sAdd = new StartUi(input, tracker).init();
+        assertThat(tracker.getAll()[0].getDescription(), is(nullValue()));
     }
 
 }
