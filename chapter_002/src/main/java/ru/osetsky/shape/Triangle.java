@@ -27,7 +27,7 @@ public class Triangle implements Shape {
 				}
             }
         }
-        return null;
+        return builder.toString();
     }
 
 }

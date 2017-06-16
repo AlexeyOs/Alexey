@@ -25,6 +25,6 @@ public class Square implements Shape {
                 }
             }
         }
-        return null;
+        return builder.toString();
     }
 }

@@ -9,6 +9,5 @@ public class Paint {
 	 * @param shape It is shape.
 	 */
     public void draw(Shape shape) {
-
     }
 }
