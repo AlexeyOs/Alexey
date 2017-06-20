@@ -59,6 +59,7 @@ public class StartUi {
      * @return null .
      */
     public StartUi init() {
+        /**
         System.out.println("0. Add new Item");
         System.out.println("1. Show all items");
         System.out.println("2. Edit item");
@@ -66,6 +67,7 @@ public class StartUi {
         System.out.println("4. Find item by Id");
         System.out.println("5. Find items by name");
         System.out.println("6. Exit Program");
+
         String comand = input.ask("Select: ");
         int k = 0;
         int c = parseInt(comand);
@@ -75,6 +77,7 @@ public class StartUi {
                 c = parseInt(comand);
             }
             if (c == ADD) {
+
                 String name = input.ask("Please, enter the tak's name: ");
                 Item itemStartUi = new Item();
                 itemStartUi.setName(name);
@@ -150,7 +153,15 @@ public class StartUi {
                 System.out.println("6. Exit Program");
             }
             k++;
-        }
+         */
+        Tracker tracker = new Tracker();
+        MenuTracker menu = new MenuTracker(this.input, tracker);
+        menu.fillActions();
+        do {
+            menu.show();
+            int key = Integer.valueOf(input.ask("Select:"));
+            menu.select(key);
+        } while ("y".equals(this.input.ask("Exit? y")));
         return null;
     }
 
