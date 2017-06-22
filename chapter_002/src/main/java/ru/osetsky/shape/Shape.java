@@ -8,6 +8,5 @@ public interface Shape {
 	  * It is not.
 	  * @return It is not.
 	  */
-    public String pic(
-	);
+    public String pic();
 }

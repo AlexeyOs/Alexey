@@ -10,7 +10,6 @@ public class ConsoleInput implements Input {
      * Field is private for scanning information.
      */
     private Scanner scanner = new Scanner(System.in);
-
     /**
      * Method is ask.
      * @param question IT is inquiry.
@@ -18,7 +17,29 @@ public class ConsoleInput implements Input {
      */
     public String ask(String question) {
         System.out.println(question);
-        return scanner.next();
+        return scanner.nextLine();
+    }
+	/**
+     * Method is ask.
+     * @param question IT is inquiry
+	 * @param range It is array type integer.
+     * @return information.
+     */
+    public int ask(String question, int[] range) {
+        int key = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("out of menu range. ");
+        }
     }
 	/**
 	 * Method is comand.

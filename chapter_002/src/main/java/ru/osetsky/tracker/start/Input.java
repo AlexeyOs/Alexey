@@ -10,4 +10,11 @@ public interface Input {
      * @return result of method ask.
      */
     String ask(String question);
+  /**
+     * Field is ask.
+     * @param question It is inquiry
+	 * @param range It is array.
+     * @return result of method ask.
+     */
+    int ask(String question, int[] range);
 }

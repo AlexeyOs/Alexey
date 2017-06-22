@@ -9,13 +9,6 @@ public class Paint {
 	 * @param shape It is shape.
 	 */
     public void draw(Shape shape) {
-		Triangle triangle = new Triangle();
-		Square square = new Square();
-    	if (shape==triangle) {
-			System.out.print(triangle.pic());
-		}
-		if (shape==square) {
-			System.out.print(triangle.pic());
-		}
+	 System.out.print(shape.pic());
     }
 }

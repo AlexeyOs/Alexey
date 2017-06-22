@@ -33,4 +33,14 @@ public class StunInput implements Input {
     public String ask(String question) {
         return answers[position++];
     }
+	/**
+     * Method ask.
+     * @param question It is String
+	 * @param range It is array type integer.
+	 * @return answers It is integer.
+     */
+    public int ask(String question, int[] range) {
+        //throw new UnsupportedOperationException("Unsupported operation");
+        return -1;
+    }
 }
