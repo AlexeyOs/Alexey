@@ -7,25 +7,33 @@ public class Triangle implements Shape {
     @Override
     public String pic() {
         StringBuilder builder = new StringBuilder();
-        int h = 3;
+        int h = 2;
         for (int i = 0; i <= h; i++) {
-            for (int i2 = 0; i2 < i; i2++) {
-                builder.append(" ");
-            }
+           if (i == 0) {
+               for (int i0 = 0; i0 <= h; i0++) {
+                    if (i0 < (h / 2)) {
+                        builder.append(" ");
+                    }
+                    if ((i0 >= (h / 2)) & (i0 <= (h + 1) / 2)) {
+                        builder.append("^");
+                    }
+                    if ((i0 > h / 2) & (i0 > (h + 1) / 2)) {
+                        builder.append(" ");
+                    }
 
-            for (int i2 = 0; i2 <= i; i2++) {
-                builder.append("^");
-                if (i2 > 0) {
-                    builder.append(" ");
-                }
-            }
+               }
+           }
+           if ((i != 0) & (i != h)) {
+                        builder.append("^");
+                        builder.append(" ");
+                        builder.append("^");
+           }
             if (i == h) {
-				for (int i3 = 0; i3 <= i; i3++) {
-                if (i3 > 0) {
-                    builder.append(" ");
-					}
+				for (int i3 = 0; i3 <= h; i3++) {
+                    builder.append("^");
 				}
             }
+            builder.append("\r\n");
         }
         return builder.toString();
     }

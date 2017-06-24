@@ -8,7 +8,7 @@ public class Paint {
 	 * Method is draw.
 	 * @param shape It is shape.
 	 */
-    public void draw(Shape shape) {
+    public static void draw(Shape shape) {
 	 System.out.print(shape.pic());
     }
 }
