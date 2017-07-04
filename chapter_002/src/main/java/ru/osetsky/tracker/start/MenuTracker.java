@@ -59,7 +59,7 @@ public class MenuTracker {
 	/**
      * Interior class AddItem is private.
      */
-    private class AddItem implements UserAction {
+    public class AddItem implements UserAction {
 		/**
 		 * Method key is public.
 		 * @return integer.

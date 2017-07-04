@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Created by koldy on 14.04.2017.
  */
-public class StunInput extends ConsoleInput {
+public class StunInput implements Input {
 	/**
      * Field is answers.
      */
@@ -41,21 +41,18 @@ public class StunInput extends ConsoleInput {
      */
     public int ask(String question, int[] range) {
         //throw new UnsupportedOperationException("Unsupported operation");
-        boolean invalid = true;
-        int value = -1;
-        /**
-         * Operator try for find mistake.
-         */
-        do {
-            try {
-                value = super.ask(question, range);
-                invalid = false;
-            } catch (MenuOutException moe) {
-                System.out.println("Please select key from menu. ");
-            } catch (NumberFormatException nfe) {
-                System.out.println("Please enter validate data again. ");
+        int key = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
             }
-        } while (invalid);
-        return value;
+        }
+        if (exist) {
+            return  key;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
     }
 }
