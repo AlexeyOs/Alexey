@@ -33,6 +33,20 @@ public class StartUi {
     public StartUi init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions();
+        UserAction deleteAction = new UserAction() {
+            public int key() {
+                return 3;
+            }
+
+            public void execute(Input input, Tracker tracker) {
+                //todo
+            }
+
+            public String info() {
+                return "3. Delete";
+            }
+        };
+        menu.addAction(deleteAction);
         do {
             menu.show();
             //int key = Integer.valueOf(input.ask("Select:"));

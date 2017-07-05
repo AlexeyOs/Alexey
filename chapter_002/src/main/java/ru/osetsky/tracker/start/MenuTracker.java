@@ -18,6 +18,7 @@ public class MenuTracker {
      * Array is private.
      */
     private UserAction[] actions = new UserAction[6];
+    private int position = 0;
 	/**
      * Constructor MenuTracker  is public.
 	 * @param input type Input
@@ -32,12 +33,15 @@ public class MenuTracker {
      */
     public void fillActions() {
        //how to fill it
-        this.actions[0] = new AddItem();
-        this.actions[1] = new ShowItems();
-        this.actions[2] = new EditItem();
-        this.actions[3] = new DeleteItem();
-        this.actions[4] = new FindItemById();
-        this.actions[5] = new FindItemByName();
+        this.actions[position++] = new AddItem();
+        this.actions[position++] = new ShowItems();
+        this.actions[position++] = new EditItem();
+        //this.actions[position++] = new DeleteItem();
+        this.actions[position++] = new FindItemById();
+        this.actions[position++] = new FindItemByName();
+    }
+    public void addAction(UserAction action) {
+        this.actions[position++] = action;
     }
 	/**
      * Method select is public.
