@@ -1,6 +1,7 @@
 package ru.osetsky.tracker.start;
 
 import ru.osetsky.tracker.models.Item;
+import ru.osetsky.tracker.templates.BaseAction;
 
 /**
  * Created by koldy on 16.06.2017.
@@ -18,6 +19,9 @@ public class MenuTracker {
      * Array is private.
      */
     private UserAction[] actions = new UserAction[6];
+    /**
+     * Field is position type int.
+     */
     private int position = 0;
 	/**
      * Constructor MenuTracker  is public.
@@ -33,15 +37,12 @@ public class MenuTracker {
      */
     public void fillActions() {
        //how to fill it
-        this.actions[position++] = new AddItem();
-        this.actions[position++] = new ShowItems();
-        this.actions[position++] = new EditItem();
-        //this.actions[position++] = new DeleteItem();
-        this.actions[position++] = new FindItemById();
-        this.actions[position++] = new FindItemByName();
-    }
-    public void addAction(UserAction action) {
-        this.actions[position++] = action;
+        this.actions[position++] = new AddItem(0, "Add");
+        this.actions[position++] = new ShowItems(1, "Show");
+        this.actions[position++] = new EditItem(2, "Edit");
+        this.actions[position++] = new DeleteItem(3, "Delete");
+        this.actions[position++] = new FindItemById(4, "FindId");
+        this.actions[position++] = new FindItemByName(5, "FindName");
     }
 	/**
      * Method select is public.
@@ -63,8 +64,17 @@ public class MenuTracker {
 	/**
      * Interior class AddItem is private.
      */
-    public class AddItem implements UserAction {
-		/**
+    public class AddItem extends BaseAction {
+        /**
+         *
+         * @param key It is Integer
+         * @param name It is String.
+         */
+        AddItem(int key, String name) {
+            super(key, name);
+        }
+
+        /**
 		 * Method key is public.
 		 * @return integer.
 		 */
@@ -95,8 +105,16 @@ public class MenuTracker {
 	/**
      * Interior class ShowItems is private.
      */
-    private static class ShowItems implements UserAction {
-		/**
+    private static class ShowItems extends BaseAction {
+        /**
+         * @param key It is Integer
+         * @param name It is String.
+         */
+        private ShowItems(int key, String name) {
+            super(key, name);
+        }
+
+        /**
 		 * Method key is public.
 		 * @return integer.
 		 */
@@ -124,8 +142,16 @@ public class MenuTracker {
 	/**
      * Interior class EditItem is private.
      */
-    private static class EditItem implements UserAction {
-		/**
+    private static class EditItem extends BaseAction {
+        /**
+         * @param key It is Integer
+         * @param name It is String.
+         */
+        private EditItem(int key, String name) {
+            super(key, name);
+        }
+
+        /**
 		 * Method key is public.
 		 * @return integer.
 		 */
@@ -164,8 +190,16 @@ public class MenuTracker {
 	/**
      * Interior class DeleteItem is private.
      */
-    public static class DeleteItem implements UserAction {
-		/**
+    public static class DeleteItem extends BaseAction {
+        /**
+         * @param key It is Integer
+         * @param name It is String.
+         */
+        public DeleteItem(int key, String name) {
+            super(key, name);
+        }
+
+        /**
 		 * Method key is public.
 		 * @return integer.
 		 */
@@ -200,8 +234,16 @@ public class MenuTracker {
 	/**
      * Interior class FindItemById is private.
      */
-    public static class FindItemById implements UserAction {
-		/**
+    public static class FindItemById extends BaseAction {
+        /**
+         * @param key It is Integer
+         * @param name It is String.
+         */
+        public FindItemById(int key, String name) {
+            super(key, name);
+        }
+
+        /**
 		 * Method key is public.
 		 * @return integer.
 		 */
@@ -236,8 +278,16 @@ public class MenuTracker {
 	/**
      * Interior class FindItemByName is private.
      */
-    public static class FindItemByName implements UserAction {
-		/**
+    public static class FindItemByName extends BaseAction {
+        /**
+         * @param key It is Integer
+         * @param name It is String.
+         */
+        public FindItemByName(int key, String name) {
+            super(key, name);
+        }
+
+        /**
 		 * Method key is public.
 		 * @return integer.
 		 */
