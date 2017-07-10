@@ -24,6 +24,13 @@ public abstract class BaseAction implements UserAction {
         this.description = name;
     }
     /**
+     * Method key is public.
+     * @return key type integer.
+     */
+    public int key(){
+        return key;
+    }
+    /**
      * Method info is public.
      * @return String key and description.
      */

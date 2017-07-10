@@ -73,15 +73,7 @@ public class MenuTracker {
         AddItem(int key, String name) {
             super(key, name);
         }
-
         /**
-		 * Method key is public.
-		 * @return integer.
-		 */
-        public int key() {
-            return 0;
-        }
-		/**
 		 * Method execute is public.
 		 * @param input type Input
 		 * @param tracker type Tracker.
@@ -113,14 +105,6 @@ public class MenuTracker {
         private ShowItems(int key, String name) {
             super(key, name);
         }
-
-        /**
-		 * Method key is public.
-		 * @return integer.
-		 */
-        public int key() {
-            return 1;
-        }
 		/**
 		 * Method execute is public.
 		 * @param input type Input
@@ -150,14 +134,6 @@ public class MenuTracker {
         private EditItem(int key, String name) {
             super(key, name);
         }
-
-        /**
-		 * Method key is public.
-		 * @return integer.
-		 */
-        public int key() {
-			return 2;
-		}
 		/**
 		 * Method execute is public.
 		 * @param input type Input
@@ -198,14 +174,6 @@ public class MenuTracker {
         public DeleteItem(int key, String name) {
             super(key, name);
         }
-
-        /**
-		 * Method key is public.
-		 * @return integer.
-		 */
-        public int key() {
-			return 3;
-		}
 		/**
 		 * Method execute is public.
 		 * @param input type Input
@@ -242,14 +210,6 @@ public class MenuTracker {
         public FindItemById(int key, String name) {
             super(key, name);
         }
-
-        /**
-		 * Method key is public.
-		 * @return integer.
-		 */
-        public int key() {
-			return 4;
-		}
 		/**
 		 * Method execute is public.
 		 * @param input type Input
@@ -286,14 +246,6 @@ public class MenuTracker {
         public FindItemByName(int key, String name) {
             super(key, name);
         }
-
-        /**
-		 * Method key is public.
-		 * @return integer.
-		 */
-        public int key() {
-			return 5;
-		}
 		/**
 		 * Method execute is public.
 		 * @param input type Input
