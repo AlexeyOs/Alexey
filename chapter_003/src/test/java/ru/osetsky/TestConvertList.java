@@ -52,4 +52,18 @@ public class TestConvertList {
         assertThat(testData, is(result));
     }
 
+    /**
+     * Test add List to List_General.
+     */
+    @Test
+    public  void whenListIntegerThenGeneralListInteger() {
+        ConvertList conv = new ConvertList();
+        List<Integer> testData = new ArrayList<Integer>();
+        testData.add(1); testData.add(2); testData.add(3); testData.add(4); testData.add(5); testData.add(6);
+        List<Integer> result;
+        List<int[]> list = new ArrayList<int[]>();
+        list.add(new int[]{1, 2, 3, 4, 5, 6});
+        result = conv.convert(list);
+        assertThat(testData, is(result));
+    }
 }

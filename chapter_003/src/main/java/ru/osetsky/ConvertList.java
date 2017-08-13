@@ -31,20 +31,35 @@ public class ConvertList {
      */
     public int[][] toArray(List<Integer> list, int rows) {
         Iterator<Integer> iter = list.iterator();
-        int stolbec;
+        int stroka;
         if (list.size() % rows == 0) {
-            stolbec = list.size() / rows;
+            stroka = list.size() / rows;
         } else {
-            stolbec = (int) (list.size() / rows) + 1;
+            stroka = (int) (list.size() / rows) + 1;
         }
-        int result[][] = new int[rows][stolbec];
-        for (int i = 0; i < stolbec; i++) {
-            for (int j = 0; j < rows; j++) {
+        int result[][] = new int[rows][stroka];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < stroka; j++) {
                 if (iter.hasNext()) {
                     result[i][j] = iter.next();
                 } else {
                     result[i][j] = 0;
                 }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Method convert add List to List_General.
+     * @param list is List<int[]>.
+     * @return result id type List<Integer>.
+     */
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new ArrayList<Integer>();
+        for (int[] arr : list) {
+            for (int i = 0; i < arr.length; i++) {
+                result.add(arr[i]);
             }
         }
         return result;
