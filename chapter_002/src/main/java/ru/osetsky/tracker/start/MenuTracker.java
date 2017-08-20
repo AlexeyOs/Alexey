@@ -3,6 +3,9 @@ package ru.osetsky.tracker.start;
 import ru.osetsky.tracker.models.Item;
 import ru.osetsky.tracker.templates.BaseAction;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by koldy on 16.06.2017.
  */
@@ -18,7 +21,7 @@ public class MenuTracker {
 	/**
      * Array is private.
      */
-    private UserAction[] actions = new UserAction[6];
+    //private UserAction[] actions = new UserAction[6];
     /**
      * Field is position type int.
      */
@@ -32,24 +35,30 @@ public class MenuTracker {
         this.input = input;
         this.tracker = tracker;
     }
+    List<UserAction> actions = new ArrayList();
 	/**
      * Method fillActions is public.
      */
     public void fillActions() {
        //how to fill it
-        this.actions[position++] = new AddItem(0, "Add");
-        this.actions[position++] = new ShowItems(1, "Show");
-        this.actions[position++] = new EditItem(2, "Edit");
-        this.actions[position++] = new DeleteItem(3, "Delete");
-        this.actions[position++] = new FindItemById(4, "FindId");
-        this.actions[position++] = new FindItemByName(5, "FindName");
+        this.actions.add(position++, new AddItem(0, "Add"));
+        this.actions.add(position++, new ShowItems(1, "Show"));
+        this.actions.add(position++, new EditItem(2, "Edit"));
+        this.actions.add(position++, new DeleteItem(3, "Delete"));
+        this.actions.add(position++, new FindItemById(4, "FindId"));
+        this.actions.add(position++, new FindItemByName(5, "FindName"));
     }
 	/**
      * Method select is public.
 	 * @param key type integer.
      */
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        //this.actions[key].execute(this.input, this.tracker);
+        for (UserAction u : actions){
+            if (u.key()==key) {
+                u.execute(this.input, this.tracker);
+            }
+        }
     }
 	/**
      * Method show is public.
@@ -141,9 +150,17 @@ public class MenuTracker {
 		 */
         public void execute(Input input, Tracker tracker) {
             //изменяет первый элемент
-            Item[] itemAr = new Item[100];     //создал массив, чтобы вытащить id-шник объекта
-            itemAr = tracker.getAll();
-            String oldid = itemAr[0].getId();  //взял старый id первого объекта
+            List<Item> itemAR1= new ArrayList<Item>();
+            //Item[] itemAr = new Item[100];     //создал массив, чтобы вытащить id-шник объекта
+            //for (Item m: itemAR1){
+            itemAR1 = tracker.getAll();
+            //itemAr = tracker.getAll();
+            String oldid ;// = itemAr[0].getId();  //взял старый id первого объекта
+            boolean b =true;
+            for(Item a: itemAR1){
+                if(b){oldid = a.getId();} //!!!объект не инициализируется!!!
+                b=false;
+            }
             String name = input.ask("Please, enter tak's name: ");
             Item itemStartUi = new Item();     //создал новый item
             itemStartUi.setName(name);

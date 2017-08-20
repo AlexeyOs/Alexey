@@ -2,6 +2,8 @@ package ru.osetsky.tracker.start;
 /**
  * Created by koldy on 23.03.2017.
  */
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import ru.osetsky.tracker.models.Item;
 
@@ -13,7 +15,8 @@ public class Tracker {
 	/**
 	 * Array items.
 	 */
-	private Item[] items = new Item[10];
+	//private Item[] items = new Item[10];
+	private List<Item> items = new ArrayList<Item>();
 	/**
 	 * Field is position.
 	 */
@@ -29,7 +32,8 @@ public class Tracker {
 	 */
 	public Item add(Item item) {
 		item.setId(this.generateId());
-		this.items[position++] = item;
+		//this.items[position++] = item;
+		this.items.add(item);
 		return item;
 	}
 	/**
@@ -37,47 +41,57 @@ public class Tracker {
 	 * @param item Type is class Item.
 	 */
 	public void update(Item item) {
-		for (int i = 0; i != this.items.length; i++) {
-			if (this.items[i] != null && this.items[i].getId().equals(item.getId())) {
-				this.items[i] = item;
-				break;
+		for (Item a: items){
+			if (a != null && a.getId().equals(item.getId())){
+				items.set(items.indexOf(a),item);
 			}
 		}
+//		for (int i = 0; i != this.items.length(); i++) {
+//			if (this.items[i] != null && this.items[i].getId().equals(item.getId())) {
+//				this.items[i] = item;
+//				break;
+//			}
+//		}
 	}
 	/**
 	 * Method delete.
 	 * @param item Type is class Item.
 	 */
 	public void delete(Item item) {
-		for (int i = 0; i != this.items.length; i++) {
-			if (this.items[i] != null && this.items[i].getId().equals(item.getId())) {
-				this.items[i] = item;
-				break;
+		for(Item b: items) {
+			if (b != null && b.getId().equals(item.getId())){
+				items.set(items.indexOf(b),item);
 			}
-
 		}
+//		for (int i = 0; i != this.items.length; i++) {
+//			if (this.items[i] != null && this.items[i].getId().equals(item.getId())) {
+//				this.items[i] = item;
+//				break;
+//			}
+//
+//		}
 	}
 	/**
 	 * Method findAll.
 	 * @return item Type is class Item.
 	 */
-	public Item[] findAll() {
-		Item[] result = new Item[this.items.length];
-		for (int i = 0; i != this.items.length; i++) {
-				result[i] = this.items[i];
-		}
-		return result;
+	public List<Item> findAll() {
+//		Item[] result = new Item[this.items.length];
+//		for (int i = 0; i != this.items.length; i++) {
+//				result[i] = this.items[i];
+//		}
+		return this.items;
 	}
 	/**
 	 * Method getAll.
 	 * @return item Type is class Item.
 	 */
-	public Item[] getAll() {
-		Item[] result = new Item[this.position];
-		for (int i = 0; i != this.position; i++) {
-			result[i] = this.items[i];
-		}
-		return result;
+	public List<Item> getAll() {
+//		Item[] result = new Item[this.position];
+//		for (int i = 0; i != this.position; i++) {
+//			result[i] = this.items[i];
+//		}
+		return this.items;
 	}
 	/**
 	 * Method findByName.

@@ -1,5 +1,7 @@
 package ru.osetsky.tracker.start;
 
+import java.util.List;
+
 /**
  * Created by koldy on 25.03.2017.
  */
@@ -7,7 +9,7 @@ public class StartUi {
 	/**
      * Array is integer for menu.
      */
-    private int[] ranges  = new int[] {0, 1, 2, 3, 4, 5};
+    //private int[] ranges  = new int[] {0, 1, 2, 3, 4, 5};
     /**
      * Field input.
      */
@@ -35,9 +37,9 @@ public class StartUi {
         menu.fillActions();
         do {
             menu.show();
-            //int key = Integer.valueOf(input.ask("Select:"));
-            //menu.select(key);
-            menu.select(input.ask("select:", ranges));
+            int key = Integer.valueOf(input.ask("Select:"));
+            menu.select(key);
+            //menu.select(input.ask("select:", ranges));
         } while (!"y".equals(this.input.ask("Exit? y")));
         return null;
     }
