@@ -41,9 +41,9 @@ public class Tracker {
 	 * @param item Type is class Item.
 	 */
 	public void update(Item item) {
-		for (Item a: items){
-			if (a != null && a.getId().equals(item.getId())){
-				items.set(items.indexOf(a),item);
+		for (Item a: items) {
+			if (a != null && a.getId().equals(item.getId())) {
+				items.set(items.indexOf(a), item);
 			}
 		}
 //		for (int i = 0; i != this.items.length(); i++) {
@@ -58,9 +58,9 @@ public class Tracker {
 	 * @param item Type is class Item.
 	 */
 	public void delete(Item item) {
-		for(Item b: items) {
-			if (b != null && b.getId().equals(item.getId())){
-				items.set(items.indexOf(b),item);
+		for (Item b: items) {
+			if (b != null && b.getId().equals(item.getId())) {
+				items.set(items.indexOf(b), item);
 			}
 		}
 //		for (int i = 0; i != this.items.length; i++) {

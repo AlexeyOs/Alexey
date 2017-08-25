@@ -36,7 +36,7 @@ public class TrackerTest {
      */
     @Test
     public final void whenAddNewItemThenAdded() throws Exception {
-        assertThat(firstTask, is(tracker.findAll()[0]));
+        assertThat(firstTask, is(tracker.findAll().get(0)));
     }
     /**
      * Method is whenEditFirstTaskThenChangeOnTmp.
@@ -49,6 +49,6 @@ public class TrackerTest {
         tmp.setDescription("Edit description");
         tmp.setId(firstTask.getId());
         tracker.update(tmp);
-        assertThat(tmp, is(tracker.findAll()[0]));
+        assertThat(tmp, is(tracker.findAll().get(0)));
     }
 }

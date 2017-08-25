@@ -35,7 +35,11 @@ public class MenuTracker {
         this.input = input;
         this.tracker = tracker;
     }
-    List<UserAction> actions = new ArrayList();
+
+    /**
+     * This List is type UserActions.
+     */
+    private List<UserAction> actions = new ArrayList();
 	/**
      * Method fillActions is public.
      */
@@ -54,8 +58,8 @@ public class MenuTracker {
      */
     public void select(int key) {
         //this.actions[key].execute(this.input, this.tracker);
-        for (UserAction u : actions){
-            if (u.key()==key) {
+        for (UserAction u : actions) {
+            if (u.key() == key) {
                 u.execute(this.input, this.tracker);
             }
         }
@@ -150,16 +154,17 @@ public class MenuTracker {
 		 */
         public void execute(Input input, Tracker tracker) {
             //изменяет первый элемент
-            List<Item> itemAR1= new ArrayList<Item>();
+            List<Item> itemAR1 = new ArrayList<Item>();
             //Item[] itemAr = new Item[100];     //создал массив, чтобы вытащить id-шник объекта
             //for (Item m: itemAR1){
             itemAR1 = tracker.getAll();
             //itemAr = tracker.getAll();
-            String oldid ;// = itemAr[0].getId();  //взял старый id первого объекта
-            boolean b =true;
-            for(Item a: itemAR1){
-                if(b){oldid = a.getId();} //!!!объект не инициализируется!!!
-                b=false;
+            String oldid = null;
+            for (Item item: itemAR1) {
+                if (item != null) {
+                    oldid = item.getId();
+                    break;
+                }
             }
             String name = input.ask("Please, enter tak's name: ");
             Item itemStartUi = new Item();     //создал новый item
@@ -198,9 +203,19 @@ public class MenuTracker {
 		 */
         public void execute(Input input, Tracker tracker) {
             //удаляет первый элемент
-            Item[] itemAr = new Item[100];     //создал массив, чтобы вытащить id-шник объекта
-            itemAr = tracker.getAll();
-            String oldid = itemAr[0].getId();  //взял старый id первого объекта
+            List<Item> itemAR1 = new ArrayList<Item>();
+            //Item[] itemAr = new Item[100];     //создал массив, чтобы вытащить id-шник объекта
+            itemAR1 = tracker.getAll();
+           //itemAr = tracker.getAll();
+            //String oldid = itemAr[0].getId();
+            // взял старый id первого объекта
+            String oldid = null;
+            for (Item item: itemAR1) {
+                if (item != null) {
+                    oldid = item.getId();
+                    break;
+                }
+            }
             Item itemDel = new Item();         //создал новый элемент
             itemDel.setId(oldid);
             tracker.delete(itemDel);

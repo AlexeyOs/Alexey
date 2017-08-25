@@ -27,7 +27,7 @@ public abstract class BaseAction implements UserAction {
      * Method key is public.
      * @return key type integer.
      */
-    public int key(){
+    public int key() {
         return key;
     }
     /**

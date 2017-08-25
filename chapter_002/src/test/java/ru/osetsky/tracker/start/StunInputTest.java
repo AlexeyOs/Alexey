@@ -20,7 +20,7 @@ public class StunInputTest {
         MenuTracker menu = new MenuTracker(input, tracker);
         menu.fillActions();
         menu.select(0);
-        assertThat(tracker.getAll()[0].getName(), is("name"));  // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        assertThat(tracker.getAll().get(0).getName(), is("name"));  // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
 	/**
 	 * Method is testHowUserAddItem.
@@ -33,7 +33,7 @@ public class StunInputTest {
         MenuTracker menu = new MenuTracker(input, tracker);
         menu.fillActions();
         menu.select(0);
-        assertThat(tracker.getAll()[0].getDescription(), is("coder"));
+        assertThat(tracker.getAll().get(0).getDescription(), is("coder"));
     }
 	/**
 	 * Method is testHowUserAddAndDeleteItem.
@@ -47,7 +47,7 @@ public class StunInputTest {
         menu.fillActions();
         menu.select(0);
         menu.select(3);
-        assertThat(tracker.getAll()[0].getDescription(), is(nullValue()));
+        assertThat(tracker.getAll().get(0).getDescription(), is(nullValue()));
     }
     /**
      * Method is testHowUserAddAndDeleteItem2.
@@ -61,7 +61,7 @@ public class StunInputTest {
         menu.fillActions();
         menu.select(0);
         menu.select(3);
-        assertThat(tracker.getAll()[0].getDescription(), is(nullValue()));
+        assertThat(tracker.getAll().get(0).getDescription(), is(nullValue()));
     }
     /**
      * Method is testHowUserInputIncorrectValue.
@@ -81,4 +81,5 @@ public class StunInputTest {
         Input input = new StunInput(new String[] {"7", "name", "desc"});
         new StartUi(input, tracker).init();
     }
+
 }
