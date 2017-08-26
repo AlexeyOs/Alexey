@@ -1,4 +1,4 @@
-package ru.osetsky;
+package ru.osetsky.testcollections;
 
 import java.util.Collection;
 import java.util.Iterator;

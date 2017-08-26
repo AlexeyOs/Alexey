@@ -1,4 +1,4 @@
-package ru.osetsky;
+package ru.osetsky.conversion;
 
 import org.junit.Test;
 

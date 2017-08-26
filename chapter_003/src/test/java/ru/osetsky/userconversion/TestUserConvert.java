@@ -1,4 +1,4 @@
-package ru.osetsky;
+package ru.osetsky.userconversion;
 
 import org.junit.Test;
 

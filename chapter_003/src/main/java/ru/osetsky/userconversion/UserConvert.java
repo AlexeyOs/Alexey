@@ -1,4 +1,4 @@
-package ru.osetsky;
+package ru.osetsky.userconversion;
 
 import java.util.HashMap;
 import java.util.List;

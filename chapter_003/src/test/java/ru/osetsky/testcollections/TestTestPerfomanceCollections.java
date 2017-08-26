@@ -1,4 +1,4 @@
-package ru.osetsky;
+package ru.osetsky.testcollections;
 import org.junit.Test;
 
 import java.util.ArrayList;

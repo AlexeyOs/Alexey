@@ -1,4 +1,4 @@
-package ru.osetsky;
+package ru.osetsky.userconversion;
 
 /**
  * Created by koldy on 12.08.2017.

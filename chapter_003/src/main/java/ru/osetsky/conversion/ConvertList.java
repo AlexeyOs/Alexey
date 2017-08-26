@@ -1,4 +1,4 @@
-package ru.osetsky;
+package ru.osetsky.conversion;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -37,7 +37,7 @@ public class ConvertList {
         } else {
             stroka = (int) (list.size() / rows) + 1;
         }
-        int result[][] = new int[rows][stroka];
+        int[][] result = new int[rows][stroka];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < stroka; j++) {
                 if (iter.hasNext()) {
