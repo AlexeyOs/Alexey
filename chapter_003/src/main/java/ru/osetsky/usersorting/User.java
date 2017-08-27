@@ -31,6 +31,13 @@ public class User implements Comparable {
     }
 
     /**
+     * @return name is type String.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * Method compareTo.
      * @param o is Object.
      * @return difference age.
