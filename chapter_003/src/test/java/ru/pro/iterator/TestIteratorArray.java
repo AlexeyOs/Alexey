@@ -16,10 +16,11 @@ public class TestIteratorArray {
     @Test
     public void whenIteratorPutMassive() {
         IteratorArray it = new IteratorArray(new int[][]{{1, 2}, {3, 4}});
-        assertThat(it.next(), is(1));
         it.next();
         it.next();
-        assertThat(it.next(), is(4));
+        it.next();
+        int result = (Integer) it.next();
+        assertThat(result, is(4));
     }
 
     /**
