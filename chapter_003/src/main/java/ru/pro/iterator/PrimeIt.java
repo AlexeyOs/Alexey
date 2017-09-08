@@ -1,6 +1,7 @@
 package ru.pro.iterator;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Created by koldy on 07.09.2017.
@@ -27,13 +28,14 @@ public class PrimeIt implements Iterator {
      */
     @Override
     public boolean hasNext() {
-        boolean f = false;
+        boolean result = false;
         for (int i = index + 1; i < this.arrays.length; i++) {
             if (this.arrays[i] % 2 != 0) {
-                f = true;
+                result = true;
+                break;
             }
         }
-        return f;
+        return result;
     }
     /**
      * Redefine method next.
@@ -42,13 +44,9 @@ public class PrimeIt implements Iterator {
     @Override
     public Object next() {
         if (hasNext()) {
-            for (int i = index + 1; i < this.arrays.length; i++) {
-                if (this.arrays[i] % 2 != 0) {
-                    index = i;
-                    break;
-                }
-            }
+            return this.arrays[index];
+        } else {
+            throw new NoSuchElementException();
         }
-        return this.arrays[index];
     }
 }

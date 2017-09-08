@@ -52,8 +52,7 @@ public class IteratorArray implements Iterator {
             value = 0;
         }
         if (hasNext()) {
-            int result = arrays[count][value++];
-            return result;
+            return arrays[count][value++];
         } else {
             throw new NoSuchElementException();
         }

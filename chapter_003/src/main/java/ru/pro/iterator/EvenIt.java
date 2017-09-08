@@ -1,6 +1,7 @@
 package ru.pro.iterator;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Created by koldy on 06.09.2017.
@@ -29,13 +30,15 @@ public class EvenIt implements Iterator {
      */
     @Override
     public boolean hasNext() {
-        boolean f = false;
+        boolean result = false;
             for (int i = index + 1; i < this.arrays.length; i++) {
                 if (this.arrays[i] % 2 == 0) {
-                    f = true;
+                    result = true;
+                    index = i;
+                    break;
                 }
             }
-       return f;
+       return result;
     }
 
     /**
@@ -45,13 +48,9 @@ public class EvenIt implements Iterator {
     @Override
     public Object next() {
         if (hasNext()) {
-            for (int i = index + 1; i < this.arrays.length; i++) {
-                if (this.arrays[i] % 2 == 0) {
-                    index = i;
-                    break;
-                }
-            }
+            return this.arrays[index];
+        } else {
+            throw new NoSuchElementException();
         }
-        return this.arrays[index];
     }
 }
