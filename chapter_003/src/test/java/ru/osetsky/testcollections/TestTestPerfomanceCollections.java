@@ -40,9 +40,9 @@ public class TestTestPerfomanceCollections {
         System.out.println("TreeSet delete = " + test.delete(tree, 1000000));
     }
      /**
-      * LinkedList add:219     delete:47
-      * ArrayList  add:115     delete:115083
-      * TreeSet    add:732     delete:94
+      * LinkedList add:305    delete:46
+      * ArrayList  add:104    delete:171519
+      * TreeSet    add:938    delete:122
       *
       * Лучшее время по добавлению показал ArrayList, но в тоже время ArrayList был худшим по
       * удалению элементов из массива, так как каждый раз приходится перебирать весь массив, чтобы удалить один элемент

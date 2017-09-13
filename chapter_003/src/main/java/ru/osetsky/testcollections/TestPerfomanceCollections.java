@@ -30,9 +30,11 @@ public class TestPerfomanceCollections {
     public long delete(Collection<String> collection, int amount) {
         long start = System.currentTimeMillis();
         Iterator iter = collection.iterator();
-        while (iter.hasNext()) {
-            iter.next();
-            iter.remove();
+        for (int i = 0; i < amount; i++) {
+            if (iter.hasNext()) {
+                iter.next();
+                iter.remove();
+            }
         }
         long result = System.currentTimeMillis() - start;
         return result;
