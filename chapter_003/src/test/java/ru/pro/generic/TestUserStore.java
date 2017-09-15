@@ -30,7 +30,7 @@ public class TestUserStore {
         User us2 = new User();
         UserStore usStore = new UserStore();
         usStore.add(us1);
-        usStore.update(us1, us2);
+        usStore.update(0, us2);
         SimpleArray<Base> sim = usStore.getSim();
         assertThat(sim.get(0), is(us2));
     }
@@ -41,7 +41,8 @@ public class TestUserStore {
     public void whenDeleteToRoleStore() {
         User us = new User();
         UserStore usStore = new UserStore();
-        usStore.delete(us);
+        usStore.add(us);
+        usStore.delete(0);
         SimpleArray<Base> sim = usStore.getSim();
         assertNull(sim.get(0));
     }

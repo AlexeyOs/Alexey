@@ -15,14 +15,14 @@ public interface Store<T extends Base> {
 
     /**
      * Method update.
-     * @param valueOld is type T.
-     * @param valueNew is type T.
+     * @param indexObject is type integer.
+     * @param object is type T.
      */
-    void update(T valueOld, T valueNew);
+    void update(int indexObject, T object);
 
     /**
      * Method delete.
-     * @param value is type T.
+     * @param objectIndex is type integer.
      */
-    void delete(T value);
+    void delete(int objectIndex);
 }
