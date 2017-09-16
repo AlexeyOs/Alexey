@@ -33,6 +33,18 @@ public class TestPrimeIt {
         assertThat(result, is(7));
     }
     /**
+     * Method whenPrimeItNext3.
+     */
+    @Test
+    public void whenPrimeItNext3() {
+        Iterator it = new PrimeIt(new int[] {3, 4, 5, 6, 7, 9, 10, 11});
+        it.next();
+        it.next();
+        it.next();
+        int result = (Integer) it.next();
+        assertThat(result, is(11));
+    }
+    /**
      * Method whenPrimeItHasNext.
      */
     @Test
