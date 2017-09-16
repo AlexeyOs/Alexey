@@ -12,7 +12,6 @@ import static org.junit.Assert.assertThat;
  * Created by koldy on 07.09.2017.
  */
 public class TestConvertIt {
-
     /**
      * Method is whenSetIterator.
      */
@@ -23,7 +22,7 @@ public class TestConvertIt {
         Iterator<Iterator<Integer>> it = Arrays.asList(it1, it2).iterator();
         Iterator<Integer> convertresult = new ConvertIt().convert(it);
         Iterator<Integer> expect = Arrays.asList(1, 2, 3, 4).iterator();
-        while (convertresult.hasNext()) {
+        if (convertresult.hasNext()) {
             assertThat(convertresult.next(), is(expect.next()));
         }
     }
@@ -42,7 +41,7 @@ public class TestConvertIt {
         ConvertIt iter = new ConvertIt();
         Iterator<Integer> result = iter.convert(it);
 
-        while (result.hasNext()) {
+        if (result.hasNext()) {
             assertThat(result.next(), is(testData.next()));
         }
     }
