@@ -67,7 +67,9 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
     public void delete(int objectIndex) {
         this.simpleArray.delete(objectIndex);
     }
-
+    /**
+     * @return array.
+     */
     public SimpleArray<Base> getSim() {
         return this.simpleArray;
     }

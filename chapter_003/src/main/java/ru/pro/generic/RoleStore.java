@@ -3,7 +3,7 @@ package ru.pro.generic;
 /**
  * Created by koldy on 08.09.2017.
  */
-public class RoleStore extends AbstractStore {
+public class RoleStore extends AbstractStore<Role> {
 //    /**
 //     * Field size is constant of type integer.
 //     */

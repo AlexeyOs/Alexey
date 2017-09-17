@@ -2,6 +2,7 @@ package ru.pro.iterator;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -13,18 +14,24 @@ import static org.junit.Assert.assertThat;
  */
 public class TestConvertIt {
     /**
+     * class object.
+     */
+    private ConvertIt convertIterator;
+    /**
      * Method is whenSetIterator.
      */
     @Test
     public void whenSetIterator() {
         Iterator<Integer> it1 = Arrays.asList(1, 2).iterator();
         Iterator<Integer> it2 = Arrays.asList(3, 4).iterator();
-        Iterator<Iterator<Integer>> it = Arrays.asList(it1, it2).iterator();
-        Iterator<Integer> convertresult = new ConvertIt().convert(it);
-        Iterator<Integer> expect = Arrays.asList(1, 2, 3, 4).iterator();
-        if (convertresult.hasNext()) {
-            assertThat(convertresult.next(), is(expect.next()));
-        }
+        ArrayList<Iterator<Integer>> iterators = new ArrayList<>();
+        iterators.add(it1);
+        iterators.add(it2);
+        Iterator<Iterator<Integer>> it = iterators.iterator();
+        this.convertIterator = new ConvertIt(it);
+        convertIterator.next();
+        int result = convertIterator.next();
+        assertThat(result, is(2));
     }
 
     /**
@@ -35,14 +42,15 @@ public class TestConvertIt {
         Iterator<Integer> it1 = Arrays.asList(4, 2, 0, 4, 6, 4, 9).iterator();
         Iterator<Integer> it2 = Arrays.asList(0, 9, 8, 7, 5).iterator();
         Iterator<Integer> it3 = Arrays.asList(1, 3, 5, 6, 7, 0, 9, 8, 4).iterator();
-        Iterator<Iterator<Integer>> it = Arrays.asList(it1, it2, it3).iterator();
-        Iterator<Integer> testData = Arrays.asList(4, 2, 0, 4, 6, 4, 9, 0, 9, 8, 7, 5, 1, 3, 5, 6, 7, 0, 9, 8, 4).iterator();
-
-        ConvertIt iter = new ConvertIt();
-        Iterator<Integer> result = iter.convert(it);
-
-        if (result.hasNext()) {
-            assertThat(result.next(), is(testData.next()));
-        }
+        ArrayList<Iterator<Integer>> iterators = new ArrayList<>();
+        iterators.add(it1);
+        iterators.add(it2);
+        iterators.add(it3);
+        Iterator<Iterator<Integer>> it = iterators.iterator();
+        convertIterator = new ConvertIt(it);
+        convertIterator.next();
+        convertIterator.next();
+        int result = convertIterator.next();
+        assertThat(result, is(0));
     }
 }
