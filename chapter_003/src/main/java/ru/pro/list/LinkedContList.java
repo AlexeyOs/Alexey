@@ -6,8 +6,11 @@ import java.util.Iterator;
  * Created by koldy on 16.09.2017.
  * @param <T> - generic type.
  */
-public class LinkedContList<T> implements SimpleList {
-
+public class LinkedContList<T> implements SimpleList<T> {
+    /**
+     * current iterator.
+     */
+    private int current = 0;
     /**
      * Node of linkedList.
      * @param <T> - generic type.
@@ -29,7 +32,7 @@ public class LinkedContList<T> implements SimpleList {
     private Node<T> head;
 
     /**
-     * tail if list.
+     * tail of list.
      */
     private Node<T> tail;
 
@@ -38,7 +41,7 @@ public class LinkedContList<T> implements SimpleList {
      * @param value - item to add.
      */
     @Override
-    public void add(Object value) {
+    public void add(T value) {
         Node<T> node  = new Node<>();
         node.value = value;
         if (head == null) {
@@ -69,17 +72,20 @@ public class LinkedContList<T> implements SimpleList {
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            private Node current = head;
+//            private Node current = head;
             @Override
             public boolean hasNext() {
-                return head.next != null;
+                return get(current++) != null;
             }
 
             @Override
             public Object next() {
-                Node<T> result = current;
-                current = current.next;
-                return result;
+//                Node<T> result = current;
+//                current = current.next;
+                T next = get(current);
+                current++;
+
+                return next;
             }
         };
     }

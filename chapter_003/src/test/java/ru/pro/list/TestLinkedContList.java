@@ -34,4 +34,17 @@ public class TestLinkedContList {
         int result = list.get(0);
         assertThat(testData, is(result));
     }
+    /**
+     * Test when Add Integer To LinkedContList.
+     */
+    @Test
+    public void whenGetToLastElementToLinkedContList() {
+        LinkedContList<Integer> list = new LinkedContList();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        int testData = 3;
+        int result = list.get(2);
+        assertThat(testData, is(result));
+    }
 }
