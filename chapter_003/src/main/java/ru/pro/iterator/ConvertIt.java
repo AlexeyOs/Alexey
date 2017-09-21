@@ -34,13 +34,13 @@ public class ConvertIt implements Iterator<Integer> {
     }
     @Override
     public boolean hasNext() {
-        if (currentIterator == null) {
-            return false;
+        boolean result;
+        if (currentIterator != null && currentIterator.hasNext()) {
+            result = true;
+        } else {
+            result = false;
         }
-        if (currentIterator.hasNext()) {
-            return true;
-        }
-        return currentIterator.hasNext();
+        return result;
     }
 
     @Override
