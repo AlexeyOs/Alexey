@@ -1,6 +1,7 @@
 package ru.pro.list;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by koldy on 17.09.2017.
@@ -10,7 +11,7 @@ public class SimpleQueue<T> {
     /**
      * Stack object.
      */
-    private LinkedList<T> container = new LinkedList<T>();
+    private List<T> container = new LinkedList<T>();
     /**
      * index for object container.
      */
@@ -24,6 +25,7 @@ public class SimpleQueue<T> {
         if (index > 0) {
             result = container.get(0);
             container.remove(0);
+            index--;
         }
         return result;
     }

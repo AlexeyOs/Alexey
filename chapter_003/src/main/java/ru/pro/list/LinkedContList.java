@@ -1,6 +1,7 @@
 package ru.pro.list;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Created by koldy on 16.09.2017.
@@ -82,10 +83,13 @@ public class LinkedContList<T> implements SimpleList<T> {
             public Object next() {
 //                Node<T> result = current;
 //                current = current.next;
-                T next = get(current);
-                current++;
-
-                return next;
+               if (hasNext()) {
+                   T next = get(current);
+                   current++;
+                   return next;
+               } else {
+                   throw new NoSuchElementException();
+               }
             }
         };
     }
