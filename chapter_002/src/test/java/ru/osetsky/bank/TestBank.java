@@ -21,7 +21,7 @@ public class TestBank {
         bank.maxcountpeople(12, "name2");
         bank.maxcountpeople(13, "name3");
         bank.maxcountpeople(14, "name4");
-        long result[] = {5, 14};
+        long[] result = {5, 14};
         assertThat(bank.maxcountpeople(7, "name7"), is(result));
     }
 }
