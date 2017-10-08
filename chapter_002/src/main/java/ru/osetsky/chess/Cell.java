@@ -25,24 +25,6 @@ public class Cell {
     }
 
     /**
-     * get axis X.
-     *
-     * @return X.
-     */
-    public int getAxisX() {
-        return axisX;
-    }
-
-    /**
-     * get axis Y.
-     *
-     * @return Y.
-     */
-    public int getAxisY() {
-        return axisY;
-    }
-
-    /**
      * set axis X.
      *
      * @param axisX X.
@@ -58,6 +40,23 @@ public class Cell {
      */
     public void setAxisY(int axisY) {
         this.axisY = axisY;
+    }
+    /**
+     * get axis X.
+     *
+     * @return X.
+     */
+    public int getAxisX() {
+        return axisX;
+    }
+
+    /**
+     * get axis Y.
+     *
+     * @return Y.
+     */
+    public int getAxisY() {
+        return axisY;
     }
 
     /**

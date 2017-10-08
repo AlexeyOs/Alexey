@@ -59,8 +59,9 @@ public class Board {
 
         // if conditions is true, move figure at destenation.
 
-        figure.getPosition().setAxisX(distanse.getAxisX());
-        figure.getPosition().setAxisY(distanse.getAxisY());
+//        figure.getPosition().setAxisX(distanse.getAxisX());
+//        figure.getPosition().setAxisY(distanse.getAxisY());
+        figure.clone(distanse);
         return result;
     }
 

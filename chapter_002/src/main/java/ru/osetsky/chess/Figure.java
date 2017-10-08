@@ -63,6 +63,12 @@ public abstract class Figure {
         }
         return moves;
     }
+    /**
+     * cope figure in this cell.
+     * @param destance - finish way.
+     * @return new figure.
+     */
+    abstract Figure clone(Cell destance);
 
     /**
      * method show position.
