@@ -85,7 +85,7 @@ public class User {
             return false;
         }
         User user = (User) o;
-        if (name != null && birthday != null ? name.equals(user.name) && birthday.equals(user.birthday) : user.name != null && user.birthday != null) {
+        if (name != null && birthday != null ? !name.equals(user.name) || !birthday.equals(user.birthday) : user.name != null && user.birthday != null) {
             return false;
         }
         return true;
