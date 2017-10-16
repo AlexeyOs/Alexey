@@ -25,7 +25,8 @@ public class TestUser {
         Calendar birthday = new GregorianCalendar(1997, 01, 05);
         User user1 = new User("Vika", 0, birthday);
         User user2 = new User("Vika", 0, birthday);
-
+        map.put(user1, "123");
+        map.put(user2, "124");
         Iterator<Map.Entry<User, String>> iterator = map.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<User, String>  changer = iterator.next();
