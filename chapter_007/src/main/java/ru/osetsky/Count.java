@@ -72,11 +72,22 @@ public class Count {
 
     /**
      * @param args - default.
+     * @throws InterruptedException - Exception.
      */
-    public static void main(String[] args) {
-        System.out.println("start");
-        new Thread(new CountSpace("в лесу родилась елочка")).start();
-        new Thread(new CountWord("в лесу она росла")).start();
-        System.out.println("finish");
+    public static void main(String[] args) throws InterruptedException {
+        Thread first = new Thread(new CountSpace("в лесу родилась елочка"));
+        Thread second = new Thread(new CountWord("в лесу она росла"));
+        double startTime = System.currentTimeMillis();
+        first.start();
+        System.out.println("First is started.");
+        second.start();
+        System.out.println("Second is started.");
+        while (first.isAlive() && second.isAlive()) {
+            System.out.println("waiting...");
+            if (System.currentTimeMillis() - startTime > 1) {
+                    first.interrupt();
+                    second.interrupt();
+            }
+        }
     }
 }
