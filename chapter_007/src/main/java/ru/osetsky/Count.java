@@ -66,6 +66,9 @@ public class Count {
                     countSpace++;
                 }
             }
+            if (Thread.currentThread().isInterrupted()) {
+                System.out.println("Thread words is interrupted.");
+            }
             System.out.println("countSpace" + ':' + countSpace);
         }
     }
@@ -83,8 +86,10 @@ public class Count {
         second.start();
         System.out.println("Second is started.");
         while (first.isAlive() && second.isAlive()) {
+            first.sleep(1000);
+            second.sleep(1000);
             System.out.println("waiting...");
-            if (System.currentTimeMillis() - startTime > 1) {
+            if (System.currentTimeMillis() - startTime > 1000) {
                     first.interrupt();
                     second.interrupt();
             }
