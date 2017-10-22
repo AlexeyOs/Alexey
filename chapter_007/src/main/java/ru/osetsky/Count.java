@@ -25,12 +25,16 @@ public class Count {
          */
         @Override
     public void run() {
+        System.out.println("Second is started.");
         int countSpace = 0;
         int countWord = 0;
         for (int i = 0; i < this.line.length(); i++) {
             char a = this.line.charAt(i);
             if (a == ' ') {
                 countSpace++;
+            }
+            if (Thread.currentThread().isInterrupted()) {
+                System.out.println("Thread words is interrupted.");
             }
         }
         countWord = countSpace + 1;
@@ -59,15 +63,16 @@ public class Count {
          */
         @Override
         public void run() {
+            System.out.println("First is started.");
             int countSpace = 0;
             for (int i = 0; i < this.line.length(); i++) {
                 char a = line.charAt(i);
                 if (a == ' ') {
                     countSpace++;
                 }
-            }
-            if (Thread.currentThread().isInterrupted()) {
-                System.out.println("Thread words is interrupted.");
+                if (Thread.currentThread().isInterrupted()) {
+                    System.out.println("Thread words is interrupted.");
+                }
             }
             System.out.println("countSpace" + ':' + countSpace);
         }
@@ -82,17 +87,11 @@ public class Count {
         Thread second = new Thread(new CountWord("в лесу она росла"));
         double startTime = System.currentTimeMillis();
         first.start();
-        System.out.println("First is started.");
         second.start();
-        System.out.println("Second is started.");
-        while (first.isAlive() && second.isAlive()) {
-            first.sleep(1000);
-            second.sleep(1000);
-            System.out.println("waiting...");
-            if (System.currentTimeMillis() - startTime > 1000) {
+        System.out.println("waiting...");
+        if (System.currentTimeMillis() - startTime > 1000) {
                     first.interrupt();
                     second.interrupt();
-            }
         }
     }
 }
