@@ -88,10 +88,9 @@ public class Count {
         double startTime = System.currentTimeMillis();
         first.start();
         second.start();
+        Thread.currentThread().sleep(1000);
         System.out.println("waiting...");
-        if (System.currentTimeMillis() - startTime > 1000) {
-                    first.interrupt();
-                    second.interrupt();
-        }
+        first.interrupt();
+        second.interrupt();
     }
 }
