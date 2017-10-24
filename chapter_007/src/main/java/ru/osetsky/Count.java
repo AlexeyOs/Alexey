@@ -35,6 +35,7 @@ public class Count {
             }
             if (Thread.currentThread().isInterrupted()) {
                 System.out.println("Thread words is interrupted.");
+                break;
             }
         }
         countWord = countSpace + 1;
@@ -72,6 +73,7 @@ public class Count {
                 }
                 if (Thread.currentThread().isInterrupted()) {
                     System.out.println("Thread words is interrupted.");
+                    break;
                 }
             }
             System.out.println("countSpace" + ':' + countSpace);
