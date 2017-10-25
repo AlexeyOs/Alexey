@@ -7,44 +7,154 @@ import java.util.Iterator;
  */
 public class ReferenceBook<T, V> implements Iterable {
     private int size = 0;
+    private final int initialref = 10;
+    boolean isNullKeyExist = false;
     /**
      * Массив, элементы которого будут добавляться в справочник.
      */
-    private Node<T, V>[] nodes;
-//    public boolean insert(T key, V value) {
-//
-//    }
-//    V get(T key) {
-//
-//    }
-//    boolean delete(T key){
-//        return true;
-//    }
-
-    @Override
-    public Iterator iterator() {
-        return new Iterator() {
-            @Override
-            public boolean hasNext() {
-                return false;
+    private Node<T, V>[] nodes = (Node<T, V>[]) new Node[this.initialref];
+    public boolean insert(T key, V value) {
+        if (this.size == this.nodes.length) {
+            this.grow();
+        }
+        if (key == null) {
+            this.addNullKey(value);
+        } else {
+            int hash = (key.hashCode());
+            int position = this.getPosition(hash);
+            for (Node n = this.nodes[position]; n != null; n.next()) {
+                Object k;
+                if (n.hash == hash && ((k = n.key) == key || key.equals(k))) {
+                    n.value = value;
+                    return true;
+                }
             }
+            this.addEntry(hash, key, value, position);
+            this.size++;
+        }
+        return true;
+    }
+    private void addNullKey(V value) {
+        if (!this.isNullKeyExist) {
+            this.size++;
+            this.isNullKeyExist = true;
+        }
+        this.nodes[0] = new Node<>(0, null, value, null);
 
-            @Override
-            public Object next() {
-                return null;
+    }
+    public V get(T key) {
+        int hash;
+        int position;
+        V returnValue = null;
+        if (key != null) {
+            hash = (key.hashCode());
+            position = this.getPosition(hash);
+        } else {
+            hash = 0;
+            position = 0;
+        }
+        for (Node n = this.nodes[position]; n != null; n.next()) {
+            Object k;
+            if (n.hash == hash && ((k = n.key) == key || key.equals(k))) {
+                returnValue = (V) n.value;
+                break;
             }
-        };
+        }
+        return returnValue;
+    }
+    boolean delete(T key) {
+        boolean returnValue = false;
+        int hash = (key.hashCode());
+        int position = this.getPosition(hash);
+        for (Node n = this.nodes[position]; n != null; n.next()) {
+            Object k;
+            if (n.hash == hash && ((k = n.key) == key || key.equals(k))) {
+                this.nodes[position] = n.next();
+                returnValue = true;
+                break;
+            }
+        }
+        return returnValue;
+    }
+
+    public Iterator<Node> iterator() {
+        return new ThisIterator<>();
+    }
+    private class ThisIterator<T, V> implements Iterator {
+        int index = 0;
+        int nodesNumber = 0;
+        ReferenceBook.Node current;
+        boolean inLoop = false;
+
+        @Override
+        public boolean hasNext() {
+            boolean hasNext = false;
+            if (!inLoop) {
+                if (nodes[this.index] == null || nodes[this.index].next() == null) {
+                    hasNext = this.nodesNumber < size;
+                } else {
+                    this.inLoop = true;
+                    this.current = this.current.next();
+                    hasNext = true;
+                }
+            } else {
+                if (nodes[this.index].next == null) {
+                    hasNext = this.nodesNumber < size;
+                    this.inLoop = false;
+                } else {
+                    this.inLoop = true;
+                    hasNext = true;
+                }
+            }
+            return hasNext;
+        }
+
+        @Override
+        public V next() {
+            V value = null;
+            ReferenceBook.Node o = null;
+            if ((!inLoop)) {
+                o = nodes[this.index++];
+            } else {
+                o = this.current;
+                this.current = this.current.next();
+                this.nodesNumber++;
+            }
+            if (o != null) {
+                value = (V) o.getValue();
+                this.nodesNumber++;
+            }
+            return value;
+        }
+    }
+
+    private void addEntry(int hash, T key, V value, int index) {
+        Node n = this.nodes[index];
+        if (n == null) {
+            this.nodes[index] = new Node(hash, key, value, n);
+        } else {
+            n.next = new Node(hash, key, value, n);
+        }
+    }
+
+    private int getPosition(int hash) {
+        return Math.abs(hash % (this.nodes.length - 1));
+    }
+    private void grow() {
+        Node[] newNodes = (Node[]) new Object[this.nodes.length >> 1];
+        System.arraycopy(this.nodes, 0, newNodes, 0, this.nodes.length);
+        this.nodes = newNodes;
     }
 
     private class Node<T, V> {
-        private int key;
         private int hash;
+        private T key;
         private V value;
         private Node<T, V> next;
 
-        public Node(int key, int hash, V value, Node<T, V> next) {
-            this.key = key;
+        public Node(int hash, T key, V value, Node<T, V> next) {
             this.hash = hash;
+            this.key = key;
             this.value = value;
             this.next = next;
         }
