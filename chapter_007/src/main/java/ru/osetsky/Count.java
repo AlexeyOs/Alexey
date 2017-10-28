@@ -5,94 +5,109 @@ package ru.osetsky;
  */
 public class Count {
     /**
-     * Class is calculate count words in input String.
+     * Wait before terminate.
      */
-    public static class CountWord implements Runnable {
-        /**
-         * Input String.
-         */
-    private final String line;
-
-        /**
-         * @param line - input String.
-         */
-    public CountWord(final String line) {
-        this.line = line;
-    }
-
-        /**
-         * run calculate count words.
-         */
-        @Override
-    public void run() {
-        System.out.println("Second is started.");
-        int countSpace = 0;
-        int countWord = 0;
-        for (int i = 0; i < this.line.length(); i++) {
-            char a = this.line.charAt(i);
-            if (a == ' ') {
-                countSpace++;
-            }
-            if (Thread.currentThread().isInterrupted()) {
-                System.out.println("Thread words is interrupted.");
-                break;
-            }
-        }
-        countWord = countSpace + 1;
-        System.out.println("countWord" + ':' + countWord);
-    }
-}
+    private static final long WATCH_DOG_TIMER = 1000;
 
     /**
-     * Class is calculate count spaces in input String.
+     * Count.
      */
-    public static class CountSpace implements Runnable {
-        /**
-         * Input String.
-         */
-        private final String line;
+    private final Thread count;
+    /**
+     * Time.
+     */
+    private final Thread time;
 
-        /**
-         * @param line - input String.
-         */
-        public CountSpace(final String line) {
-            this.line = line;
+    /**
+     * Constructor initialize two threads.
+     *
+     * @param line - words.
+     */
+    public Count(String line) {
+        this.count = new Thread(new Count.CountChar(line));
+        this.time = new Thread(new Count.Time());
+    }
+
+
+    /**
+     * Start threads.
+     */
+    public void count() {
+        System.out.println("Start");
+        try {
+            count.start();
+            count.join(WATCH_DOG_TIMER);
+            time.start();
+            time.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        System.out.println("End");
+    }
 
+
+    /**
+     * Class interrupter.
+     */
+    public class Time implements Runnable {
         /**
-         * run calculate count spaces.
+         * Run.
          */
         @Override
         public void run() {
-            System.out.println("First is started.");
-            int countSpace = 0;
-            for (int i = 0; i < this.line.length(); i++) {
-                char a = line.charAt(i);
-                if (a == ' ') {
-                    countSpace++;
-                }
-                if (Thread.currentThread().isInterrupted()) {
-                    System.out.println("Thread words is interrupted.");
-                    break;
-                }
+            if (count != null && count.isAlive()) {
+                System.out.printf("%s %s %n", "Terminate: ", count.getName());
+                count.interrupt();
             }
-            System.out.println("countSpace" + ':' + countSpace);
         }
     }
 
+
+    /**
+     * Class counter.
+     */
+    public class CountChar implements Runnable {
+
+        /**
+         * Counter.
+         */
+        private final CountWords counter;
+
+        /**
+         * Constructor initialize counter.
+         *
+         * @param line - words.
+         */
+        public CountChar(String line) {
+            this.counter = new CountWords(line);
+        }
+
+        /**
+         * Run.
+         */
+        @Override
+        public void run() {
+
+            int words = this.counter.words();
+            if (!count.isInterrupted()) {
+                System.out.printf("%s %d %n", "Words", words);
+            }
+        }
+    }
     /**
      * @param args - default.
      * @throws InterruptedException - Exception.
      */
     public static void main(String[] args) throws InterruptedException {
-        Thread first = new Thread(new CountSpace("в лесу родилась елочка"));
-        Thread second = new Thread(new CountWord("в лесу она росла"));
-        double startTime = System.currentTimeMillis();
-        first.start();
-        second.start();
-        Thread.currentThread().sleep(1000);
-        System.out.println("waiting...");
-        first.interrupt();
-        second.interrupt();
+//        Thread first = new Thread(new CountSpace("в лесу родилась елочка"));
+//        Thread second = new Thread(new CountWords("в лесу она росла"));
+//        double startTime = System.currentTimeMillis();
+//        first.start();
+//        second.start();
+//        Thread.currentThread().sleep(1000);
+//        System.out.println("waiting...");
+//        first.interrupt();
+//        second.interrupt();
+        new Count("job for java").count();
     }
 }
