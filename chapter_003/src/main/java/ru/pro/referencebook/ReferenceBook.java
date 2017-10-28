@@ -24,7 +24,8 @@ public class ReferenceBook<T, V> implements Iterable {
             int position = this.getPosition(hash);
             for (Node n = this.nodes[position]; n != null; n.next()) {
                 Object k;
-                if (n.hash == hash && ((k = n.key) == key || key.equals(k))) {
+                k = n.key;
+                if (n.hash == hash && (k == key || key.equals(k))) {
                     n.value = value;
                     return true;
                 }
@@ -55,7 +56,8 @@ public class ReferenceBook<T, V> implements Iterable {
         }
         for (Node n = this.nodes[position]; n != null; n.next()) {
             Object k;
-            if (n.hash == hash && ((k = n.key) == key || key.equals(k))) {
+            k = n.key;
+            if (n.hash == hash && (k == key || key.equals(k))) {
                 returnValue = (V) n.value;
                 break;
             }
@@ -68,7 +70,8 @@ public class ReferenceBook<T, V> implements Iterable {
         int position = this.getPosition(hash);
         for (Node n = this.nodes[position]; n != null; n.next()) {
             Object k;
-            if (n.hash == hash && ((k = n.key) == key || key.equals(k))) {
+            k = n.key;
+            if (n.hash == hash && (k == key || key.equals(k))) {
                 this.nodes[position] = n.next();
                 returnValue = true;
                 break;
