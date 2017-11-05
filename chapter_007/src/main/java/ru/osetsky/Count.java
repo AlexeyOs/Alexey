@@ -34,14 +34,16 @@ public class Count {
      */
     public void count() {
         System.out.println("Start");
-        try {
-            count.start();
-            count.join(WATCH_DOG_TIMER);
-            time.start();
-            time.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        count.start();
+        time.start();
+//        try {
+//            count.start();
+//            count.join(WATCH_DOG_TIMER);
+//            time.start();
+//            time.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         System.out.println("End");
     }
 
