@@ -26,7 +26,6 @@ public class ReferenceBook<T, V> implements Iterable {
                 Object k;
                 k = n.key;
                 if (n.hash == hash && (k == key || key.equals(k))) {
-                    n.value = value;
                     return true;
                 }
             }
@@ -136,15 +135,18 @@ public class ReferenceBook<T, V> implements Iterable {
         if (n == null) {
             this.nodes[index] = new Node(hash, key, value, n);
         } else {
-            n.next = new Node(hash, key, value, n);
+            int i = 0;
+            Node[] nelementscontainer = new Node[0];
+            nelementscontainer[i++] = n;
+            nelementscontainer[i++] = n.next;
         }
     }
 
     private int getPosition(int hash) {
-        return Math.abs(hash % (this.nodes.length - 1));
+        return Math.abs(hash % (this.nodes.length));
     }
     private void grow() {
-        Node[] newNodes = (Node[]) new Object[this.nodes.length >> 1];
+        Node[] newNodes = (Node[]) new Object[this.nodes.length << 1];
         System.arraycopy(this.nodes, 0, newNodes, 0, this.nodes.length);
         this.nodes = newNodes;
     }
