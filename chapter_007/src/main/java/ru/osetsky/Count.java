@@ -36,14 +36,6 @@ public class Count {
         System.out.println("Start");
         count.start();
         time.start();
-//        try {
-//            count.start();
-//            count.join(WATCH_DOG_TIMER);
-//            time.start();
-//            time.join();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         System.out.println("End");
     }
 
@@ -101,15 +93,6 @@ public class Count {
      * @throws InterruptedException - Exception.
      */
     public static void main(String[] args) throws InterruptedException {
-//        Thread first = new Thread(new CountSpace("в лесу родилась елочка"));
-//        Thread second = new Thread(new CountWords("в лесу она росла"));
-//        double startTime = System.currentTimeMillis();
-//        first.start();
-//        second.start();
-//        Thread.currentThread().sleep(1000);
-//        System.out.println("waiting...");
-//        first.interrupt();
-//        second.interrupt();
         new Count("job for java").count();
     }
 }
