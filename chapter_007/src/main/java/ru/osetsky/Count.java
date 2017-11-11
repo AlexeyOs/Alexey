@@ -1,5 +1,7 @@
 package ru.osetsky;
 
+import java.util.Stack;
+
 /**
  * Created by koldy on 15.10.2017.
  */
@@ -17,6 +19,10 @@ public class Count {
      * Time.
      */
     private final Thread time;
+
+    private static long startTime;
+
+    private static long endTime;
 
     /**
      * Constructor initialize two threads.
@@ -44,6 +50,11 @@ public class Count {
      * Class interrupter.
      */
     public class Time implements Runnable {
+//        public long startTime;
+//        public long endTime;
+        public Time(){
+            startTime = System.currentTimeMillis();
+        }
         /**
          * Run.
          */
@@ -53,6 +64,7 @@ public class Count {
                 System.out.printf("%s %s %n", "Terminate: ", count.getName());
                 count.interrupt();
             }
+            endTime = System.currentTimeMillis();
         }
     }
 
@@ -94,5 +106,6 @@ public class Count {
      */
     public static void main(String[] args) throws InterruptedException {
         new Count("job for java").count();
+        System.out.println(endTime - startTime);
     }
 }
