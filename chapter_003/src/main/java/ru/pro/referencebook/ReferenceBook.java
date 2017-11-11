@@ -147,7 +147,7 @@ public class ReferenceBook<T, V> implements Iterable {
     }
     private void grow() {
         Node[] newNodes = (Node[]) new Object[this.nodes.length << 1];
-        System.arraycopy(this.nodes, 0, newNodes, 0, this.nodes.length);
+        System.arraycopy(this.nodes, getPosition(this.nodes.hashCode()), newNodes, 0, this.nodes.length);
         this.nodes = newNodes;
     }
 
