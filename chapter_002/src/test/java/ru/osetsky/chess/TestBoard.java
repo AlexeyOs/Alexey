@@ -29,7 +29,7 @@ public class TestBoard {
         this.bishop = new Bishop(new Cell(5, 5));
     }
 
-
+    private Figure[] figures = new Figure[10];
 
 
     //MOVE THE BISHOP.
@@ -43,12 +43,21 @@ public class TestBoard {
      */
     @Test
     public void whenBishopMveThenSheMove() throws OccupiedWayException, FigureNotFoundException, ImposibleMoveException {
-        board.addFigure(bishop); //55
+        board.addFigure(bishop);
         board.move(bishop.getPosition(), new Cell(3, 3));
         board.move(bishop.getPosition(), new Cell(2, 4));
         board.move(bishop.getPosition(), new Cell(4, 6));
         board.move(bishop.getPosition(), new Cell(5, 5));
         assertThat(bishop.getPosition(), is(new Cell(5, 5)));
+    }
+
+    @Test
+    public void whenBoardfindFigureShowFigure() {
+        Cell cell = new Cell(5,5);
+       board.addFigure(bishop);
+       System.out.println(this.figures[0].way(cell));
+        System.out.println(board.findFigure(cell));
+        System.out.println(bishop.getPosition());
     }
 
 }

@@ -62,17 +62,17 @@ public class Cell {
      * Return index Figure.
      * @return фигуру.
      */
-    public int getIndFigure(Figure[] figures) {
-
-        int ind = -1;
-
-        for (ind = 0; ind < figures.length; ind++) {
-            if (figures[ind].position.equals(this)) {
-                break;
-            }
-        }
-        return ind;
-    }
+//    public int getIndFigure(Figure[] figures) {
+//
+//        int ind = -1;
+//
+//        for (ind = 0; ind < figures.length; ind++) {
+//            if (figures[ind].position.equals(this)) {
+//                break;
+//            }
+//        }
+//        return ind;
+//    }
 
     /**
      * method for comparing the cell field.
