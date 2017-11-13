@@ -38,10 +38,12 @@ public class Count {
     /**
      * Start threads.
      */
-    public void count() {
+    public void count() throws InterruptedException {
         System.out.println("Start");
         count.start();
+        count.sleep(1000);
         time.start();
+        time.sleep(1000);
         System.out.println("End");
     }
 
@@ -50,8 +52,6 @@ public class Count {
      * Class interrupter.
      */
     public class Time implements Runnable {
-//        public long startTime;
-//        public long endTime;
         public Time(){
             startTime = System.currentTimeMillis();
         }
@@ -60,11 +60,12 @@ public class Count {
          */
         @Override
         public void run() {
-            if (count != null && count.isAlive()) {
+            endTime = System.currentTimeMillis();
+            if (endTime-startTime > 1000) {
+                System.out.println(endTime - startTime);
                 System.out.printf("%s %s %n", "Terminate: ", count.getName());
                 count.interrupt();
             }
-            endTime = System.currentTimeMillis();
         }
     }
 
@@ -106,6 +107,5 @@ public class Count {
      */
     public static void main(String[] args) throws InterruptedException {
         new Count("job for java").count();
-        System.out.println(endTime - startTime);
     }
 }
