@@ -29,7 +29,7 @@ public class TestBoard {
         this.bishop = new Bishop(new Cell(5, 5));
     }
 
-    private Figure[] figures = new Figure[10];
+    private Figure figures;
 
 
     //MOVE THE BISHOP.
@@ -54,8 +54,8 @@ public class TestBoard {
     @Test
     public void whenBoardfindFigureShowFigure() {
         Cell cell = new Cell(5,5);
-       board.addFigure(bishop);
-       System.out.println(this.figures[0].way(cell));
+       this.figures = board.addFigure(bishop);
+        System.out.println(this.figures);
         System.out.println(board.findFigure(cell));
         System.out.println(bishop.getPosition());
     }

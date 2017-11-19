@@ -5,13 +5,9 @@ package ru.osetsky.chess;
  */
 public class Board {
     /**
-     * figure position in array.
-     */
-    private int positionFigure = 0;
-    /**
      * array of figures.
      */
-    private Figure[] figures = new Figure[10];
+    private Figure figures;
     /**
      * chess model size.
      */
@@ -24,8 +20,8 @@ public class Board {
      * @return figure.
      */
     public Figure addFigure(Figure figure) {
-        this.figures[positionFigure++] = figure;
-        return figure;
+        this.figures = figure;
+        return figures;
     }
 
     /**
@@ -39,30 +35,8 @@ public class Board {
      * @throws FigureNotFoundException figure not found in sourse.
      */
     public boolean move(Cell sourse, Cell distanse) throws OccupiedWayException, FigureNotFoundException, ImposibleMoveException {
-//        figure = findFigure(sourse);
         boolean result = imposibleMove(distanse);
-
-        try {
-            if (findFigure(sourse) == null) {
-                throw new FigureNotFoundException("FIGURE NOT FOUND");
-            } else if (result) {
-                throw new OccupiedWayException("IMPOSEBLI MOVE. THE POSITION OCCUPIED ANOTHER FIGURE");
-            }
-        } catch (FigureNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        //------------------------------
-//        int indFigure = sourse.getIndFigure(figures);
-//        this.figure = figures[indFigure];
-        //--------------------------------
-
-        // if conditions is true, move figure at destenation.
-
-//        figure.getPosition().setAxisX(distanse.getAxisX());
-//        figure.getPosition().setAxisY(distanse.getAxisY());
-//        figure.clone(distanse);
-        figures[positionFigure] = figures[positionFigure].clone(distanse);
-
+        figures = figures.clone(distanse);
         return result;
     }
 
@@ -74,11 +48,9 @@ public class Board {
      */
     final Figure findFigure(Cell sourse) {
         Figure fig = null;
-        for (int i = 0; i != positionFigure; i++) {
-            if (figures[i].getPosition().equals(sourse) && figures[i] != null) {
-                fig = figures[i];
+            if (figures.getPosition().equals(sourse) && figures != null) {
+                fig = figures;
             }
-        }
         return fig;
     }
 
@@ -93,23 +65,21 @@ public class Board {
         boolean result = false;
         Cell[] cellMoves;
         int imposibleMoveSize = distanse.getAxisX() > distanse.getAxisY() ? distanse.getAxisX() : distanse.getAxisY();
-        cellMoves = this.figures[positionFigure].way(distanse);
+        cellMoves = this.figures.way(distanse);
 
-        for (int i = 0; i != positionFigure; i++) {
             for (int j = 0; j != cellMoves.length; j++) {
 
-                if (!figures[i].equals(figures[positionFigure]) && cellMoves[j].equals(figures[i].getPosition())
-                        && cellMoves[j] != null && figures[i] != null) {
+                if (!figures.equals(figures) && cellMoves[j].equals(figures.getPosition())
+                        && cellMoves[j] != null && figures != null) {
                     throw new OccupiedWayException("IMPOSEBLI MOVE. THE POSITION OCCUPIED ANOTHER FIGURE");
                 }
                 else if (imposibleMoveSize >= size) {
                     throw new ImposibleMoveException("going beyond the dimensions of the chessboard");
-                } else if (figures[i].equals(figures[positionFigure]) && !cellMoves[cellMoves.length - 1].equals(distanse)
-                        && cellMoves[j] != null && figures[i] != null) {
+                } else if (figures.equals(figures) && !cellMoves[cellMoves.length - 1].equals(distanse)
+                        && cellMoves[j] != null && figures != null) {
                     throw new ImposibleMoveException("WRONG COLOR OF THE FIGURE");
 
                 }
-            }
         }
         return result;
     }
