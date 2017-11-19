@@ -48,7 +48,9 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
         private TreeIterator() {
             queue = new LinkedList<>();
-            queue.add(root);
+            if (queue.hashCode()!=root.hashCode()) {
+                queue.add(root);
+            }
         }
 
         @Override
