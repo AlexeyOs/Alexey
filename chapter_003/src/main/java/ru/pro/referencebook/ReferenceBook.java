@@ -146,11 +146,13 @@ public class ReferenceBook<T, V> implements Iterable {
         return Math.abs(hash % (this.nodes.length));
     }
     private void grow() {
-        Node[] newNodes = (Node[]) new Object[this.nodes.length << 1];
-        for(int i = 0; i<this.nodes.length; i++) {
-            newNodes[i] = this.nodes[getPosition(hashCode())];
+        Node<T, V>[] newNodes = (Node<T, V>[]) new Object[this.nodes.length << 1];
+        for (Node n: nodes) {
+            if (n != null) {
+                newNodes[Math.abs(n.key.hashCode()) % newNodes.length] = n;
+            }
+            this.nodes = newNodes;
         }
-        this.nodes = newNodes;
     }
 
     private class Node<T, V> {
