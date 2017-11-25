@@ -1,4 +1,4 @@
-package ru.osetsky;
+package ru.osetsky.threads;
 
 /**
  * Created by koldy on 29.10.2017.

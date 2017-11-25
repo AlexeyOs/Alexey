@@ -1,6 +1,4 @@
-package ru.osetsky;
-
-import java.util.Stack;
+package ru.osetsky.threads;
 
 /**
  * Created by koldy on 15.10.2017.
@@ -52,7 +50,7 @@ public class Count {
      * Class interrupter.
      */
     public class Time implements Runnable {
-        public Time(){
+        public Time() {
             startTime = System.currentTimeMillis();
         }
         /**
@@ -61,7 +59,7 @@ public class Count {
         @Override
         public void run() {
             endTime = System.currentTimeMillis();
-            if (endTime-startTime > 1000) {
+            if (endTime - startTime > 1000) {
                 System.out.println(endTime - startTime);
                 System.out.printf("%s %s %n", "Terminate: ", count.getName());
                 count.interrupt();
