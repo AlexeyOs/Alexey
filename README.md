@@ -27,4 +27,4 @@
 util
 JUnit
 
-[Ссылка на обучающий ресурс](http://webdesign.ru.net)
+[Ссылка на обучающий ресурс](http://job4j.ru/index.html)
