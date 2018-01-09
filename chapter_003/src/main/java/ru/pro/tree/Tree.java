@@ -28,7 +28,7 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     @Override
     public boolean add(E parent, E child) {
         Node<E> resultAdd = root;
-        if (root.getValue().compareTo(parent) != 0) {
+        if (!root.getValue().equals(parent)) {
             resultAdd = find(root.getChildren(), parent);
         }
         boolean parentExists = resultAdd != null;
@@ -48,9 +48,7 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
         private TreeIterator() {
             queue = new LinkedList<>();
-            if (queue.hashCode() != root.hashCode()) {
-                queue.add(root);
-            }
+            queue.add(root);
         }
 
         @Override
