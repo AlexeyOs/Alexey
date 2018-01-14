@@ -16,10 +16,23 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         Node<E> result = null;
         for (Node<E> child : children) {
             if (child.getValue().compareTo(parent) == 0) {
-                result = child;
-                break;
+                if (checkRepeat(child.getValue(),children)) {
+                    result = child;
+                    break;
+                }
             }
             result = find(child.getChildren(), parent);
+        }
+        return result;
+    }
+
+    private boolean checkRepeat(E child,List<Node<E>> children){
+        boolean result = true;
+        for (Node<E> childall : children) {
+            if (child.equals(childall.getValue())) {
+                result = false;
+                break;
+            }
         }
         return result;
     }
