@@ -39,5 +39,19 @@ public class TestTree {
         assertThat(result, is("root"));
     }
 
+    @Test
+    public void whenThereIsNodeWith2ChildsThenIsNotBinary() {
+        rootTest = new Node<>("1");
+        Tree<String> tree = new Tree<>(rootTest);
+        tree.add("1", "11");
+        tree.add("11", "111");
+        tree.add("11", "112");
+        tree.add("1", "12");
+        tree.add("12", "121");
+        tree.add("12", "122");
+        tree.add("12", "123");
+        assertThat(tree.isBinary(), is(false));
+    }
+
 
 }

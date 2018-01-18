@@ -37,7 +37,27 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return result;
     }
 
+    public boolean isBinary(){
+        return isBinary(root);
+    }
 
+    private boolean isBinary(Node<E> node) {
+        boolean result;
+        // если потоков миньше двух, то дерево не бинарное
+        if (node.getChildren().size() > 2){
+            return false;
+        } else {
+            //проверка детей
+            for (Node<E> noda: node.getChildren()) {
+                //проверка текущего узла
+                result = isBinary(noda);
+                if (!result) {
+                    return result;
+                }
+            }
+        }
+        return true;
+    }
     @Override
     public boolean add(E parent, E child) {
         Node<E> resultAdd = root;
