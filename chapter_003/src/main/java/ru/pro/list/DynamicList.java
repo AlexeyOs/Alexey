@@ -1,12 +1,15 @@
 package ru.pro.list;
 
 import java.util.Iterator;
-
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 /**
  * Created by koldy on 09.09.2017.
  * @param <E> - generic.
  */
+@ThreadSafe
 public class DynamicList<E> implements SimpleList<E> {
+    @GuardedBy("this")
     /**
      * Array of object.
      */
@@ -40,7 +43,7 @@ public class DynamicList<E> implements SimpleList<E> {
     /**
      * Method expand array of doubly.
      */
-    private void makeExpand() {
+    private synchronized void makeExpand() {
         this.length *= 2;
         Object[] tempArray = new Object[length];
         System.arraycopy(this.container, 0, tempArray, 0, container.length);
@@ -52,7 +55,7 @@ public class DynamicList<E> implements SimpleList<E> {
      * @param value - object to add.
      */
     @Override
-    public void add(E value) {
+    public synchronized void add(E value) {
 
         if (this.index == this.container.length) {
             makeExpand();
@@ -65,7 +68,7 @@ public class DynamicList<E> implements SimpleList<E> {
      * @return container - array(Object[]).
      */
     @Override
-    public E get(int index) {
+    public synchronized E get(int index) {
         return (E) container[index];
     }
 
@@ -74,7 +77,7 @@ public class DynamicList<E> implements SimpleList<E> {
      * @return iterator.
      */
     @Override
-    public Iterator<E> iterator() {
+    public synchronized Iterator<E> iterator() {
         return new Iterator<E>() {
             private int position = 0;
 

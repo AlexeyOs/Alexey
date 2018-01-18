@@ -1,13 +1,17 @@
 package ru.pro.list;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 import java.util.Iterator;
 
 /**
  * Created by koldy on 26.09.2017.
  * @param <T> - generic type.
  */
+@ThreadSafe
 public class CycleList<T> implements Iterable<T> {
-
+    @GuardedBy("this")
     /**
      * first node.
      */
@@ -26,7 +30,7 @@ public class CycleList<T> implements Iterable<T> {
     /**
      * @param value - value for add.
      */
-    public void addNoCycle(T value) {
+    public synchronized void addNoCycle(T value) {
         Node<T> tmp = lastNode;
         Node<T> node  = new Node(value, null);
         lastNode = node;
@@ -41,7 +45,7 @@ public class CycleList<T> implements Iterable<T> {
     /**
      * @param value - value for add.
      */
-    public void addToWithCycle(T value) {
+    public synchronized void addToWithCycle(T value) {
         Node<T> tmp = lastNode;
         Node<T> node = new Node<>(value, firstNode);
         lastNode = node;
@@ -58,7 +62,7 @@ public class CycleList<T> implements Iterable<T> {
      * @return
      */
     @Override
-    public Iterator<T> iterator() {
+    public synchronized Iterator<T> iterator() {
         return new Iterator<T>() {
             private int pointer = 0;
             private Node tmp = null;
@@ -129,7 +133,7 @@ public class CycleList<T> implements Iterable<T> {
     /**
      * @return object firstNode.
      */
-    public Node<T> getFirstNode() {
+    public synchronized Node<T> getFirstNode() {
         return firstNode;
     }
 
