@@ -28,10 +28,14 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     private boolean checkRepeat(E child,List<Node<E>> children){
         boolean result = true;
+        int count = 0;
         for (Node<E> childall : children) {
             if (child.equals(childall.getValue())) {
-                result = false;
-                break;
+                if (count > 0 & count <= 1) {
+                    result = false;
+                    break;
+                }
+                count++;
             }
         }
         return result;
