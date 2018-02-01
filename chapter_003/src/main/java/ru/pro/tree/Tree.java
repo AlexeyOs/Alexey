@@ -12,14 +12,12 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         this.root = root;
     }
 
+    private Node<E> result;
     private Node<E> find(List<Node<E>> children, E parent) {
-        Node<E> result = null;
         for (Node<E> child : children) {
             if (child.getValue().compareTo(parent) == 0) {
-                if (checkRepeat(child.getValue(),children)) {
                     result = child;
                     break;
-                }
             }
             result = find(child.getChildren(), parent);
         }
@@ -28,34 +26,44 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     private boolean checkRepeat(E child,List<Node<E>> children){
         boolean result = true;
-        int count = 0;
-        for (Node<E> childall : children) {
-            if (child.equals(childall.getValue())) {
-                if (count > 0 & count <= 1) {
-                    result = false;
-                    break;
+        for (Node<E> childcom : children) {
+                if (child.equals(childcom.getValue())) {
+                        result = false;
+                        return result;
                 }
-                count++;
+        }
+        if (result) {
+            for (Node<E> child_down : children) {
+                if (child_down.getChildren().size()>0) {
+                    result = checkRepeat(child, child_down.getChildren());
+                    if (result == false) {
+                        return result;
+                    }
+                }
             }
         }
+
         return result;
     }
 
     public boolean isBinary(){
-        return isBinary(root);
+        return isBinary(root.getChildren());
     }
 
-    private boolean isBinary(Node<E> node) {
+    private boolean isBinary(List<Node<E>> node) {
         boolean result;
-        // если потоков миньше двух, то дерево не бинарное
-        if (node.getChildren().size() > 2){
-            return false;
-        } else {
-            //проверка детей
-            for (Node<E> noda: node.getChildren()) {
-                //проверка текущего узла
-                result = isBinary(noda);
-                if (!result) {
+        // если потоков меньше двух, то дерево не бинарное
+        for (Node<E> noda: node){
+            if (noda.getChildren().size() > 2){
+                return false;
+            }
+        }
+        //проверка детей
+        for (Node<E> noda: node) {
+            //проверка текущего узла
+            if (noda.getChildren().size() > 0) {
+                result = isBinary(noda.getChildren());
+                if (!isBinary(noda.getChildren())) {
                     return result;
                 }
             }
@@ -65,11 +73,11 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     @Override
     public boolean add(E parent, E child) {
         Node<E> resultAdd = root;
-        if (!root.getValue().equals(parent)) {
-            resultAdd = find(root.getChildren(), parent);
+        if (!root.getValue().equals(parent)&&checkRepeat(child,this.root.getChildren())) {
+                resultAdd = find(root.getChildren(), parent);
         }
         boolean parentExists = resultAdd != null;
-        if (parentExists) {
+        if (parentExists && checkRepeat(child,this.root.getChildren())) {
             Node<E> node = new Node<>(child);
             resultAdd.getChildren().add(node);
         }

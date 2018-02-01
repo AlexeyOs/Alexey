@@ -53,5 +53,4 @@ public class TestTree {
         assertThat(tree.isBinary(), is(false));
     }
 
-
 }
