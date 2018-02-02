@@ -20,6 +20,7 @@ public class TestBoard {
      */
     private Bishop bishop;
 
+    private int index = 0;
     /**
      * run method before test.
      */
@@ -28,9 +29,6 @@ public class TestBoard {
         this.board = new Board();
         this.bishop = new Bishop(new Cell(5, 5));
     }
-
-    private Figure figures;
-
 
     //MOVE THE BISHOP.
 
@@ -43,19 +41,19 @@ public class TestBoard {
      */
     @Test
     public void whenBishopMveThenSheMove() throws OccupiedWayException, FigureNotFoundException, ImposibleMoveException {
-        board.addFigure(bishop);
-        board.move(bishop.getPosition(), new Cell(3, 3));
-        board.move(bishop.getPosition(), new Cell(2, 4));
-        board.move(bishop.getPosition(), new Cell(4, 6));
-        board.move(bishop.getPosition(), new Cell(5, 5));
+        board.addFigure(bishop, index);
+        board.move(bishop.getPosition(), new Cell(3, 3),index);
+        board.move(bishop.getPosition(), new Cell(2, 4),index);
+        board.move(bishop.getPosition(), new Cell(4, 6),index);
+        board.move(bishop.getPosition(), new Cell(5, 5),index);
         assertThat(bishop.getPosition(), is(new Cell(5, 5)));
     }
 
     @Test
     public void whenBoardfindFigureShowFigure() {
         Cell cell = new Cell(5,5);
-       this.figures = board.addFigure(bishop);
-        System.out.println(this.figures);
+        board.addFigure(bishop,index);
+        System.out.println(this.bishop.way(cell));
         System.out.println(board.findFigure(cell));
         System.out.println(bishop.getPosition());
     }
