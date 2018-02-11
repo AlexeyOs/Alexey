@@ -16,6 +16,8 @@ public class Node<E> {
         this.value = value;
     }
 
+    public Node<E> left;
+    public Node<E> right;
     public List<Node<E>> getChildren() {
         return children;
     }
