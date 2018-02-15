@@ -1,9 +1,13 @@
 package ru.pro.tree;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Created by koldy on 05.02.2018.
  */
-public class SearchBinaryTree<E> {
+public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> {
     private Node<E> root;
 
     public void add(E e){
@@ -35,10 +39,10 @@ public class SearchBinaryTree<E> {
         boolean isNeedSave = false;
         Node<E> node = this.root;
         while (node != null) {
-            if (node.getValue().hashCode() == element.hashCode()) {
+            if (node.getValue().compareTo(element) > 0) {
                 isNeedSave = true;
                 break;
-            } else if (node.getValue().hashCode() > element.hashCode()) {
+            } else if (node.getValue().compareTo(element) < 0) {
                 node = node.left;
             } else {
                 node = node.right;
@@ -46,4 +50,35 @@ public class SearchBinaryTree<E> {
         }
         return isNeedSave;
     }
+    @Override
+    public Iterator<E> iterator() {
+        return new SearchBinaryTree.SBinaryTreeIterator();
+    }
+
+    @Override
+    public boolean add(E parent, E child) {
+        return false;
+    }
+
+    private class SBinaryTreeIterator implements Iterator<E> {
+        private Queue<Node<E>> queue;
+
+        private SBinaryTreeIterator() {
+            queue = new LinkedList<>();
+            queue.add(root);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !queue.isEmpty();
+        }
+
+        @Override
+        public E next() {
+            Node<E> result = queue.poll();
+            queue.addAll(result.getChildren());
+            return result.getValue();
+        }
+    }
+
 }
