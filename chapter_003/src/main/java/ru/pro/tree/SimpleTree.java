@@ -12,4 +12,5 @@ public interface SimpleTree<E extends Comparable<E>> extends Iterable<E> {
      * @return
      */
     boolean add(E parent, E child);
+    void add(E e);
 }

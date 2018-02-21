@@ -85,6 +85,11 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     @Override
+    public void add(E e) {
+
+    }
+
+    @Override
     public Iterator<E> iterator() {
         return new TreeIterator();
     }

@@ -8,8 +8,16 @@ import java.util.Queue;
  * Created by koldy on 05.02.2018.
  */
 public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> {
+    /*
+     * Поле узла содержащее корень.
+     */
     private Node<E> root;
+    private Node<E> nodeIter = root;
 
+    /*
+     * Переопределенный метод для добавления в Бинарное дерево.
+     */
+    @Override
     public void add(E e){
         if(this.root == null){
             this.root = new Node<E>(e);
@@ -19,6 +27,7 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
             if (e.hashCode() < node.getValue().hashCode()){
                 if (node.left == null){
                     node.left = new Node<E>(e);
+                    nodeIter = node.left;
                     return;
                 } else {
                     node = node.left;
@@ -26,6 +35,7 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
             } else if (e.hashCode() > node.getValue().hashCode()) {
                 if (node.right == null){
                     node.right = new Node<E>(e);
+                    nodeIter = node.right;
                     return;
                 } else  {
                     node = node.right;
@@ -50,11 +60,17 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
         }
         return isNeedSave;
     }
+    /*
+     * Итератор
+     */
     @Override
     public Iterator<E> iterator() {
         return new SearchBinaryTree.SBinaryTreeIterator();
     }
 
+    /*
+     * Метод для добавления который используется в классе Tree.
+     */
     @Override
     public boolean add(E parent, E child) {
         return false;
@@ -63,11 +79,16 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
     private class SBinaryTreeIterator implements Iterator<E> {
         private Queue<Node<E>> queue;
 
+        /*
+         * Инициализирует и добавляет элемент.
+         */
         private SBinaryTreeIterator() {
             queue = new LinkedList<>();
-            queue.add(root);
+            queue.add(nodeIter);
         }
-
+        /*
+         * Проверяет пустой объект или нет.
+         */
         @Override
         public boolean hasNext() {
             return !queue.isEmpty();
