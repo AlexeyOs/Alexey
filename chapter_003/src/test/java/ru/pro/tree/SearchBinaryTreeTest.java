@@ -20,6 +20,15 @@ public class SearchBinaryTreeTest {
         assertThat(tree.find(1), is(true));
         assertThat(tree.find(18), is(false));
     }
+    @Test
+    public void whenBinaryElementsInMap2() {
+        tree.add(1);
+        tree.add(2);
+        tree.add(3);
+        tree.add(4);
+        assertThat(tree.find(3), is(true));
+        assertThat(tree.find(15), is(false));
+    }
 
 
 }

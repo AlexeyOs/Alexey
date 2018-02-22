@@ -24,7 +24,7 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
         }
         Node<E> node = this.root;
         while (true) {
-            if (e.hashCode() < node.getValue().hashCode()){
+            if (node.getValue().compareTo(e) < 0){
                 if (node.left == null){
                     node.left = new Node<E>(e);
                     nodeIter = node.left;
@@ -32,7 +32,7 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
                 } else {
                     node = node.left;
                 }
-            } else if (e.hashCode() > node.getValue().hashCode()) {
+            } else if (node.getValue().compareTo(e) > 0) {
                 if (node.right == null){
                     node.right = new Node<E>(e);
                     nodeIter = node.right;
@@ -49,7 +49,7 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
         boolean isNeedSave = false;
         Node<E> node = this.root;
         while (node != null) {
-            if (node.getValue().compareTo(element) > 0) {
+            if (node.getValue().compareTo(element) >= 0) {
                 isNeedSave = true;
                 break;
             } else if (node.getValue().compareTo(element) < 0) {
