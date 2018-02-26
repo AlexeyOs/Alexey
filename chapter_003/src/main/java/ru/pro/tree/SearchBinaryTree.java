@@ -12,7 +12,6 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
      * Поле узла содержащее корень.
      */
     private Node<E> root;
-    private Node<E> nodeIter = root;
 
     /*
      * Переопределенный метод для добавления в Бинарное дерево.
@@ -27,7 +26,6 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
             if (node.getValue().compareTo(e) < 0){
                 if (node.left == null){
                     node.left = new Node<E>(e);
-                    nodeIter = node.left;
                     return;
                 } else {
                     node = node.left;
@@ -35,7 +33,6 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
             } else if (node.getValue().compareTo(e) > 0) {
                 if (node.right == null){
                     node.right = new Node<E>(e);
-                    nodeIter = node.right;
                     return;
                 } else  {
                     node = node.right;
@@ -84,7 +81,7 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
          */
         private SBinaryTreeIterator() {
             queue = new LinkedList<>();
-            queue.add(nodeIter);
+            queue.add(root);
         }
         /*
          * Проверяет пустой объект или нет.
@@ -97,7 +94,7 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
         @Override
         public E next() {
             Node<E> result = queue.poll();
-            queue.addAll(result.getChildren());
+            queue.addAll(result.getLeftRight());
             return result.getValue();
         }
     }
