@@ -94,7 +94,12 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
         @Override
         public E next() {
             Node<E> result = queue.poll();
-            queue.addAll(result.getLeftRight());
+            if (result.right != null) {
+                queue.add(result.right);
+            }
+            if (result.left != null) {
+                queue.add((result.left));
+            }
             return result.getValue();
         }
     }
