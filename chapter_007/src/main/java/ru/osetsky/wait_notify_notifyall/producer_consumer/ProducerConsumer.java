@@ -1,6 +1,4 @@
-package ru.osetsky.wait_notify_notifyall;
-
-import com.sun.xml.internal.stream.util.ThreadLocalBufferAllocator;
+package ru.osetsky.wait_notify_notifyall.producer_consumer;
 
 /**
  * Created by koldy on 16.02.2018.
@@ -48,7 +46,7 @@ public class ProducerConsumer {
 //            }
 //        };
         Thread producer = new Thread(new Producer((queue)));
-        Thread customer = new Thread(new Customer((queue)));
+        Thread customer = new Thread(new Consumer((queue)));
         producer.start();
         customer.start();
     }

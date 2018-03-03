@@ -1,4 +1,4 @@
-package ru.osetsky.wait_notify_notifyall;
+package ru.osetsky.wait_notify_notifyall.producer_consumer;
 
 /**
  * Created by koldy on 17.02.2018.
