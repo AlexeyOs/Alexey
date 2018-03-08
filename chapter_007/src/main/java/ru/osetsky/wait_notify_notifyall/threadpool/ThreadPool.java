@@ -16,20 +16,26 @@ public class ThreadPool implements Executor {
     /*
      * Поле для остановки пула.
      */
-    private boolean stop = true;
+    private boolean stop = false;
 
     private ArrayList<Double> list = new ArrayList<>();
+    private void init() {
+        new Thread(new TaskWorker()).start();
+    }
     public ThreadPool(int nThread) {
         for (int i = 0; i < nThread; i++) {
-            new Thread(new TaskWorker()).start();
+            init();
         }
     }
     /*
      * Перезагрузка пула.
      */
     public void shutDown() {
-        stop = false;
+        stop = true;
     }
+    /*
+     * Заносит результаты вычисления тангенса в массив.
+     */
     public ArrayList<Double> add(Work work) {
         for (int i = 0; i < 15000; i++) {
             this.list.add(work.count(i));
@@ -39,7 +45,7 @@ public class ThreadPool implements Executor {
 
     @Override
     public void execute(Runnable command) {
-        if (stop) {
+        if (!stop) {
             queue.offer(command);
         }
     }
@@ -47,7 +53,7 @@ public class ThreadPool implements Executor {
     private class TaskWorker implements Runnable {
         @Override
         public void run() {
-            while (stop) {
+            while (!stop) {
                 Runnable nextTask = queue.poll();
                 if (nextTask != null) {
                     nextTask.run();
