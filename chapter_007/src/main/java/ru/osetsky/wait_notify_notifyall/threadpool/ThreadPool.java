@@ -37,7 +37,7 @@ public class ThreadPool implements Executor {
      * Заносит результаты вычисления тангенса в массив.
      */
     public ArrayList<Double> add(Work work) {
-        for (int i = 0; i < 15000; i++) {
+        for (int i = 0; i < 150; i++) {
             this.list.add(work.count(i));
         }
         return this.list;
