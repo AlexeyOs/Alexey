@@ -3,23 +3,36 @@ package ru.osetsky.wait_notify_notifyall.threadpool;
 /**
  * Created by koldy on 14.03.2018.
  */
-public class Lock implements Runnable {
+public class Lock{
+    public static void main(String[] args) {
+        Object object = new Object();//создал объект
+        Thread thread = new Thread(new ObjectLocker(object));//Привязал объект к потоку
+        thread.start();//запустил поток
+        lock(object);//блокирую поток
+        unlock(thread);//заново запускаю
+    }
 
-    private boolean freeOrBusy = false;
-    private int id_run_object;
-    @Override
-    public void run() {
-        while (!freeOrBusy){
-            //Runnable runnable = null;
+    private static void lock(Object object) {
+        synchronized (object) {
+            object.notify();//блокирую поток
         }
     }
-    public void lock(){
-        freeOrBusy = true;//блокирую поток
-        id_run_object = hashCode();//запоминаю хашкоды, чтобы затем разблокировать в unlock
-    }
-    public void unlock() {
-        if (hashCode() == id_run_object) {
-            freeOrBusy = false;
+
+    private static void unlock(Thread thread) {
+        synchronized (thread) {
+            thread.start();//запускаю заново
         }
+    }
+
+    public static class ObjectLocker implements Runnable {
+        private Object object;
+        public ObjectLocker(Object object){
+            this.object = object;
+        }
+        @Override
+        public void run() {
+            System.out.println("Start thread");//поток стартовал
+        }
+
     }
 }

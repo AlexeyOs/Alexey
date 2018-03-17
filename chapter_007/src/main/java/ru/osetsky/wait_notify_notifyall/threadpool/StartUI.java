@@ -27,10 +27,5 @@ public class StartUI {
                 value);
 
         threadPool.shutDown();
-        // реализованный механизм блокировки
-        Lock lockObject = new Lock() ;//объект пожет быть в двух состояниях: занят и свободен
-        lockObject.run();//запускаю поток
-        lockObject.lock();//блокирую поток
-        //lockObject.unlock();//разблокирую поток
     }
 }
