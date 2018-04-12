@@ -1,6 +1,7 @@
 package ru.pro.exam;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Created by koldy on 30.03.2018.
@@ -30,9 +31,16 @@ public class WordVerification {
      * Проверяет на совпадение букв
      */
     private int checkForCoincidence(HashMap<Integer,String> strArr1, HashMap<Integer,String> strArr2){
-        for (int i = 0; i < strArr1.size(); i++) {
-            for (int j = 0; j < strArr2.size(); j++){
-                if (strArr1.get(i).equals(strArr2.get(j))){
+        //определяет самый длинные массив
+        if (strArr1.size() > strArr2.size()){
+            for (int i = 0; i < strArr1.size(); i++) {
+                if (strArr2.containsValue(strArr1.get(i))) {
+                    countSame++;
+                }
+            }
+        } else {
+            for (int i = 0; i < strArr2.size(); i++) {
+                if (strArr1.containsValue(strArr2.get(i))) {
                     countSame++;
                 }
             }

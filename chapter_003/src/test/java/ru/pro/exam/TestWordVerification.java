@@ -13,7 +13,6 @@ public class TestWordVerification {
     public void whenCheckSameWords() {
         assertThat(true,is(new WordVerification().verification("Telephone","Telephone")));
     }
-
     @Test
     public void whenCheckDifferentWords() {
         assertThat(false,is(new WordVerification().verification("Car","Cart")));
@@ -21,5 +20,9 @@ public class TestWordVerification {
     @Test
     public void whenCheckDifferentWordsDefferentCharacter() {
         assertThat(false,is(new WordVerification().verification("Cucumber","Sale")));
+    }
+    @Test
+    public void whenCheckDifferentWordsManyRepeat() {
+        assertThat(false,is(new WordVerification().verification("Canumber","Cucumber")));
     }
 }
