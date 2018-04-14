@@ -1,8 +1,5 @@
 package ru.osetsky.jdbc;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import java.io.*;
@@ -20,74 +17,13 @@ import javax.xml.stream.XMLStreamReader;
  */
 public class SQLStorage {
     /*
-     * Поле необходимое для подключения к базе данных.
-     */
-    private static final Logger Log = LoggerFactory.getLogger(SQLStorage.class);
-    private String url = "jdbc:postgresql://localhost:5432/java_a_from_z";
-    private String username = "postgres";
-    private String password = "1234";
-
-    /*
-     * Метод проверяет есть ли таблица, если нет, то создает, затем удялет все значения
-     * и вставляет новые значния.
-     */
-    private List<Integer> create_table_insert_select(int countElements){
-        List<Integer> arr = new ArrayList();
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            // соединене
-            conn = DriverManager.getConnection(url, username, password);
-
-            // создание таблицы в базе данных
-            stmt = conn.createStatement();
-
-            String sql = "CREATE TABLE IF NOT EXISTS TEST " +
-                    "(field INTEGER not NULL)";
-            stmt.executeUpdate(sql);
-
-            // Удаление записей если они есть
-            sql = "DELETE FROM TEST";
-            stmt.executeUpdate(sql);
-
-            //вставка
-            for (int i = 0; i < countElements; i++) {
-                PreparedStatement st = conn.prepareStatement("INSERT INTO test(field) values(?)");
-                st.setInt(1, i);
-                st.executeUpdate();
-                st.close();
-            }
-
-            // создание таблицы в базе данных
-            String query = "select field from TEST";
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                int field = rs.getInt(1);
-                arr.add(field);
-            }
-
-        } catch (Exception e) {
-            Log.error(e.getMessage(), e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    Log.error(e.getMessage(), e);
-                }
-            }
-        }
-        return arr;
-    }
-    /*
      * Поле для хранении индекса аттрибута во втором файле.
      */
-    private int attr_index = 0;
+    private int attrindex = 0;
     /*
-     * Поле возвращает сумму элементов в уже исправленном с помощью xlst xml файле.
+     * Поле возвращает сумму элементов из файла 2.xml
      */
-    private int getSum(){
+    private int getSum() {
         int i = 0;
         String fileName = "C:\\projects\\Alexey\\chapter_008\\src\\main\\java\\ru\\osetsky\\jdbc\\2.xml";
         try {
@@ -95,7 +31,7 @@ public class SQLStorage {
             while (xmlr.hasNext()) {
                 xmlr.next();
                 if (xmlr.isStartElement() && xmlr.getName().toString().equals("entry")) {
-                    i += Integer.parseInt(xmlr.getAttributeValue(attr_index));
+                    i += Integer.parseInt(xmlr.getAttributeValue(attrindex));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -105,10 +41,7 @@ public class SQLStorage {
         }
         return i;
     }
-    /*
-     * Берет элементы из базы данных и записывает их в xml файл.
-     */
-    private void write_into_xml(List<Integer> arrxml) {
+    private void writeIntoXml(List<Integer> arrxml) {
         Entries entries = new Entries();
         entries.setEntries(new ArrayList<Entry>());
         for (int i = 0; i < arrxml.size(); i++) {
@@ -134,11 +67,16 @@ public class SQLStorage {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args) {
-        List<Integer> arr = new ArrayList();
+    public static void main(String[] args) throws SQLException {
+        DbHandler dbHandler = new DbHandler();
+        dbHandler.deleteTable();
+        // Добавляем запись
+        dbHandler.addIntoTable(10);
+        dbHandler.commit();
+        // Получаем все записи и вывожу их в консоль
+        List<Integer> arr1 = dbHandler.getAllItems();
         SQLStorage sqlStorage = new SQLStorage();
-        arr = sqlStorage.create_table_insert_select(10000);
-        sqlStorage.write_into_xml(arr);
+        sqlStorage.writeIntoXml(arr1);
         Stylizer stylizer = new Stylizer();
         stylizer.xmlEdit();
         System.out.println("Сумма всех атрибутов " + sqlStorage.getSum());
