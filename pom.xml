@@ -4,12 +4,22 @@
 	<artifactId>Alexey</artifactId>
 	<packaging>pom</packaging>
 	<version>2.0</version>
+	<name>junior</name>
+	<url>http://job4j.ru/</url>
 	
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
 	<modules>
+
 		<module>chapter_001</module>
 		<module>chapter_002</module>
 		<module>chapter_003</module>
 		<module>chapter_007</module>
+		<module>chapter_008</module>
 	</modules>
 	
 	<dependencies>
@@ -30,6 +40,18 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.19</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901-1.jdbc4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.21.0.1</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -54,6 +76,11 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.0</version>
 			</plugin>
 		</plugins>
 	</build>
