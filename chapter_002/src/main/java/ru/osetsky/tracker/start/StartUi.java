@@ -1,6 +1,8 @@
 package ru.osetsky.tracker.start;
 
 
+import java.sql.SQLException;
+
 /**
  * Created by koldy on 25.03.2017.
  */
@@ -31,7 +33,7 @@ public class StartUi {
      * Method StartUi.
      * @return null .
      */
-    public StartUi init() {
+    public StartUi init() throws SQLException {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions();
         do {
@@ -48,7 +50,7 @@ public class StartUi {
      * Method main.
      * @param args It is String.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
        Input input = new ValidateInput();
        Tracker tracker = new Tracker();
        new StartUi(input, tracker).init();

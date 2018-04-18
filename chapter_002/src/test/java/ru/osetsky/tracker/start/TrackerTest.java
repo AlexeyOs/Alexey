@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.osetsky.tracker.models.Item;
 
+import java.sql.SQLException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -23,7 +25,7 @@ public class TrackerTest {
      * Method is initialize.
      */
     @Before
-    public final void initialize() {
+    public final void initialize() throws SQLException {
         tracker = new Tracker();
         firstTask = new Item();
         firstTask.setName("First task");
@@ -36,7 +38,7 @@ public class TrackerTest {
      */
     @Test
     public final void whenAddNewItemThenAdded() throws Exception {
-        assertThat(firstTask, is(tracker.findAll().get(0)));
+        assertThat(firstTask, is(tracker.getAll().get(0)));
     }
     /**
      * Method is whenEditFirstTaskThenChangeOnTmp.
@@ -49,6 +51,6 @@ public class TrackerTest {
         tmp.setDescription("Edit description");
         tmp.setId(firstTask.getId());
         tracker.update(tmp);
-        assertThat(tmp, is(tracker.findAll().get(0)));
+        assertThat(tmp, is(tracker.getAll().get(0)));
     }
 }

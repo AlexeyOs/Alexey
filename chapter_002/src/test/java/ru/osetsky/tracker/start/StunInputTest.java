@@ -1,6 +1,8 @@
 package ru.osetsky.tracker.start;
 import org.junit.Test;
 
+import java.sql.SQLException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.Matchers.nullValue;
@@ -12,7 +14,7 @@ public class StunInputTest {
 	 * Method is testStunInputHowUser.
 	 */
     @Test
-    public void testStunInputHowUser() {
+    public void testStunInputHowUser() throws SQLException {
         Tracker tracker = new Tracker();
         String[] parametr = {"name", "desc"};
         Input input = new StunInput(parametr);  //создаём StubInput с последовательносeтью действий
@@ -26,7 +28,7 @@ public class StunInputTest {
 	 * Method is testHowUserAddItem.
 	 */
     @Test
-    public  void testHowUserAddItem() {
+    public  void testHowUserAddItem() throws SQLException {
         Tracker tracker = new Tracker();
         String[] parametr = {"Alex", "coder"};
         Input input = new StunInput(parametr);
@@ -39,7 +41,7 @@ public class StunInputTest {
 	 * Method is testHowUserAddAndDeleteItem.
 	 */
     @Test
-    public  void testHowUserAddAndDeleteItem() {
+    public  void testHowUserAddAndDeleteItem() throws SQLException {
         Tracker tracker = new Tracker();
         String[] parametr = {"Lala", "coder"};
         Input input = new StunInput(parametr);
@@ -53,7 +55,7 @@ public class StunInputTest {
      * Method is testHowUserAddAndDeleteItem2.
      */
     @Test
-    public  void testHowUserAddAndDeleteItem2() {
+    public  void testHowUserAddAndDeleteItem2() throws SQLException {
         Tracker tracker = new Tracker();
         String[] parametr = {"Petr", "teacher"};
         Input input = new StunInput(parametr);
@@ -67,7 +69,7 @@ public class StunInputTest {
      * Method is testHowUserInputIncorrectValue.
      */
     @Test(expected = NumberFormatException.class)
-    public void testHowUserInputIncorrectValue() {
+    public void testHowUserInputIncorrectValue() throws SQLException {
         Tracker tracker = new Tracker();
         Input input = new StunInput(new String[] {"1", "name", "desc"});
         new StartUi(input, tracker).init();
@@ -76,7 +78,7 @@ public class StunInputTest {
      * Method is testHowUserInputIncorrectValue2.
      */
     @Test(expected = MenuOutException.class)
-    public void testHowUserInputIncorrectValue2() {
+    public void testHowUserInputIncorrectValue2() throws SQLException {
         Tracker tracker = new Tracker();
         Input input = new StunInput(new String[] {"7", "name", "desc"});
         new StartUi(input, tracker).init();

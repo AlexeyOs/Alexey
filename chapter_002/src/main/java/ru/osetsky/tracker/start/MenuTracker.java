@@ -3,6 +3,7 @@ package ru.osetsky.tracker.start;
 import ru.osetsky.tracker.models.Item;
 import ru.osetsky.tracker.templates.BaseAction;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,25 +12,21 @@ import java.util.List;
  */
 public class MenuTracker {
 	/**
-     * Field is private for input.
+     * Поле для ввода параметров в меню.
      */
     private Input input;
 	/**
-     * Field is private for tracker.
+     * Поле для манипуляций с данными.
      */
     private Tracker tracker;
-	/**
-     * Array is private.
-     */
-    //private UserAction[] actions = new UserAction[6];
     /**
-     * Field is position type int.
+     * Поля позиции компонентов в меню.
      */
     private int position = 0;
 	/**
-     * Constructor MenuTracker  is public.
-	 * @param input type Input
-	 * @param tracker type Tracker.
+     * Конструктор меню.
+	 * @param input данные о выборе пункта меню.
+	 * @param tracker объект для манипулирования с данными.
      */
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -37,14 +34,13 @@ public class MenuTracker {
     }
 
     /**
-     * This List is type UserActions.
+     * Метод хранящий пункты меню.
      */
     private List<UserAction> actions = new ArrayList();
 	/**
-     * Method fillActions is public.
+     * Метод активирующий меню.
      */
     public void fillActions() {
-       //how to fill it
         this.actions.add(position++, new AddItem(0, "Add"));
         this.actions.add(position++, new ShowItems(1, "Show"));
         this.actions.add(position++, new EditItem(2, "Edit"));
@@ -53,11 +49,10 @@ public class MenuTracker {
         this.actions.add(position++, new FindItemByName(5, "FindName"));
     }
 	/**
-     * Method select is public.
-	 * @param key type integer.
+     * Метод для выбора меню.
+	 * @param key введенный ключ определяют выбранный пункт меню.
      */
-    public void select(int key) {
-        //this.actions[key].execute(this.input, this.tracker);
+    public void select(int key) throws SQLException {
         for (UserAction u : actions) {
             if (u.key() == key) {
                 u.execute(this.input, this.tracker);
@@ -65,7 +60,7 @@ public class MenuTracker {
         }
     }
 	/**
-     * Method show is public.
+     * Метод выводящий пункты меню.
      */
     public void show() {
         for (UserAction action : this.actions) {
@@ -75,23 +70,23 @@ public class MenuTracker {
         }
     }
 	/**
-     * Interior class AddItem is private.
+     * Класс вызывающий методы, добавляющие данные в базу.
      */
     public class AddItem extends BaseAction {
         /**
          *
-         * @param key It is Integer
-         * @param name It is String.
+         * @param key ключ меню
+         * @param name Имя меню.
          */
         AddItem(int key, String name) {
             super(key, name);
         }
         /**
-		 * Method execute is public.
-		 * @param input type Input
-		 * @param tracker type Tracker.
+		 * Метод выполняет вывод вопросов и считывает введенные данные, после чего отправляет на запись.
+		 * @param input Входные данные
+		 * @param tracker отправка на запись в базу.
 		 */
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) throws SQLException {
             String name = input.ask("Please, enter the tak's name: ");
             Item itemStartUi = new Item();
             itemStartUi.setName(name);
@@ -100,7 +95,7 @@ public class MenuTracker {
             tracker.add(itemStartUi);
         }
 		/**
-		 * Method info is public.
+		 * Метод выводит название данного пункта меню.
 		 * @return String.
 		 */
         public String info() {
@@ -108,28 +103,28 @@ public class MenuTracker {
         }
     }
 	/**
-     * Interior class ShowItems is private.
+     * Класс, который обрабатывает пункт меню отвечающий за вывод всех заявок.
      */
     private static class ShowItems extends BaseAction {
         /**
-         * @param key It is Integer
-         * @param name It is String.
+         * @param key ключ меню
+         * @param name имя меню.
          */
         private ShowItems(int key, String name) {
             super(key, name);
         }
 		/**
-		 * Method execute is public.
-		 * @param input type Input
-		 * @param tracker type Tracker.
+		 * Метод, который представляет из себя пукнт управления данным пунктом меню.
+		 * @param input Входные данные
+		 * @param tracker отправка запроса в базу.
 		 */
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) throws SQLException {
            for (Item item: tracker.getAll()) {
-               System.out.println(String.format("%s. %s", item.getId(), item.getName()));
+               System.out.println(String.format("%s. %s", item.getCreate(), item.getName()));
            }
         }
 		/**
-		 * Method info is public.
+		 * Метод выводит название данного пункта меню.
 		 * @return String.
 		 */
         public String info() {
@@ -137,32 +132,29 @@ public class MenuTracker {
         }
     }
 	/**
-     * Interior class EditItem is private.
+     * Класс отвечает за редактирование !!!первой записи.
      */
     private static class EditItem extends BaseAction {
         /**
-         * @param key It is Integer
-         * @param name It is String.
+         * @param key ключ меню
+         * @param name имя меню.
          */
         private EditItem(int key, String name) {
             super(key, name);
         }
 		/**
-		 * Method execute is public.
-		 * @param input type Input
-		 * @param tracker type Tracker.
+		 * Метод управляющий редактированием !!!первой!!! записи.
+         * @param input Входные данные
+         * @param tracker отправка запроса в базу.
 		 */
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) throws SQLException {
             //изменяет первый элемент
             List<Item> itemAR1 = new ArrayList<Item>();
-            //Item[] itemAr = new Item[100];     //создал массив, чтобы вытащить id-шник объекта
-            //for (Item m: itemAR1){
             itemAR1 = tracker.getAll();
-            //itemAr = tracker.getAll();
-            String oldid = null;
+            Long oldid = null;
             for (Item item: itemAR1) {
                 if (item != null) {
-                    oldid = item.getId();
+                    oldid = item.getCreate();
                     break;
                 }
             }
@@ -171,14 +163,14 @@ public class MenuTracker {
             itemStartUi.setName(name);
             String description = input.ask("Please, enter description");
             itemStartUi.setDescription(description);
-            itemStartUi.setId(oldid);         //привязал тот же id
+            itemStartUi.setCreate(oldid);         //привязал тот же id
             tracker.update(itemStartUi);      //вызвал метод update
             for (Item item : tracker.getAll()) {
                 System.out.println(item.getName());
             }
         }
 		/**
-		 * Method info is public.
+		 * Метод выводит название данного пункта меню.
 		 * @return String.
 		 */
         public String info() {
@@ -186,45 +178,42 @@ public class MenuTracker {
 		}
     }
 	/**
-     * Interior class DeleteItem is private.
+     * Класс отвечает за удаление !!!первой записи.
      */
     public static class DeleteItem extends BaseAction {
         /**
-         * @param key It is Integer
-         * @param name It is String.
+         * @param key ключ меню
+         * @param name имя меню.
          */
         public DeleteItem(int key, String name) {
             super(key, name);
         }
 		/**
-		 * Method execute is public.
-		 * @param input type Input
-		 * @param tracker type Tracker.
+		 * Метод управляющие удаление !!!первой записи.
+         * @param input Входные данные
+         * @param tracker отправка запроса в базу.
 		 */
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) throws SQLException {
             //удаляет первый элемент
             List<Item> itemAR1 = new ArrayList<Item>();
-            //Item[] itemAr = new Item[100];     //создал массив, чтобы вытащить id-шник объекта
             itemAR1 = tracker.getAll();
-           //itemAr = tracker.getAll();
-            //String oldid = itemAr[0].getId();
             // взял старый id первого объекта
-            String oldid = null;
+            Long oldid = null;
             for (Item item: itemAR1) {
                 if (item != null) {
-                    oldid = item.getId();
+                    oldid = item.getCreate();
                     break;
                 }
             }
             Item itemDel = new Item();         //создал новый элемент
-            itemDel.setId(oldid);
+            itemDel.setCreate(oldid);
             tracker.delete(itemDel);
             for (Item item : tracker.getAll()) {
                 System.out.println(item.getName());
             }
         }
 		/**
-		 * Method info is public.
+		 * Метод выводит название данного пункта меню.
 		 * @return String.
 		 */
         public String info() {
@@ -232,25 +221,25 @@ public class MenuTracker {
 		}
     }
 	/**
-     * Interior class FindItemById is private.
+     * Класс отвечающий за поиск записи по id.
      */
     public static class FindItemById extends BaseAction {
         /**
-         * @param key It is Integer
-         * @param name It is String.
+         * @param key ключ меню
+         * @param name имя меню.
          */
         public FindItemById(int key, String name) {
             super(key, name);
         }
 		/**
-		 * Method execute is public.
-		 * @param input type Input
-		 * @param tracker type Tracker.
+		 * Метод управляющий поиском записи.
+         * @param input Входные данные
+         * @param tracker отправка запроса в базу.
 		 */
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) throws SQLException {
 
             for (Item item : tracker.getAll()) {
-                System.out.println(item.getId());
+                System.out.println(item.getCreate());
             }
             Item item = new Item();
             String id = input.ask("Please, enter the tak's id: ");
@@ -260,7 +249,7 @@ public class MenuTracker {
 
         }
 		/**
-		 * Method info is public.
+		 * Метод выводит название данного пункта меню.
 		 * @return String.
 		 */
         public String info() {
@@ -268,22 +257,22 @@ public class MenuTracker {
 		}
     }
 	/**
-     * Interior class FindItemByName is private.
+     * Класс отвечающий за поиск записи по именю.
      */
     public static class FindItemByName extends BaseAction {
         /**
-         * @param key It is Integer
-         * @param name It is String.
+         * @param key ключ меню
+         * @param name имя меню.
          */
         public FindItemByName(int key, String name) {
             super(key, name);
         }
 		/**
-		 * Method execute is public.
-		 * @param input type Input
-		 * @param tracker type Tracker.
+		 * Метод управляющий поиском записи.
+         * @param input Входные данные
+         * @param tracker отправка запроса в базу.
 		 */
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker) throws SQLException {
             Item item = new Item();
             String name = input.ask("Please, enter the tak's name: ");
             item = tracker.findByName(name);
@@ -291,7 +280,7 @@ public class MenuTracker {
             System.out.println(item.getDescription());
         }
 		/**
-		 * Method info is public.
+		 * Метод выводит название данного пункта меню.
 		 * @return String.
 		 */
         public String info() {

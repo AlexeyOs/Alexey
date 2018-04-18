@@ -2,6 +2,7 @@ package ru.osetsky.tracker.start;
 /**
  * Created by koldy on 23.03.2017.
  */
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,12 +16,7 @@ public class Tracker {
 	/**
 	 * Array items.
 	 */
-	//private Item[] items = new Item[10];
 	private List<Item> items = new ArrayList<Item>();
-	/**
-	 * Field is position.
-	 */
-	private int position = 0;
 	/**
 	 * Field is static from util.
 	 */
@@ -30,81 +26,52 @@ public class Tracker {
 	 * @param item Type is class Item.
 	 * @return item Type is class Item.
 	 */
-	public Item add(Item item) {
+	public Item add(Item item) throws SQLException {
 		item.setId(this.generateId());
-		//this.items[position++] = item;
 		this.items.add(item);
+		DBConnect dbConnect = new DBConnect();
+		dbConnect.addIntoTable(item);
+		dbConnect.commit();
 		return item;
 	}
 	/**
 	 * Method update.
 	 * @param item Type is class Item.
 	 */
-	public void update(Item item) {
-		for (Item a: items) {
-			if (a != null && a.getId().equals(item.getId())) {
-				items.set(items.indexOf(a), item);
-			}
-		}
-//		for (int i = 0; i != this.items.length(); i++) {
-//			if (this.items[i] != null && this.items[i].getId().equals(item.getId())) {
-//				this.items[i] = item;
-//				break;
-//			}
-//		}
+	public void update(Item item) throws SQLException {
+		DBConnect dbConnect = new DBConnect();
+		dbConnect.updateItem(item);
+		dbConnect.commit();
 	}
 	/**
 	 * Method delete.
 	 * @param item Type is class Item.
 	 */
-	public void delete(Item item) {
-		for (Item b: items) {
-			if (b != null && b.getId().equals(item.getId())) {
-				items.set(items.indexOf(b), item);
-			}
-		}
-//		for (int i = 0; i != this.items.length; i++) {
-//			if (this.items[i] != null && this.items[i].getId().equals(item.getId())) {
-//				this.items[i] = item;
-//				break;
-//			}
-//
-//		}
-	}
-	/**
-	 * Method findAll.
-	 * @return item Type is class Item.
-	 */
-	public List<Item> findAll() {
-//		Item[] result = new Item[this.items.length];
-//		for (int i = 0; i != this.items.length; i++) {
-//				result[i] = this.items[i];
-//		}
-		return this.items;
+	public void delete(Item item) throws SQLException {
+		DBConnect dbConnect = new DBConnect();
+		dbConnect.deleteTable(item.getCreate());
+		System.out.println(item.getCreate());
+		dbConnect.commit();
 	}
 	/**
 	 * Method getAll.
 	 * @return item Type is class Item.
 	 */
-	public List<Item> getAll() {
-//		Item[] result = new Item[this.position];
-//		for (int i = 0; i != this.position; i++) {
-//			result[i] = this.items[i];
-//		}
-		return this.items;
+	public List<Item> getAll() throws SQLException {
+		DBConnect dbConnect = new DBConnect();
+		List<Item> result = dbConnect.getAllItems();
+		dbConnect.commit();
+		return result;
 	}
 	/**
 	 * Method findByName.
 	 * @param name Type is String.
 	 * @return name Type is Item.
 	 */
-	public Item findByName(String name) {
-		Item result = null;
-		for (Item item : items) {
-				if (item != null && item.getName().equals(name)) {
-					result = item;
-			}
-		}
+	public Item findByName(String name) throws SQLException {
+		DBConnect dbConnect = new DBConnect();
+		Item result = dbConnect.findByName(name);
+		dbConnect.commit();
 		return result;
 	}
 	/**
@@ -112,14 +79,10 @@ public class Tracker {
 	 * @param id Type is Spring.
 	 * @return result Type is Item.
 	 */
-	protected Item findById(String id) {
-		Item result = null;
-		for (Item item : items) {
-				if (item != null && item.getId().equals(id)) {
-					result = item;
-					break;
-			}
-		}
+	protected Item findById(String id) throws SQLException {
+		DBConnect dbConnect = new DBConnect();
+		Item result = dbConnect.findItem(Long.parseLong(id));
+		dbConnect.commit();
 		return result;
 	}
 	/**
