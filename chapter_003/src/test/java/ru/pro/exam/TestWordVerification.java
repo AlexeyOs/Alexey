@@ -25,4 +25,8 @@ public class TestWordVerification {
     public void whenCheckDifferentWordsManyRepeat() {
         assertThat(false,is(new WordVerification().verification("Canumber","Cucumber")));
     }
+    @Test
+    public void whenCheckNumber() {
+        assertThat(true,is(new WordVerification().verification("122","112")));
+    }
 }

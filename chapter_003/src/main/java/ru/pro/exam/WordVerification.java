@@ -70,4 +70,5 @@ public class WordVerification {
         }
         return strArrayCharacters;
     }
+    
 }
