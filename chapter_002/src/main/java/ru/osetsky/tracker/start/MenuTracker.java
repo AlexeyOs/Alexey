@@ -86,7 +86,7 @@ public class MenuTracker {
 		 * @param input Входные данные
 		 * @param tracker отправка на запись в базу.
 		 */
-        public void execute(Input input, Tracker tracker) throws SQLException {
+        public void execute(Input input, Tracker tracker) {
             String name = input.ask("Please, enter the tak's name: ");
             Item itemStartUi = new Item();
             itemStartUi.setName(name);
@@ -118,7 +118,7 @@ public class MenuTracker {
 		 * @param input Входные данные
 		 * @param tracker отправка запроса в базу.
 		 */
-        public void execute(Input input, Tracker tracker) throws SQLException {
+        public void execute(Input input, Tracker tracker) {
            for (Item item: tracker.getAll()) {
                System.out.println(String.format("%s. %s", item.getCreate(), item.getName()));
            }
@@ -147,7 +147,7 @@ public class MenuTracker {
          * @param input Входные данные
          * @param tracker отправка запроса в базу.
 		 */
-        public void execute(Input input, Tracker tracker) throws SQLException {
+        public void execute(Input input, Tracker tracker) {
             //изменяет первый элемент
             List<Item> itemAR1 = new ArrayList<Item>();
             itemAR1 = tracker.getAll();
@@ -193,7 +193,7 @@ public class MenuTracker {
          * @param input Входные данные
          * @param tracker отправка запроса в базу.
 		 */
-        public void execute(Input input, Tracker tracker) throws SQLException {
+        public void execute(Input input, Tracker tracker) {
             //удаляет первый элемент
             List<Item> itemAR1 = new ArrayList<Item>();
             itemAR1 = tracker.getAll();
@@ -236,7 +236,7 @@ public class MenuTracker {
          * @param input Входные данные
          * @param tracker отправка запроса в базу.
 		 */
-        public void execute(Input input, Tracker tracker) throws SQLException {
+        public void execute(Input input, Tracker tracker) {
 
             for (Item item : tracker.getAll()) {
                 System.out.println(item.getCreate());
@@ -272,7 +272,7 @@ public class MenuTracker {
          * @param input Входные данные
          * @param tracker отправка запроса в базу.
 		 */
-        public void execute(Input input, Tracker tracker) throws SQLException {
+        public void execute(Input input, Tracker tracker) {
             Item item = new Item();
             String name = input.ask("Please, enter the tak's name: ");
             item = tracker.findByName(name);

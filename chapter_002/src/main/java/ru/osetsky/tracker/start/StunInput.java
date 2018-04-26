@@ -7,40 +7,39 @@ import java.util.Scanner;
  */
 public class StunInput implements Input {
 	/**
-     * Field is answers.
+     * Поле-массив с ответами.
      */
     private String[] answers;
 	/**
-     * Field is position.
+     * Поле номера меню.
      */
     private int position = 0;
 	/**
-     * Field is scanner.
+     * Поле отвечающее за считывание входных данных.
      */
     private Scanner scanner = new Scanner(System.in);
 	/**
-     * Method is StunInput.
-	 * @param answers It is String array.
+     * Конструктор.
+	 * @param answers Массив содержащий пункты меню.
      */
     public StunInput(String[] answers) {
         this.answers = answers;
     }
-	/**
-     * Method ask.
-     * @param question It is String.
-	 * @return answers It is integer.
+    /**
+     * Поле запрашивает входные данные.
+     * @param question Входной запрос.
+     * @return result результат возвращающий на входные данные.
      */
     public String ask(String question) {
         return answers[position++];
     }
-	/**
-     * Method ask.
-     * @param question It is String
-	 * @param range It is array type integer.
-	 * @return answers It is integer.
+    /**
+     * Поле запрашивает цифру выбор меню.
+     * @param question Входной запрос
+     * @param range Пункты меню.
+     * @return result результат возвращающий на входные данные.
      */
     public int ask(String question, int[] range) {
-        //throw new UnsupportedOperationException("Unsupported operation");
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int value : range) {

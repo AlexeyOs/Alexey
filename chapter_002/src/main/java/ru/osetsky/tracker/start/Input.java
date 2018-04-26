@@ -5,16 +5,16 @@ package ru.osetsky.tracker.start;
  */
 public interface Input {
     /**
-     * Field is ask.
-     * @param question It is inquiry.
-     * @return result of method ask.
+     * Поле запрашивает входные данные.
+     * @param question Входной запрос.
+     * @return result результат возвращающий на входные данные.
      */
     String ask(String question);
   /**
-     * Field is ask.
-     * @param question It is inquiry
-	 * @param range It is array.
-     * @return result of method ask.
+     * Поле запрашивает цифру выбор меню.
+     * @param question Входной запрос
+	 * @param range Пункты меню.
+     * @return result результат возвращающий на входные данные.
      */
     int ask(String question, int[] range);
 }

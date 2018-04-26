@@ -14,79 +14,103 @@ import ru.osetsky.tracker.models.Item;
 
 public class Tracker {
 	/**
-	 * Array items.
+	 * Массив объектов пользователе(пользователь рассматриватьеся как запись).
 	 */
 	private List<Item> items = new ArrayList<Item>();
 	/**
-	 * Field is static from util.
+	 * Поля используется для генерирования id.
 	 */
 	private static final Random RN = new Random();
 	/**
-	 * Method add.
-	 * @param item Type is class Item.
-	 * @return item Type is class Item.
+	 * Метода отправляет данные в класс отвечающий за соединение с базой данный,
+	 * и запрашивает добавление данных в базу.
+	 * @param item Тип записи.
+	 * @return item Тип записи.
 	 */
-	public Item add(Item item) throws SQLException {
+	public Item add(Item item) {
 		item.setId(this.generateId());
 		this.items.add(item);
-		DBConnect dbConnect = new DBConnect();
-		dbConnect.addIntoTable(item);
-		dbConnect.commit();
+		try (DBConnect dbConnect = new DBConnect()) {
+			dbConnect.addIntoTable(item);
+			dbConnect.commit();
+		} catch (Exception e) {
+			System.out.println("Ошибка при добавлении в классе Tracker");
+		}
 		return item;
 	}
 	/**
-	 * Method update.
-	 * @param item Type is class Item.
+	 * Метода отправляет данные в класс отвечающий за соединение с базой данный,
+	 * и запрашивает обновление данных в базе.
+	 * @param item Тип записи.
 	 */
-	public void update(Item item) throws SQLException {
-		DBConnect dbConnect = new DBConnect();
-		dbConnect.updateItem(item);
-		dbConnect.commit();
+	public void update(Item item) {
+		try (DBConnect dbConnect = new DBConnect()) {
+			dbConnect.updateItem(item);
+			dbConnect.commit();
+		} catch (Exception e) {
+			System.out.println("Ошибка при обновлении в классе Tracker");
+		}
 	}
 	/**
-	 * Method delete.
-	 * @param item Type is class Item.
+	 * Метода отправляет данные в класс отвечающий за соединение с базой данный,
+	 * и запрашивает удаление данных в базе.
+	 * @param item Тип записи.
 	 */
-	public void delete(Item item) throws SQLException {
-		DBConnect dbConnect = new DBConnect();
-		dbConnect.deleteTable(item.getCreate());
-		System.out.println(item.getCreate());
-		dbConnect.commit();
+	public void delete(Item item) {
+		try (DBConnect dbConnect = new DBConnect()) {
+			dbConnect.deleteTable(item.getCreate());
+			System.out.println(item.getCreate());
+			dbConnect.commit();
+		} catch (Exception e) {
+			System.out.println("Ошибка при удалении в классе Tracker");
+		}
 	}
 	/**
-	 * Method getAll.
-	 * @return item Type is class Item.
+	 * Метода запрашивает данные из класса отвечающего за соединение с базой данный.
+	 * @return Тип записи.
 	 */
-	public List<Item> getAll() throws SQLException {
-		DBConnect dbConnect = new DBConnect();
-		List<Item> result = dbConnect.getAllItems();
-		dbConnect.commit();
-		return result;
+	public List<Item> getAll() {
+		try (DBConnect dbConnect = new DBConnect()) {
+			List<Item> result = dbConnect.getAllItems();
+			dbConnect.commit();
+			return result;
+		} catch (Exception e) {
+			System.out.println("Ошибка при запросе всех объектов в классе Tracker");
+		}
+		return null;
 	}
 	/**
-	 * Method findByName.
-	 * @param name Type is String.
-	 * @return name Type is Item.
+	 * Метода запрашивает объект с заданным именем из класса отвечающего за соединение с базой данный.
+	 * @param name Имя искомого объекта.
+	 * @return name Тип объекта.
 	 */
-	public Item findByName(String name) throws SQLException {
-		DBConnect dbConnect = new DBConnect();
-		Item result = dbConnect.findByName(name);
-		dbConnect.commit();
-		return result;
+	public Item findByName(String name) {
+		try (DBConnect dbConnect = new DBConnect()) {
+			Item result = dbConnect.findByName(name);
+			dbConnect.commit();
+			return result;
+		} catch (Exception e) {
+			System.out.println("Ошибка поиске объектов по имени в классе Tracker");
+		}
+		return null;
 	}
 	/**
-	 * Method findById.
-	 * @param id Type is Spring.
-	 * @return result Type is Item.
+	 * Метода запрашивает объект с заданным id из класса отвечающего за соединение с базой данный.
+	 * @param id Индентификатор объетка.
+	 * @return result Тип записи.
 	 */
-	protected Item findById(String id) throws SQLException {
-		DBConnect dbConnect = new DBConnect();
-		Item result = dbConnect.findItem(Long.parseLong(id));
-		dbConnect.commit();
-		return result;
+	public Item findById(String id) {
+		try (DBConnect dbConnect = new DBConnect()) {
+			Item result = dbConnect.findItem(Long.parseLong(id));
+			dbConnect.commit();
+			return result;
+		} catch (Exception e) {
+			System.out.println("Ошибка поиска объектов по id в классе Tracker");
+		}
+		return null;
 	}
 	/**
-	 * Method generateId.
+	 * Метод генерирующий уникальный идентификатор.
 	 * @return String.
 	 */
 	private String generateId() {

@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by koldy on 14.04.2018.
  */
-public class DBConnect {
+public class DBConnect implements AutoCloseable {
     /*
      * Поле необходимое для подключения к базе данных.
      */
@@ -143,5 +143,10 @@ public class DBConnect {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void close() throws Exception {
+        System.out.println("Close");
     }
 }
