@@ -1,4 +1,4 @@
-package ru.osetsky.non_blocking_algoritm;
+package ru.osetsky.nonblockingalgoritm;
 
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ public class NonBlockTest {
     @Test
     public void whenUpdateElementInMap() {
         cacheUs.add(new User(1, "Alex"));
-        cacheUs.update(1,new User(1,"Igor"));
+        cacheUs.update(1, new User(1, "Igor"));
         assertThat(cacheUs.size(), is(1));
     }
 
@@ -40,6 +40,6 @@ public class NonBlockTest {
         cacheUs.add(new User(3, "Alex"));
         cacheUs.add(new User(5, "Igor"));
         cacheUs.delete(3);
-        assertThat(cacheUs.size(),is(1));
+        assertThat(cacheUs.size(), is(1));
     }
 }

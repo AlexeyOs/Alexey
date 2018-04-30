@@ -25,15 +25,6 @@ public class TestCycleList {
         assertTrue(list.hasCycle(list.getFirstNode()));
     }
 
-    /**
-     * test method hasCycle, if list have no cycle, then return false.
-     */
-    @Test
-    public void whenCallHasCycleAndListIsANoCycleThenReturnTrue() {
-        this.list = new CycleList<>();
-        this.createNoCycleList();
-        assertFalse(list.hasCycle(list.getFirstNode()));
-    }
 
     /**
      * create list with out no cycle.

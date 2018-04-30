@@ -1,4 +1,4 @@
-package ru.osetsky.wait_notify_notifyall.producer_consumer;
+package ru.osetsky.waitnotifynotifyall.producerconsumer;
 
 import java.util.LinkedList;
 import java.util.List;

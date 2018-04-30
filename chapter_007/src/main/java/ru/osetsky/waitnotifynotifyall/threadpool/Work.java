@@ -1,4 +1,4 @@
-package ru.osetsky.wait_notify_notifyall.threadpool;
+package ru.osetsky.waitnotifynotifyall.threadpool;
 
 /**
  * Created by koldy on 04.03.2018.

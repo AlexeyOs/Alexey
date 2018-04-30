@@ -1,4 +1,4 @@
-package ru.osetsky.parcerSQLru;
+package ru.osetsky.parcer;
 
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
@@ -33,7 +33,7 @@ public class Start {
         }
         List<String> arr = new ArrayList<>();
         arr = dbConnect.getAllItems();
-        for(int i = 0; i<arr.size(); i++) {
+        for (int i = 0; i < arr.size(); i++) {
             System.out.println(arr.get(i));
         }
     }

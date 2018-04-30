@@ -22,10 +22,10 @@ public class CashMachine {
             list.add(lst);
             return list;
         }
-        if (note == 5){
+        if (note == 5) {
             List<List<Integer>> list = new ArrayList<>();
             List<Integer> lst1 = new ArrayList<>();
-            for (int i =0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {
                 lst1.add(1);
             }
             List<Integer> lst2 = new ArrayList<>();
@@ -34,21 +34,21 @@ public class CashMachine {
             list.add(lst2);
             return list;
         }
-        if (note == 10){
+        if (note == 10) {
             List<List<Integer>> list = new ArrayList<>();
             List<Integer> lst1 = new ArrayList<>();
             lst1.add(note);
             List<Integer> lst2 = new ArrayList<>();
-            for (int i =0; i < 2; i++) {
+            for (int i = 0; i < 2; i++) {
                 lst2.add(5);
             }
             List<Integer> lst3 = new ArrayList<>();
-            for (int i =0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {
                 lst3.add(1);
             }
             lst3.add(5);
             List<Integer> lst4 = new ArrayList<>();
-            for (int i =0; i < 10; i++) {
+            for (int i = 0; i < 10; i++) {
                 lst4.add(1);
             }
             list.add(lst1);

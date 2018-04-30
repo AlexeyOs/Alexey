@@ -1,4 +1,4 @@
-package ru.osetsky.parcerSQLru;
+package ru.osetsky.parcer;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -42,7 +42,7 @@ public class Parser {
         return vacancies;
     }
 
-    public Set<Vacancy> getJavaVacanciesFromDocument(Document document, DbConnect dbConnect){
+    public Set<Vacancy> getJavaVacanciesFromDocument(Document document, DbConnect dbConnect) {
         Set<Vacancy> vacancies = new HashSet<>();
         Elements elements = document.select(".postslisttopic");
         for (Element element : elements) {
@@ -52,7 +52,7 @@ public class Parser {
                     Vacancy vacancy = getVacancy(element);
                     if (vacancy != null) {
                         vacancies.add(vacancy);
-                        dbConnect.addIntoTable(vacancy.getName(),vacancy.getUrl());
+                        dbConnect.addIntoTable(vacancy.getName(), vacancy.getUrl());
                         dbConnect.commit();
                     }
                 }

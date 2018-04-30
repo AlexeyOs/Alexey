@@ -8,9 +8,9 @@ import static org.hamcrest.core.Is.is;
 /**
  * Created by koldy on 30.01.2018.
  */
-public class isBinaryTreeTest {
+public class IsBinaryTreeTest {
     @Test
-    public void shouldReturnTrue () {
+    public void shouldReturnTrue() {
         Node<Integer> node =  new Node<Integer>(50);
         Tree<Integer> tree = new Tree<Integer>(node);
         tree.add(50, 70);
@@ -26,7 +26,7 @@ public class isBinaryTreeTest {
     }
 
     @Test
-    public void shouldReturnFalse () {
+    public void shouldReturnFalse() {
         Node<Integer> node =  new Node<Integer>(50);
         Tree<Integer> tree = new Tree<>(node);
         tree.add(50, 70);

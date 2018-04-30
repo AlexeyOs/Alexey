@@ -22,7 +22,7 @@ public class TreeTestOther {
 
 
     @Before
-    public void setUp(){
+    public void setUp() {
         tree.add(50, 60);
         tree.add(50, 70);
         tree.add(60, 10);
@@ -37,16 +37,16 @@ public class TreeTestOther {
     }
 
     @Test
-    public void resultShouldContainExpectedValuesAndOny () {
+    public void resultShouldContainExpectedValuesAndOny() {
         assertThat(result, containsInAnyOrder(expected.toArray()));
     }
 
     @Test
-    public void printToCompare(){
+    public void printToCompare() {
         printResultAndExpected();
     }
 
-    public void printResultAndExpected () {
+    public void printResultAndExpected() {
         expected.sort(Comparator.naturalOrder());
         result.sort(Comparator.naturalOrder());
 

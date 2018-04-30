@@ -24,7 +24,7 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return result;
     }
 
-    private boolean checkRepeat(E child,List<Node<E>> children){
+    private boolean checkRepeat(E child, List<Node<E>> children) {
         boolean result = true;
         for (Node<E> childcom : children) {
                 if (child.equals(childcom.getValue())) {
@@ -33,10 +33,10 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                 }
         }
         if (result) {
-            for (Node<E> child_down : children) {
-                if (child_down.getChildren().size()>0) {
-                    result = checkRepeat(child, child_down.getChildren());
-                    if (result == false) {
+            for (Node<E> childdown : children) {
+                if (childdown.getChildren().size() > 0) {
+                    result = checkRepeat(child, childdown.getChildren());
+                    if (!result) {
                         return result;
                     }
                 }
@@ -46,15 +46,15 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return result;
     }
 
-    public boolean isBinary(){
+    public boolean isBinary() {
         return isBinary(root.getChildren());
     }
 
     private boolean isBinary(List<Node<E>> node) {
         boolean result;
         // если потоков меньше двух, то дерево не бинарное
-        for (Node<E> noda: node){
-            if (noda.getChildren().size() > 2){
+        for (Node<E> noda: node) {
+            if (noda.getChildren().size() > 2) {
                 return false;
             }
         }
@@ -73,11 +73,11 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     @Override
     public boolean add(E parent, E child) {
         Node<E> resultAdd = root;
-        if (!root.getValue().equals(parent)&&checkRepeat(child,this.root.getChildren())) {
+        if (!root.getValue().equals(parent) && checkRepeat(child, this.root.getChildren())) {
                 resultAdd = find(root.getChildren(), parent);
         }
         boolean parentExists = resultAdd != null;
-        if (parentExists && checkRepeat(child,this.root.getChildren())) {
+        if (parentExists && checkRepeat(child, this.root.getChildren())) {
             Node<E> node = new Node<>(child);
             resultAdd.getChildren().add(node);
         }

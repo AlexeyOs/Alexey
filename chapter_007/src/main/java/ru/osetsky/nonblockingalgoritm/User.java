@@ -1,4 +1,4 @@
-package ru.osetsky.non_blocking_algoritm;
+package ru.osetsky.nonblockingalgoritm;
 
 /**
  * Created by koldy on 15.03.2018.
@@ -8,14 +8,14 @@ public class User {
     private int key;
     private String value;
     private int version;
-    public User(int key,String value){
+    public User(int key, String value) {
         this.key = key;
         this.value = value;
     }
     public void setValue(String value) {
         this.value = value;
     }
-    public int getKey(){
+    public int getKey() {
         return key;
     }
     public int getVersion() {

@@ -1,4 +1,4 @@
-package ru.osetsky.parcerSQLru;
+package ru.osetsky.parcer;
 
 import java.util.Calendar;
 

@@ -1,12 +1,12 @@
-package ru.osetsky.wait_notify_notifyall.producer_consumer;
+package ru.osetsky.waitnotifynotifyall.producerconsumer;
 
 /**
  * Created by koldy on 17.02.2018.
  */
-public class Producer implements Runnable{
-    private final  SimpleBlockingQueue queue ;
+public class Producer implements Runnable {
+    private final  SimpleBlockingQueue queue;
 
-    public Producer(SimpleBlockingQueue queue){
+    public Producer(SimpleBlockingQueue queue) {
         this.queue = queue;
     }
 

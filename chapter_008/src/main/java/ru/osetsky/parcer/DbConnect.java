@@ -1,4 +1,4 @@
-package ru.osetsky.parcerSQLru;
+package ru.osetsky.parcer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,9 +40,9 @@ public class DbConnect {
             // создание таблицы в базе данных
             stmt = connection.createStatement();
             //!!! Сделать autoincrement id.
-            String sql = "CREATE TABLE IF NOT EXISTS PARCE (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                    "NAME VARCHAR ," +
-                    "HREF VARCHAR)";
+            String sql = "CREATE TABLE IF NOT EXISTS PARCE (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+                    + "NAME VARCHAR ,"
+                    + "HREF VARCHAR)";
             stmt.executeUpdate(sql);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
@@ -70,7 +70,7 @@ public class DbConnect {
     /*
      * Добавление записей в таблицу.
      */
-    public void addIntoTable( String name, String href) {
+    public void addIntoTable(String name, String href) {
         try {
             //вставка
                 PreparedStatement st = connection.prepareStatement("INSERT INTO PARCE(name, href) values(?,?)");

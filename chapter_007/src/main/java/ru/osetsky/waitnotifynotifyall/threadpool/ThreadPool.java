@@ -1,4 +1,4 @@
-package ru.osetsky.wait_notify_notifyall.threadpool;
+package ru.osetsky.waitnotifynotifyall.threadpool;
 
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;

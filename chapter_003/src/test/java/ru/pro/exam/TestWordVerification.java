@@ -11,22 +11,22 @@ public class TestWordVerification {
 
     @Test
     public void whenCheckSameWords() {
-        assertThat(true,is(new WordVerification().verification("Telephone","Telephone")));
+        assertThat(true, is(new WordVerification().verification("Telephone", "Telephone")));
     }
     @Test
     public void whenCheckDifferentWords() {
-        assertThat(false,is(new WordVerification().verification("Car","Cart")));
+        assertThat(false, is(new WordVerification().verification("Car", "Cart")));
     }
     @Test
     public void whenCheckDifferentWordsDefferentCharacter() {
-        assertThat(false,is(new WordVerification().verification("Cucumber","Sale")));
+        assertThat(false, is(new WordVerification().verification("Cucumber", "Sale")));
     }
     @Test
     public void whenCheckDifferentWordsManyRepeat() {
-        assertThat(false,is(new WordVerification().verification("Canumber","Cucumber")));
+        assertThat(false, is(new WordVerification().verification("Canumber", "Cucumber")));
     }
     @Test
     public void whenCheckNumber() {
-        assertThat(true,is(new WordVerification().verification("122","112")));
+        assertThat(true, is(new WordVerification().verification("122", "112")));
     }
 }

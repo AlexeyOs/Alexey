@@ -17,21 +17,21 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
      * Переопределенный метод для добавления в Бинарное дерево.
      */
     @Override
-    public void add(E e){
-        if(this.root == null){
+    public void add(E e) {
+        if (this.root == null) {
             this.root = new Node<E>(e);
         }
         Node<E> node = this.root;
         while (true) {
-            if (node.getValue().compareTo(e) < 0){
-                if (node.left == null){
+            if (node.getValue().compareTo(e) < 0) {
+                if (node.left == null) {
                     node.left = new Node<E>(e);
                     return;
                 } else {
                     node = node.left;
                 }
             } else if (node.getValue().compareTo(e) > 0) {
-                if (node.right == null){
+                if (node.right == null) {
                     node.right = new Node<E>(e);
                     return;
                 } else  {
@@ -42,7 +42,7 @@ public class SearchBinaryTree<E extends Comparable<E>> implements SimpleTree<E> 
             }
         }
     }
-    public boolean find(E element){
+    public boolean find(E element) {
         boolean isNeedSave = false;
         Node<E> node = this.root;
         while (node != null) {

@@ -17,22 +17,21 @@ public class WordVerification {
     /*
      * Метод проверяет два массива заполненных буквами, составленные из двух слов.
      */
-    public boolean verification(String str1, String str2){
-       HashMap<Integer,String> strArr1 = sendToArrayAllCharacters(str1);
-       HashMap<Integer,String> strArr2 = sendToArrayAllCharacters(str2);
-       checkForCoincidence(strArr1,strArr2);
-       if (countSame == strArr1.size() && countSame == strArr2.size()){
-           return true;
-       } else {
-           return false;
-       }
+    public boolean verification(String str1, String str2) {
+        HashMap<Integer, String> strArr1 = sendToArrayAllCharacters(str1);
+        HashMap<Integer, String> strArr2 = sendToArrayAllCharacters(str2);
+        checkForCoincidence(strArr1, strArr2);
+        if (countSame == strArr1.size() && countSame == strArr2.size()) {
+            return true;
+        }
+        return false;
     }
     /*
      * Проверяет на совпадение букв
      */
-    private int checkForCoincidence(HashMap<Integer,String> strArr1, HashMap<Integer,String> strArr2){
+    private int checkForCoincidence(HashMap<Integer, String> strArr1, HashMap<Integer, String> strArr2) {
         //определяет самый длинные массив
-        if (strArr1.size() > strArr2.size()){
+        if (strArr1.size() > strArr2.size()) {
             for (int i = 0; i < strArr1.size(); i++) {
                 if (strArr2.containsValue(strArr1.get(i))) {
                     countSame++;
@@ -51,14 +50,14 @@ public class WordVerification {
     /*
      * Разбивает слово по буквам и отправляет в массив
      */
-    private HashMap<Integer, String> sendToArrayAllCharacters(String str){
-        HashMap<Integer,String> strArrayCharacters = new HashMap<>();
+    private HashMap<Integer, String> sendToArrayAllCharacters(String str) {
+        HashMap<Integer, String> strArrayCharacters = new HashMap<>();
         /*
          * Переменная которая указывает, есть ли уже в массиве данная буква.
          */
         boolean alreadyExists = false;
         int index = 0;
-        for (int i = 0; i < str.length() ;  i++) {
+        for (int i = 0; i < str.length();  i++) {
             if (strArrayCharacters.containsValue(str.substring(i, i + 1))) {
                 alreadyExists = true;
             }
@@ -70,5 +69,5 @@ public class WordVerification {
         }
         return strArrayCharacters;
     }
-    
+
 }

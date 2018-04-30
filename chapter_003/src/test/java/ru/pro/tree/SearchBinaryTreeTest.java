@@ -35,11 +35,11 @@ public class SearchBinaryTreeTest {
         assertThat(tree.find(15), is(false));
     }
     @Test
-    public void binarySearchTreeTest () {
+    public void binarySearchTreeTest() {
         List<Integer> expected = Arrays.asList(50, 70, 30, 20, 40, 80, 60);
         List<Integer> result  = new ArrayList<>();
 
-        SearchBinaryTree <Integer> tree = new SearchBinaryTree<>();
+        SearchBinaryTree<Integer> tree = new SearchBinaryTree<>();
         tree.add(50);
         tree.add(70);
         tree.add(30);

@@ -1,4 +1,4 @@
-package ru.osetsky.monitor_synchronizy;
+package ru.osetsky.monitorsynchronizy;
 
 /**
  * Created by koldy on 15.01.2018.

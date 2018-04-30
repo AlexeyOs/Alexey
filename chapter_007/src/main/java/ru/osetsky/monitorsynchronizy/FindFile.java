@@ -1,4 +1,4 @@
-package ru.osetsky.monitor_synchronizy;
+package ru.osetsky.monitorsynchronizy;
 
 import java.io.File;
 import java.util.concurrent.BlockingQueue;

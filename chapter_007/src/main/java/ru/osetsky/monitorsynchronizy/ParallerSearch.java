@@ -1,4 +1,4 @@
-package ru.osetsky.monitor_synchronizy;
+package ru.osetsky.monitorsynchronizy;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,9 +44,9 @@ public class ParallerSearch {
         this.exts = exts;
     }
 
-    public static boolean isAlive(){
+    public static boolean isAlive() {
         boolean isNeedSave = false;
-        for (Thread thr : thread){
+        for (Thread thr : thread) {
             if (thr.isAlive()) {
                 isNeedSave = true;
             }

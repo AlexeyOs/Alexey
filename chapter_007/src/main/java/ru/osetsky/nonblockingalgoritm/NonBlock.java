@@ -1,4 +1,4 @@
-package ru.osetsky.non_blocking_algoritm;
+package ru.osetsky.nonblockingalgoritm;
 
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,7 +11,7 @@ public class NonBlock<E extends User> {
     /*
      * Поле хэшкарты
      */
-    private ConcurrentHashMap<Integer,E> map = new ConcurrentHashMap();
+    private ConcurrentHashMap<Integer, E> map = new ConcurrentHashMap();
     public void add(User cacheUs) {
         // Проверяю нет ли хэша с этим id
         if (!this.map.containsKey(cacheUs.getKey())) {
@@ -21,7 +21,7 @@ public class NonBlock<E extends User> {
             System.out.println("Такой элемент уже существует");
         }
     }
-    public void update(int key, E cacheUs){
+    public void update(int key, E cacheUs) {
         // Проверяю есть ли хеш с таким id
         if (this.map.containsKey(key)) {
             this.map.computeIfPresent(cacheUs.getKey(), new BiFunction<Integer, E, E>() {
@@ -44,7 +44,7 @@ public class NonBlock<E extends User> {
             System.out.println("Элемент не найденн");
         }
     }
-    public void delete(int key){
+    public void delete(int key) {
         // Проверяю есть ли хэш с этим id
         if (this.map.containsKey(key)) {
             this.map.remove(key);
