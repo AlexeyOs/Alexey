@@ -1,7 +1,7 @@
 <web-app>
     <servlet>
-        <servlet-name>EchoServlet</servlet-name>
-        <servlet-class>osetsky.servlets.EchoServlet</servlet-class>
+        <servlet-name>CreateServlet</servlet-name>
+        <servlet-class>osetsky.servlets.CreateServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -9,18 +9,44 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>osetsky.servlets.UsersServlet</servlet-class>
+        <servlet-name>ListServlet</servlet-name>
+        <servlet-class>osetsky.servlets.ListServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>EditServlet</servlet-name>
+        <servlet-class>osetsky.servlets.EditServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>UsersServlet</servlet-name>
+        <servlet-class>osetsky.httpprotocol.UsersServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>4</load-on-startup>
+    </servlet>
 
     <servlet-mapping>
-        <servlet-name>EchoServlet</servlet-name>
-        <url-pattern>/echo</url-pattern>
+        <servlet-name>CreateServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListServlet</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditServlet</servlet-name>
+        <url-pattern>/edit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>

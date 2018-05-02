@@ -1,4 +1,4 @@
-package osetsky.servlets;
+package osetsky.httpprotocol;
 
 import java.util.Date;
 

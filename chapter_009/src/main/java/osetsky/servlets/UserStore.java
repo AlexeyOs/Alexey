@@ -1,4 +1,4 @@
-package osetsky.httpprotocol;
+package osetsky.servlets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,6 +97,48 @@ public class UserStore {
             e.printStackTrace();
             return Collections.emptyList();
         }
+    }
+    /**
+     *
+     * Получение всех id из таблицы.
+     */
+    public List<Integer> getAllIdItems() {
+        try (Statement statement = this.connection.createStatement()) {
+            List<Integer> arr = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery("select id,name,login, email, createDate from SERVLET");
+            while (resultSet.next()) {
+                arr.add(resultSet.getInt("id"));
+            }
+            return arr;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+    /**
+     *
+     * Получение данных из таблицы по id.
+     */
+    public String getItemParam(String id, String param) {
+        try (Statement statement = this.connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("select name, login, email, createDate from SERVLET where id = " + Integer.parseInt(id));
+            resultSet.next();
+            if (param.equals("name")) {
+                return resultSet.getString("name");
+            }
+            if (param.equals("login")) {
+                return resultSet.getString("login");
+            }
+            if (param.equals("email")) {
+                return resultSet.getString("email");
+            }
+            if (param.equals("createDate")) {
+                return resultSet.getString("createDate");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     /**
      * Так как Autocommit = false, то commit делается вызовом данного метода.
