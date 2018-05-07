@@ -3,6 +3,10 @@ package osetsky.servlets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,9 +20,9 @@ public class UserStore {
      * Поле необходимое для подключения к базе данных.
      */
     private static final Logger LOG = LoggerFactory.getLogger(UserStore.class);
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/java_a_from_z";
-    private static final String USER = "postgres";
-    private static final String PASS = "1234";
+//    private static final String DB_URL = "jdbc:postgresql://localhost:5432/java_a_from_z";
+//    private static final String USER = "postgres";
+//    private static final String PASS = "1234";
 
     /**
      * Используем шаблон одиночка Eager initialization(Искаженная инициализация).
@@ -28,24 +32,41 @@ public class UserStore {
     public static UserStore getInstance() {
         return INSTANCE;
     }
+    private DataSource ds;
     private Connection connection;
     /*
      * Подключение к базе и создание первой таблицы,
      * частный конструктор, чтобы клиентские приложения не использовали конструктор
      */
     private UserStore() {
+//        try {
+//            Class.forName("org.postgresql.Driver");
+//        } catch (ClassNotFoundException ex) {
+//            System.out.println("Драйвер не загружен");
+//        }
         try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Драйвер не загружен");
+
+            InitialContext cxt = new InitialContext();
+            if (cxt == null) {
+                throw new Exception("Uh oh -- no context!");
+            }
+
+            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/postgres");
+            connection = ds.getConnection();
+            if (ds == null) {
+                throw new Exception("Data source not found!");
+            }
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        // Выполняем подключение к базе данных
-        try {
-            this.connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            connection.setAutoCommit(false);
-        } catch (SQLException e) {
-            System.out.println("Ошибка параметров подключения");
-        }
+//        try {
+//            this.connection = DriverManager.getConnection(DB_URL, USER, PASS);
+//            connection.setAutoCommit(false);
+//        } catch (SQLException e) {
+//            System.out.println("Ошибка параметров подключения");
+//        }
         Statement stmt = null;
         try {
             // создание таблицы в базе данных

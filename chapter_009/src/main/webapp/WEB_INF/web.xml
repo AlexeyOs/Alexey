@@ -1,4 +1,10 @@
 <web-app>
+    <resource-ref>
+        <description>postgreSQL Datasource example</description>
+        <res-ref-name>jdbc/postgres</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
     <servlet>
         <servlet-name>CreateServlet</servlet-name>
         <servlet-class>osetsky.servlets.CreateServlet</servlet-class>
@@ -35,6 +41,15 @@
         </init-param>
         <load-on-startup>4</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>EchoServlet</servlet-name>
+        <servlet-class>osetsky.jsp.EchoServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>5</load-on-startup>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>CreateServlet</servlet-name>
@@ -51,5 +66,9 @@
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
         <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EchoServlet</servlet-name>
+        <url-pattern>/echo</url-pattern>
     </servlet-mapping>
 </web-app>
