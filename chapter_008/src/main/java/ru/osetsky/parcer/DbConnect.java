@@ -21,7 +21,7 @@ public class DbConnect {
     /*
      * Константа, в которой хранится адрес подключения.
      */
-    private static final String URL = "jdbc:sqlite:C:/projects/Alexey/chapter_008/src/main/java/ru/osetsky/parcerSQLru/parcer.db";
+    private static final String URL = "jdbc:sqlite:C:/projects/Alexey/chapter_008/src/main/java/ru/osetsky/parcer/parcer.db";
     /*
      * Объект, в котором будет храниться соединение с БД.
      */
@@ -52,14 +52,13 @@ public class DbConnect {
     /*
      * Получение данных из таблицы.
      */
-    public List<String> getAllItems() {
+    public List<Vacancy> getAllItems() {
         try (Statement statement = this.connection.createStatement()) {
-            List<String> arr = new ArrayList<>();
+            List<Vacancy> arr = new ArrayList<>();
             ResultSet resultSet = statement.executeQuery("select id,name,href from PARCE");
             while (resultSet.next()) {
-                arr.add(new String(resultSet.getString("id")));
-                arr.add(new String(resultSet.getString("name")));
-                arr.add(new String(resultSet.getString("href")));
+                arr.add(new Vacancy(resultSet.getString("name"),
+                        resultSet.getString("href")));
             }
             return arr;
         } catch (SQLException e) {
