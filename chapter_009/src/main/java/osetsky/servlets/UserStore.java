@@ -20,9 +20,9 @@ public class UserStore {
      * Поле необходимое для подключения к базе данных.
      */
     private static final Logger LOG = LoggerFactory.getLogger(UserStore.class);
-//    private static final String DB_URL = "jdbc:postgresql://localhost:5432/java_a_from_z";
-//    private static final String USER = "postgres";
-//    private static final String PASS = "1234";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/java_a_from_z";
+    private static final String USER = "postgres";
+    private static final String PASS = "1234";
 
     /**
      * Используем шаблон одиночка Eager initialization(Искаженная инициализация).
@@ -39,34 +39,34 @@ public class UserStore {
      * частный конструктор, чтобы клиентские приложения не использовали конструктор
      */
     private UserStore() {
-//        try {
-//            Class.forName("org.postgresql.Driver");
-//        } catch (ClassNotFoundException ex) {
-//            System.out.println("Драйвер не загружен");
-//        }
         try {
-
-            InitialContext cxt = new InitialContext();
-            if (cxt == null) {
-                throw new Exception("Uh oh -- no context!");
-            }
-
-            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/postgres");
-            connection = ds.getConnection();
-            if (ds == null) {
-                throw new Exception("Data source not found!");
-            }
-        } catch (NamingException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Драйвер не загружен");
         }
 //        try {
-//            this.connection = DriverManager.getConnection(DB_URL, USER, PASS);
-//            connection.setAutoCommit(false);
-//        } catch (SQLException e) {
-//            System.out.println("Ошибка параметров подключения");
+//
+//            InitialContext cxt = new InitialContext();
+//            if (cxt == null) {
+//                throw new Exception("Uh oh -- no context!");
+//            }
+//
+//            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/postgres");
+//            connection = ds.getConnection();
+//            if (ds == null) {
+//                throw new Exception("Data source not found!");
+//            }
+//        } catch (NamingException e) {
+//            e.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace();
 //        }
+        try {
+            this.connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            System.out.println("Ошибка параметров подключения");
+        }
         Statement stmt = null;
         try {
             // создание таблицы в базе данных
