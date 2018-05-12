@@ -3,6 +3,9 @@ package ru.osetsky.exam;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.atan2;
+import static java.lang.Math.max;
+
 public class CashMachine {
     /*
      *  Реализован банкомат размена денег. Автомат принимает бумажную купюру и обменивает на монеты.
@@ -14,49 +17,50 @@ public class CashMachine {
         this.values = values;
     }
 
+    /**
+     * Метод сортирует входные монеты.
+     */
+    public void bubbleSort(int[] arr) {
+    /*Внешний цикл каждый раз сокращает фрагмент массива,
+      так как внутренний цикл каждый раз ставит в конец
+      фрагмента максимальный элемент*/
+        for (int i = arr.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+            /*Сравниваем элементы попарно,
+              если они имеют неправильный порядок,
+              то меняем местами*/
+                if (arr[j] > arr[j + 1]) {
+                    int tmp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = tmp;
+                }
+            }
+        }
+    }
+
+    /**
+     * Метод по размену монету на основе жадного алгоритма.
+     * @param note Число денег поступившего в метод.
+     * @return массив разменных монет
+     */
+
     public List<List<Integer>> exchange(int note) {
-        if (note == 1) {
-            List<List<Integer>> list = new ArrayList<>();
-            List<Integer> lst = new ArrayList<>();
-            lst.add(note);
-            list.add(lst);
-            return list;
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> lst = new ArrayList<>();
+        bubbleSort(values);
+        while (note >= values[0]) {
+            if (note >= values[2]) {
+                lst.add(values[2]);
+                note = note - values[2];
+            } else if (note >= values[1]) {
+                lst.add(values[1]);
+                note = note - values[1];
+            } else {
+                lst.add(values[0]);
+                note = note - values[0];
+            }
         }
-        if (note == 5) {
-            List<List<Integer>> list = new ArrayList<>();
-            List<Integer> lst1 = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                lst1.add(1);
-            }
-            List<Integer> lst2 = new ArrayList<>();
-            lst2.add(note);
-            list.add(lst1);
-            list.add(lst2);
-            return list;
-        }
-        if (note == 10) {
-            List<List<Integer>> list = new ArrayList<>();
-            List<Integer> lst1 = new ArrayList<>();
-            lst1.add(note);
-            List<Integer> lst2 = new ArrayList<>();
-            for (int i = 0; i < 2; i++) {
-                lst2.add(5);
-            }
-            List<Integer> lst3 = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                lst3.add(1);
-            }
-            lst3.add(5);
-            List<Integer> lst4 = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
-                lst4.add(1);
-            }
-            list.add(lst1);
-            list.add(lst2);
-            list.add(lst3);
-            list.add(lst4);
-            return list;
-        }
-        return null;
+        list.add(lst);
+        return list;
     }
 }
