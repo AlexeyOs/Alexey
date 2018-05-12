@@ -1,4 +1,4 @@
-package ru.osetsky;
+package ru.osetsky.profession;
 
 /**
  *Class Profession решение задачи части 002 урок 2.

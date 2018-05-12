@@ -1,4 +1,4 @@
-package ru.osetsky.models;
+package ru.osetsky.profession;
 /**
  *Class Teacher решение задачи части 002 урок 2.
  *@author osetsky

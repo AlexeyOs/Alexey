@@ -1,4 +1,4 @@
-package ru.osetsky;
+package ru.osetsky.profession;
 /**
  *Class Calculate решение задачи части 002 урок 2.
  *@author osetsky
