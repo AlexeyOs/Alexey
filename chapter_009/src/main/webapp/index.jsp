@@ -1,4 +1,4 @@
-<%@ page import="osetsky.jsp.UserStorage" %>
+<%@ page import="osetsky.jsp.DBStore" %>
 <%@ page import="osetsky.jsp.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -22,7 +22,7 @@
         <th>email</th>
         <th>createDate</th>
     </tr>
-    <% for (User user : UserStorage.getInstance().getUsers()) {%>
+    <% for (User user : DBStore.getInstance().getUsers()) {%>
     <tr>
         <td><%=user.getName()%></td>
         <td><%=user.getLogin()%></td>

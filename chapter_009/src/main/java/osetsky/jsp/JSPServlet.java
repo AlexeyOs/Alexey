@@ -15,14 +15,15 @@ import java.io.IOException;
  */
 public class JSPServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(JSPServlet.class);
-    private final UserStorage users = UserStorage.getInstance();
+//    private final UserStorage users = UserStorage.getInstance();
+    private final DBStore usersStore = DBStore.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //создание пользователя
        resp.setContentType("text/hmtl");
-       users.addIntoTable(new User(req.getParameter("name"), req.getParameter("login"), req.getParameter("email"), req.getParameter("createDate")));
-       users.commit();
+       usersStore.addIntoTable(new User(req.getParameter("name"), req.getParameter("login"), req.getParameter("email"), req.getParameter("createDate")));
+//       usersStore.commit();
        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 }
