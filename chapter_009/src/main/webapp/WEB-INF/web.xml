@@ -42,8 +42,8 @@
         <load-on-startup>4</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>JSPServlet</servlet-name>
-        <servlet-class>osetsky.jsp.JSPServlet</servlet-class>
+        <servlet-name>Users Controller Servlet</servlet-name>
+        <servlet-class>osetsky.jsp.UsersController</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -68,7 +68,7 @@
         <url-pattern>/users</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>JSPServlet</servlet-name>
-        <url-pattern>/echo</url-pattern>
+        <servlet-name>Users Controller Servlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>

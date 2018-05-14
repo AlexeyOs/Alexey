@@ -1,13 +1,15 @@
-<%@ page import="osetsky.jsp.DBStore" %>
+<%@ page import="osetsky.jsp.UserStorage" %>
 <%@ page import="osetsky.jsp.User" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
 
-<form action="<%=request.getContextPath()%>/echo" method="post">
+<form action="${pageContext.servletContext.contextPath}/" method="post">
     Name : <input type="text" name="name"><br>
     Login : <input type="text" name="login"><br>
     Email : <input type="text" name="email"><br>
@@ -22,14 +24,14 @@
         <th>email</th>
         <th>createDate</th>
     </tr>
-    <% for (User user : DBStore.getInstance().getUsers()) {%>
+    <c:forEach items="${users}" var="user">
     <tr>
-        <td><%=user.getName()%></td>
-        <td><%=user.getLogin()%></td>
-        <td><%=user.getEmail()%></td>
-        <td><%=user.getCreateDate()%></td>
+        <td><c:out value="${user.name}"></c:out></td>
+        <td><c:out value="${user.login}"></c:out></td>
+        <td><c:out value="${user.email}"></c:out></td>
+        <td><c:out value="${user.createDate}"></c:out></td>
     </tr>
-    <% } %>
+    </c:forEach>
 </table>
 
 </body>
