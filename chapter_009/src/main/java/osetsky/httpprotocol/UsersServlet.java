@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 public class UsersServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(UsersServlet.class);
-    private final UserStore users = UserStore.getInstance();
+    private final ValidateService logic = ValidateService.getInstance();
     public UsersServlet() throws SQLException {
     }
 
@@ -25,38 +25,25 @@ public class UsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        writer.append(String.format("%s", users.getAllItems()));
+        writer.append(String.format("%s",logic.findAllStr()));
         writer.flush();
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String name = req.getParameter(new User().getName());
-        String login = req.getParameter(new User().getLogin());
-        String email = req.getParameter(new User().getEmail());
-        String createDate = req.getParameter(new User().getCreateDate());
-        users.addIntoTable(name, login, email, createDate);
-        users.commit();
-        //doGet(req, resp);
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
         String id = req.getParameter("id");
-        String name = req.getParameter(new User().getName());
-        String login = req.getParameter(new User().getLogin());
-        String email = req.getParameter(new User().getEmail());
-        String createDate = req.getParameter(new User().getCreateDate());
-        users.updateTable(id, name, login, email, createDate);
-        users.commit();
+        String name = req.getParameter("name");
+        String login = req.getParameter("login");
+        String email = req.getParameter("email");
+        String createDate = req.getParameter("createDate");
+        if (id == null) {
+            logic.add(name, login, email, createDate);
+        } else if (email != null) {
+            logic.update(id, name, login, email, createDate);
+        } else {
+            logic.delete(id);
+        }
+        doGet(req, resp);
     }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        users.deleteTable(req.getParameter("id"));
-        users.commit();
-    }
-
 }

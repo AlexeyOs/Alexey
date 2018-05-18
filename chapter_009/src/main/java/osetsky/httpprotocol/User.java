@@ -1,16 +1,35 @@
 package osetsky.httpprotocol;
 
-import java.util.Date;
 
 /**
  * Created by koldy on 19.04.2018.
  */
 public class User {
-    private String name = "name";
-    private String login = "login";
-    private String email = "email";
-    private String createDate = "createDate";
+    private String id;
+    private String name;
+    private String login;
+    private String email;
+    private String createDate;
 
+    public User(String name, String login, String email, String createDate) {
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDate = createDate;
+    }
+    public User(String id, String name, String login, String email, String createDate) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDate = createDate;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getId() {
+        return id;
+    }
     public void setName(String name) {
         this.name = name;
     }
