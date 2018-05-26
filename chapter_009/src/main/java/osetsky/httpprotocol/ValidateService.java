@@ -53,6 +53,7 @@ public class ValidateService implements Store{
     public void delete(String id) {
         if (logic.findBy(id) != null) {
             logic.delete(id);
+            logic.commit();
         }
     }
     /**

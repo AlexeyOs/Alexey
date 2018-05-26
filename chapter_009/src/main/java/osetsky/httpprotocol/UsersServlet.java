@@ -18,8 +18,6 @@ import java.sql.SQLException;
 public class UsersServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(UsersServlet.class);
     private final ValidateService logic = ValidateService.getInstance();
-    public UsersServlet() throws SQLException {
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
