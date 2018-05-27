@@ -7,7 +7,8 @@ import java.util.List;
  * Слой Logic, который между Servlet и DB, Memory.
  */
 public class ValidateService implements Store{
-    private final MemoryStore logic = MemoryStore.getInstance();
+//    private final MemoryStore logic = MemoryStore.getInstance();
+    private final DBStore logic = DBStore.getInstance();
     private static final ValidateService INSTANCE = new ValidateService();
     public static ValidateService getInstance() {
         return INSTANCE;
@@ -28,7 +29,7 @@ public class ValidateService implements Store{
         }
         if(!repeat){
             logic.add(name, login, email, createDate);
-            logic.commit();
+//            logic.commit();
         }
     }
 
@@ -41,7 +42,7 @@ public class ValidateService implements Store{
         //проверяет есть ли такой id в базе, если есть, то обновляет пользователя
         if (logic.findBy(id) != null) {
             logic.update(id, name, login, email, createDate);
-            logic.commit();
+//            logic.commit();
         }
     }
 
@@ -53,7 +54,7 @@ public class ValidateService implements Store{
     public void delete(String id) {
         if (logic.findBy(id) != null) {
             logic.delete(id);
-            logic.commit();
+//            logic.commit();
         }
     }
     /**
