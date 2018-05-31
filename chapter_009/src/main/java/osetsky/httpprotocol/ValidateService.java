@@ -29,7 +29,6 @@ public class ValidateService implements Store{
         }
         if(!repeat){
             logic.add(name, login, email, createDate);
-//            logic.commit();
         }
     }
 
@@ -42,7 +41,6 @@ public class ValidateService implements Store{
         //проверяет есть ли такой id в базе, если есть, то обновляет пользователя
         if (logic.findBy(id) != null) {
             logic.update(id, name, login, email, createDate);
-//            logic.commit();
         }
     }
 
@@ -54,7 +52,6 @@ public class ValidateService implements Store{
     public void delete(String id) {
         if (logic.findBy(id) != null) {
             logic.delete(id);
-//            logic.commit();
         }
     }
     /**

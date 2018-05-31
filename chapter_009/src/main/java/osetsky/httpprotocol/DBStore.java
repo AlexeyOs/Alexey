@@ -89,7 +89,7 @@ public class DBStore implements Store {
             st.setString(2, login);
             st.setString(3, email);
             st.setString(4, createDate);
-            st.executeUpdate();
+            st.execute();
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,14 +134,15 @@ public class DBStore implements Store {
     @Override
     public User findBy(String id) {
         try (Connection connection = dataSource.getConnection();
-            Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("select name,login, email, createDate from SERVLET where id =" + id);
+            PreparedStatement statement = connection.prepareStatement("select name,login, email, createDate from SERVLET where id =" + id)) {
+            ResultSet resultSet = statement.executeQuery();
             resultSet.next();
-            statement.close();
-            return new User(resultSet.getString("name"),
+            User user = new User(resultSet.getString("name"),
                     resultSet.getString("login"),
                     resultSet.getString("email"),
                     resultSet.getString("createDate"));
+            statement.close();
+            return user;
         } catch (SQLException e) {
             e.printStackTrace();
         }

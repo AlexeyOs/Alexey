@@ -16,7 +16,7 @@ public class MemoryStore implements Store {
     /*
  * Поле необходимое для подключения к базе данных.
  */
-    private static final Logger LOG = LoggerFactory.getLogger(UserStore.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MemoryStore.class);
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/java_a_from_z";
     private static final String USER = "postgres";
     private static final String PASS = "1234";

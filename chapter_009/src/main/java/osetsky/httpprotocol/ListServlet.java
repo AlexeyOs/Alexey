@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class ListServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(ListServlet.class);
-    private final UserStore users = UserStore.getInstance();
     private final ValidateService logic = ValidateService.getInstance();
 
     @Override

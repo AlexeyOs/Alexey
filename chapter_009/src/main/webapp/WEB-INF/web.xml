@@ -1,21 +1,12 @@
 <web-app>
     <servlet>
-        <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>osetsky.httpprotocol.UsersServlet</servlet-class>
-        <init-param>
-            <param-name>debug</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet>
         <servlet-name>ListServlet</servlet-name>
         <servlet-class>osetsky.httpprotocol.ListServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
         </init-param>
-        <load-on-startup>2</load-on-startup>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>EditServlet</servlet-name>
@@ -24,7 +15,7 @@
             <param-name>debug</param-name>
             <param-value>true</param-value>
         </init-param>
-        <load-on-startup>3</load-on-startup>
+        <load-on-startup>2</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>CreateServlet</servlet-name>
@@ -33,13 +24,19 @@
             <param-name>debug</param-name>
             <param-value>true</param-value>
         </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Users Controller Servlet</servlet-name>
+        <servlet-class>osetsky.httpprotocol.UsersController</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
         <load-on-startup>4</load-on-startup>
     </servlet>
 
-    <servlet-mapping>
-        <servlet-name>UsersServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>ListServlet</servlet-name>
         <url-pattern>/list</url-pattern>
@@ -51,6 +48,10 @@
     <servlet-mapping>
         <servlet-name>CreateServlet</servlet-name>
         <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Users Controller Servlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
 </web-app>
