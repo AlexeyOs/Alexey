@@ -1,5 +1,7 @@
 package osetsky.httpprotocol;
 
+import osetsky.models.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,20 +9,37 @@ import java.util.List;
  * Слой Logic, который между Servlet и DB, Memory.
  */
 public class ValidateService implements Store{
-//    private final MemoryStore logic = MemoryStore.getInstance();
     private final DBStore logic = DBStore.getInstance();
     private static final ValidateService INSTANCE = new ValidateService();
     public static ValidateService getInstance() {
         return INSTANCE;
     }
+//    private ValidateService() {
+//        this.logic.add("root","root","root@root","","08.06.2018");
+//    }
+
+    /**
+     * Проверка наличия пользователя.
+     */
+    public boolean isCredentional(String login, String password){
+        boolean exists = false;
+        List<User> users = logic.findAll();
+        for (User user : users) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
+    }
     /**
      * Добавление записей в таблицу.
      */
     @Override
-    public void add(String name, String login, String email, String createDate) {
+    public void add(String name, String login, String email, String password, String createDate) {
         //проверяет есть ли такой пользователь в базе, если пользователь уникальный, то добавляет нового.
         boolean repeat = false;
-        User newuser = new User(name, login, email, createDate);
+        User newuser = new User(name, login, email, password, createDate);
         List<User> listUsers = logic.findAll();
         for (User user:listUsers) {
             if (user.equals(newuser)){
@@ -28,7 +47,7 @@ public class ValidateService implements Store{
             }
         }
         if(!repeat){
-            logic.add(name, login, email, createDate);
+            logic.add(name, login, email, password, createDate);
         }
     }
 

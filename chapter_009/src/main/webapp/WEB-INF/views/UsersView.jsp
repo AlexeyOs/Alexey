@@ -1,5 +1,5 @@
 <%@ page import="osetsky.httpprotocol.UsersController" %>
-<%@ page import="osetsky.httpprotocol.User" %>
+<%@ page import="osetsky.models.User" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>

@@ -1,4 +1,5 @@
 <web-app>
+
     <servlet>
         <servlet-name>ListServlet</servlet-name>
         <servlet-class>osetsky.httpprotocol.ListServlet</servlet-class>
@@ -35,6 +36,19 @@
         </init-param>
         <load-on-startup>4</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>Signin</servlet-name>
+        <servlet-class>osetsky.httpprotocol.SigninController</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>5</load-on-startup>
+    </servlet>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>osetsky.httpprotocol.AuthFilter</filter-class>
+    </filter>
 
 
     <servlet-mapping>
@@ -53,5 +67,14 @@
         <servlet-name>Users Controller Servlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Signin</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
 
 </web-app>

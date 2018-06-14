@@ -2,6 +2,8 @@ package osetsky.httpprotocol;
 
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import osetsky.models.User;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,6 +49,7 @@ public class DBStore implements Store {
                     + "NAME VARCHAR ,"
                     + "LOGIN VARCHAR,"
                     + "EMAIL VARCHAR,"
+                    + "PASSWORD VARCHAR,"
                     + "createDate VARCHAR)");
             pstmt.execute();
             pstmt.close();
@@ -59,7 +62,7 @@ public class DBStore implements Store {
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement st = connection.prepareStatement(
-                "select id,name,login, email, createDate from SERVLET");
+                "select id,name,login, email, password, createDate from SERVLET");
             List<User> arr = new ArrayList<>();
             ResultSet resultSet = st.executeQuery();
             while (resultSet.next()){
@@ -67,6 +70,7 @@ public class DBStore implements Store {
                         resultSet.getString("name"),
                         resultSet.getString("login"),
                         resultSet.getString("email"),
+                        resultSet.getString("password"),
                         resultSet.getString("createDate")));
             }
             st.close();
@@ -80,15 +84,16 @@ public class DBStore implements Store {
      * Добавление записей в таблицу.
      */
     @Override
-    public void add(String name,  String login, String email, String createDate) {
+    public void add(String name,  String login, String email, String password, String createDate) {
         try {
             //вставка
             Connection connection = dataSource.getConnection();
-            PreparedStatement st = connection.prepareStatement("INSERT INTO SERVLET(name, login, email, createDate) values(?, ?, ?, ?)");
+            PreparedStatement st = connection.prepareStatement("INSERT INTO SERVLET(name, login, email, password, createDate) values(?, ?, ?, ?, ?)");
             st.setString(1, name);
             st.setString(2, login);
             st.setString(3, email);
-            st.setString(4, createDate);
+            st.setString(4, password);
+            st.setString(5, createDate);
             st.execute();
             st.close();
         } catch (SQLException e) {
@@ -134,12 +139,13 @@ public class DBStore implements Store {
     @Override
     public User findBy(String id) {
         try (Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("select name,login, email, createDate from SERVLET where id =" + id)) {
+            PreparedStatement statement = connection.prepareStatement("select name,login, email, password, createDate from SERVLET where id =" + id)) {
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             User user = new User(resultSet.getString("name"),
                     resultSet.getString("login"),
                     resultSet.getString("email"),
+                    resultSet.getString("password"),
                     resultSet.getString("createDate"));
             statement.close();
             return user;

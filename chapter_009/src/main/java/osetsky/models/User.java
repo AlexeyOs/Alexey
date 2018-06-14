@@ -1,4 +1,4 @@
-package osetsky.httpprotocol;
+package osetsky.models;
 
 
 /**
@@ -9,7 +9,17 @@ public class User {
     private String name;
     private String login;
     private String email;
+    private String password;
     private String createDate;
+
+    public User(String id, String name,String login, String email, String password, String createDate) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.password = password;
+        this.createDate = createDate;
+    }
 
     public User(String name, String login, String email, String createDate) {
         this.name = name;
@@ -53,5 +63,8 @@ public class User {
     }
     public String getCreateDate() {
         return createDate;
+    }
+    public String getPassword() {
+        return password;
     }
 }

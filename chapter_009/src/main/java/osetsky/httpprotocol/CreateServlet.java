@@ -36,6 +36,8 @@ public class CreateServlet extends HttpServlet {
                 + "<br>"
                 + "Email : <input type='text' name='email'/>"
                 + "<br>"
+                + "Password : <input type='text' name='password'/>"
+                + "<br>"
                 + "CreateDate : <input type='text' name='createDate'/>"
                 + "<input type='submit'>"
                 + "</form>"
@@ -51,8 +53,9 @@ public class CreateServlet extends HttpServlet {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
+        String password = req.getParameter("password");
         String createDate = req.getParameter("createDate");
-        this.logic.add(name, login, email, createDate);
+        this.logic.add(name, login, email, password, createDate);
         doGet(req, resp);
     }
 }
