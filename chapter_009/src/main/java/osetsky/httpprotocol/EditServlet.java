@@ -21,32 +21,9 @@ public class EditServlet  extends HttpServlet {
     private User user;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
         id = req.getQueryString();
-        user = logic.findBy(id);
-        // формирование html формы.
-        writer.append("<!DOCTYPE html>"
-                + "<html lang=\"en\">"
-                + "<head>"
-                + "    <meta charset=\"UTF-8\">"
-                + "    <title>Title</title>"
-                + "</head>"
-                + "<body>"
-                + "<form action='" + req.getContextPath() + "/edit' method='post'>"
-                + "Name : <input type='text' name='name' value='" + user.getName() + "'/>"
-                + "<br>"
-                + "Login : <input type='text' name='login' value='" + user.getLogin() + "'/>"
-                + "<br>"
-                + "Email : <input type='text' name='email' value='" + user.getEmail() + "'/>"
-                + "<br>"
-                + "CreateDate : <input type='text' name='createDate' value='" + user.getCreateDate() + "'/>"
-                + "<input type='submit'>"
-                + "</form>"
-                + "<br>"
-                + "</body>"
-                + "</html>");
-        writer.flush();
+        req.setAttribute("user",  logic.findBy(id));
+        req.getRequestDispatcher("/WEB-INF/views/EditView.jsp").forward(req, resp);
     }
 
     @Override
@@ -56,8 +33,10 @@ public class EditServlet  extends HttpServlet {
         String name = req.getParameter("name");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
+        String password = req.getParameter("password");
         String createDate = req.getParameter("createDate");
-        this.logic.update(id, name, login, email,createDate);
+        this.logic.update(id, name, login, email, password,createDate);
+        resp.sendRedirect(String.format("%s/edit", req.getContextPath()));
     }
 }
 

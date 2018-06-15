@@ -19,32 +19,7 @@ public class CreateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        // формирование html формы.
-        writer.append("<!DOCTYPE html>"
-                + "<html lang=\"en\">"
-                + "<head>"
-                + "    <meta charset=\"UTF-8\">"
-                + "    <title>Title</title>"
-                + "</head>"
-                + "<body>"
-                + "<form action='" + req.getContextPath() + "/create' method='post'>"
-                + "Name : <input type='text' name='name'/>"
-                + "<br>"
-                + "Login : <input type='text' name='login'/>"
-                + "<br>"
-                + "Email : <input type='text' name='email'/>"
-                + "<br>"
-                + "Password : <input type='text' name='password'/>"
-                + "<br>"
-                + "CreateDate : <input type='text' name='createDate'/>"
-                + "<input type='submit'>"
-                + "</form>"
-                + "<br>"
-                + "</body>"
-                + "</html>");
-        writer.flush();
+        req.getRequestDispatcher("/WEB-INF/views/CreateView.jsp").forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,6 +31,6 @@ public class CreateServlet extends HttpServlet {
         String password = req.getParameter("password");
         String createDate = req.getParameter("createDate");
         this.logic.add(name, login, email, password, createDate);
-        doGet(req, resp);
+        resp.sendRedirect(String.format("%s/list", req.getContextPath()));
     }
 }

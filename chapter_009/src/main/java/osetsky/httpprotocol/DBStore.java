@@ -102,20 +102,22 @@ public class DBStore implements Store {
     }
 
     @Override
-    public void update(String id, String name, String login, String email, String createDate) {
+    public void update(String id, String name, String login, String email, String password, String createDate) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement st = connection.prepareStatement(
                 "UPDATE SERVLET SET "
                         + " name = ?,"
                         + " login = ?,"
                         + " email = ?,"
+                        + " password = ?,"
                         + " createDate = ?"
                         + "WHERE id = ?")) {
             st.setString(1, name);
             st.setString(2, login);
             st.setString(3, email);
-            st.setString(4, createDate);
-            st.setInt(5, Integer.parseInt(id));
+            st.setString(4, password);
+            st.setString(5, createDate);
+            st.setInt(6, Integer.parseInt(id));
             st.execute();
             st.close();
         } catch (SQLException e) {
@@ -139,16 +141,17 @@ public class DBStore implements Store {
     @Override
     public User findBy(String id) {
         try (Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("select name,login, email, password, createDate from SERVLET where id =" + id)) {
+            PreparedStatement statement = connection.prepareStatement("select name, login, email, password, createDate from SERVLET where id =" + id)) {
             ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            User user = new User(resultSet.getString("name"),
-                    resultSet.getString("login"),
-                    resultSet.getString("email"),
-                    resultSet.getString("password"),
-                    resultSet.getString("createDate"));
+            if (resultSet.next()) {
+                return new User(id,
+                        resultSet.getString("name"),
+                        resultSet.getString("login"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("createDate"));
+            }
             statement.close();
-            return user;
         } catch (SQLException e) {
             e.printStackTrace();
         }

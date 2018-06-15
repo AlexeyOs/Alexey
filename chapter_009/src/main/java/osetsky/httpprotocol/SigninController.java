@@ -30,7 +30,6 @@ public class SigninController extends HttpServlet {
             HttpSession session = req.getSession();
             synchronized (session) {
                 session.setAttribute("login", login);
-//                session.invalidate();
             }
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {

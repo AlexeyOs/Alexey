@@ -56,10 +56,10 @@ public class ValidateService implements Store{
      * Изменение данных из таблицы.
      */
     @Override
-    public void update(String id, String name, String login, String email, String createDate) {
+    public void update(String id, String name, String login, String email, String password, String createDate) {
         //проверяет есть ли такой id в базе, если есть, то обновляет пользователя
         if (logic.findBy(id) != null) {
-            logic.update(id, name, login, email, createDate);
+            logic.update(id, name, login, email, password, createDate);
         }
     }
 
