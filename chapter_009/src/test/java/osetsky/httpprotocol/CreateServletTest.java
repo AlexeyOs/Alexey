@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class CreateServletTest {
     @Test
-    public void doPost() throws Exception {
+    public void addUser() throws Exception {
         CreateServlet controller = new CreateServlet();
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
@@ -25,6 +25,7 @@ public class CreateServletTest {
         when(request.getParameter("login")).thenReturn("root");
         when(request.getParameter("email")).thenReturn("root@root");
         when(request.getParameter("password")).thenReturn("");
+        when(request.getParameter("role")).thenReturn("1");
         when(request.getParameter("createDate")).thenReturn("08.06.2018");
         controller.doPost(request, response);
         List<User> users = ValidateService.getInstance().findAll();

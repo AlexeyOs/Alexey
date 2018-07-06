@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -19,7 +18,7 @@ import static org.mockito.Mockito.when;
  */
 public class EditServletTest {
     @Test
-    public void doPost() throws ServletException, IOException {
+    public void editUser() throws ServletException, IOException {
         EditServlet controller = new EditServlet();
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
