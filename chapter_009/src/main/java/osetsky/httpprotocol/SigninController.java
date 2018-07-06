@@ -2,6 +2,7 @@ package osetsky.httpprotocol;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import osetsky.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import java.io.IOException;
  */
 public class SigninController extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(SigninController.class);
+    private final ValidateService logic = ValidateService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,10 +30,9 @@ public class SigninController extends HttpServlet {
         String password = req.getParameter("password");
         if (ValidateService.getInstance().isCredentional(login, password)) {
             HttpSession session = req.getSession();
-            synchronized (session) {
-                session.setAttribute("login", login);
-            }
-            resp.sendRedirect(String.format("%s/", req.getContextPath()));
+            session.setAttribute("login", login);
+            User user = logic.findByLoginAndPass(login, password);
+            resp.sendRedirect(String.format("%s/edit?" + user.getId(), req.getContextPath()));
         } else {
             req.setAttribute("error", "Credentional invalid");
             doGet(req, resp);

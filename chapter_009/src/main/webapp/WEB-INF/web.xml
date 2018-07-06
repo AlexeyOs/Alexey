@@ -45,6 +45,33 @@
         </init-param>
         <load-on-startup>5</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>List Role</servlet-name>
+        <servlet-class>osetsky.httpprotocol.ListRole</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>6</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Create Role</servlet-name>
+        <servlet-class>osetsky.httpprotocol.CreateRole</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>6</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Edit Role</servlet-name>
+        <servlet-class>osetsky.httpprotocol.EditRole</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>7</load-on-startup>
+    </servlet>
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>osetsky.httpprotocol.AuthFilter</filter-class>
@@ -64,12 +91,20 @@
         <url-pattern>/create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Users Controller Servlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Signin</servlet-name>
         <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>List Role</servlet-name>
+        <url-pattern>/listrole</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Create Role</servlet-name>
+        <url-pattern>/createrole</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Edit Role</servlet-name>
+        <url-pattern>/editrole</url-pattern>
     </servlet-mapping>
 
     <filter-mapping>

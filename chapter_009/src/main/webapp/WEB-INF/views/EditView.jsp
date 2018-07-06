@@ -3,8 +3,18 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        body{
+            background-color: #8db4fc; /* Цвет фона веб-страницы */
+        }
+        .center{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+<br>
+<div class="center">
 <form action="${pageContext.servletContext.contextPath}/edit" method='post'>
     Name : <input type='text' name='name' value="${user.name}"/>
     <br>
@@ -15,8 +25,12 @@
     Password : <input type='text' name='password' value="${user.password}"/>
     <br>
     CreateDate : <input type='text' name='createDate' value="${user.createDate}"/>
+    <br>
     <input type='submit'>
 </form>
-<br>
+    <c:if test="${admin.role == 1}">
+        <a href="${pageContext.servletContext.contextPath}/list"><input type='submit' value='Все пользователи'></a>
+    </c:if>
+</div>
 </body>
 </html>

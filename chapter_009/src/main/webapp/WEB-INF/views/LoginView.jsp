@@ -3,6 +3,14 @@
 <html>
 <head>
     <title></title>
+    <style>
+    body{
+        background-color: #8db4fc; /* Цвет фона веб-страницы */
+    }
+    .center{
+        text-align: center;
+    }
+    </style>
 </head>
 <body>
 <c:if test="${error != ''}">
@@ -10,10 +18,13 @@
         <c:out value="${error}"/>
     </div>
 </c:if>
+<br>
+<div class="center">
 <form action="${pageContext.servletContext.contextPath}/signin" method="post">
     Login : <input type="text" name="login"><br>
     Password : <input type="password" name="password"><br>
     <input type="submit">
 </form>
+</div>
 </body>
 </html>

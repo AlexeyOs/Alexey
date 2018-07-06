@@ -10,28 +10,25 @@ public class User {
     private String login;
     private String email;
     private String password;
+    private int role;
     private String createDate;
 
-    public User(String id, String name,String login, String email, String password, String createDate) {
+    public User(String id, String name,String login, String email, String password, int role, String createDate) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.email = email;
         this.password = password;
+        this.role = role;
         this.createDate = createDate;
     }
 
-    public User(String name, String login, String email, String createDate) {
+    public User(String name, String login, String email, String password, int role, String createDate) {
         this.name = name;
         this.login = login;
         this.email = email;
-        this.createDate = createDate;
-    }
-    public User(String id, String name, String login, String email, String createDate) {
-        this.id = id;
-        this.name = name;
-        this.login = login;
-        this.email = email;
+        this.password = password;
+        this.role = role;
         this.createDate = createDate;
     }
     public void setId(String id) {
@@ -58,13 +55,16 @@ public class User {
     public String getEmail() {
         return email;
     }
+    public String getPassword() {
+        return password;
+    }
+    public int getRole() {
+        return role;
+    }
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
     public String getCreateDate() {
         return createDate;
-    }
-    public String getPassword() {
-        return password;
     }
 }

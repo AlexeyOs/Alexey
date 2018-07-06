@@ -1,5 +1,6 @@
 package osetsky.httpprotocol;
 
+import osetsky.models.Role;
 import osetsky.models.User;
 
 import java.util.ArrayList;
@@ -14,32 +15,15 @@ public class ValidateService implements Store{
     public static ValidateService getInstance() {
         return INSTANCE;
     }
-//    private ValidateService() {
-//        this.logic.add("root","root","root@root","","08.06.2018");
-//    }
 
-    /**
-     * Проверка наличия пользователя.
-     */
-    public boolean isCredentional(String login, String password){
-        boolean exists = false;
-        List<User> users = logic.findAll();
-        for (User user : users) {
-            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
-                exists = true;
-                break;
-            }
-        }
-        return exists;
-    }
     /**
      * Добавление записей в таблицу.
      */
     @Override
-    public void add(String name, String login, String email, String password, String createDate) {
+    public void add(String name, String login, String email, String password, int role, String createDate) {
         //проверяет есть ли такой пользователь в базе, если пользователь уникальный, то добавляет нового.
         boolean repeat = false;
-        User newuser = new User(name, login, email, password, createDate);
+        User newuser = new User(name, login, email, password, role, createDate);
         List<User> listUsers = logic.findAll();
         for (User user:listUsers) {
             if (user.equals(newuser)){
@@ -47,7 +31,7 @@ public class ValidateService implements Store{
             }
         }
         if(!repeat){
-            logic.add(name, login, email, password, createDate);
+            logic.add(name, login, email, password, role, createDate);
         }
     }
 
@@ -105,5 +89,71 @@ public class ValidateService implements Store{
     @Override
     public User findBy(String id) {
        return logic.findBy(id);
+    }
+
+    @Override
+    public void addRole(String name, String description, boolean addcontent, boolean updatecontent, boolean seealluser) {
+        logic.addRole(name, description, addcontent, updatecontent, seealluser);
+    }
+
+    @Override
+    public void updateRole(String id, String name, String description, boolean addcontent, boolean updatecontent, boolean seealluser) {
+        if (logic.findByRole(id) != null) {
+            logic.updateRole(id, name, description, addcontent, updatecontent, seealluser);
+        }
+    }
+
+    @Override
+    public void deleteRole(String id) {
+        if (logic.findByRole(id) != null) {
+            logic.deleteRole(id);
+        }
+    }
+
+    @Override
+    public List<Role> findAllRoles() {
+        return logic.findAllRoles();
+    }
+
+    @Override
+    public Role findByRole(String id) {
+        return logic.findByRole(id);
+    }
+
+
+    /**
+     * Находит пользователя по введенному имени и паролю.
+     * @return boolean параметр.
+     */
+    public User findByLoginAndPass(String login, String password){
+        List<User> users = findAll();
+        for (User user : users) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Проверка наличия пользователя.
+     */
+    public boolean isCredentional(String login, String password){
+        boolean exists = false;
+        List<User> users = logic.findAll();
+        for (User user : users) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                exists = true;
+                break;
+            }
+        }
+        return exists;
+    }
+    /**
+     * Проверяет наличие администраторской роли у пользователи, чтобы предоставить доступ к редаутированию всех пользователей.
+     * @return boolean параметр.
+     */
+    public boolean checkAdminRoles(){
+        return logic.checkAdminRoles();
     }
 }

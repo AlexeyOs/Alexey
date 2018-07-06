@@ -2,32 +2,31 @@ package osetsky.httpprotocol;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import osetsky.models.User;
+import osetsky.models.Role;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 /**
- * Created by koldy on 26.05.2018.
+ * Created by koldy on 29.06.2018.
  */
-public class ListServlet extends HttpServlet {
-    private static final Logger LOG = LoggerFactory.getLogger(ListServlet.class);
+public class ListRole extends HttpServlet {
+    private static final Logger LOG = LoggerFactory.getLogger(EditServlet.class);
     private final ValidateService logic = ValidateService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("usersParam",  logic.findAll());
-        req.getRequestDispatcher("/WEB-INF/views/ListView.jsp").forward(req, resp);
+        req.setAttribute("roles",  logic.findAllRoles());
+        req.getRequestDispatcher("/WEB-INF/views/ListRole.jsp").forward(req, resp);
     }
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //удаление пользователя
         resp.setContentType("text/html");
-        this.logic.delete(req.getQueryString());
-        resp.sendRedirect(String.format("%s/list", req.getContextPath()));
+        this.logic.deleteRole(req.getQueryString());
+        resp.sendRedirect(String.format("%s/listrole", req.getContextPath()));
     }
 }
