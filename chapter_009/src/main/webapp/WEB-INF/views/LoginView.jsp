@@ -10,6 +10,9 @@
     .center{
         text-align: center;
     }
+    input{
+        color: black;
+    }
     </style>
 </head>
 <body>
