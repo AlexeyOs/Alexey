@@ -8,6 +8,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            var result = true;
+            var login = document.getElementsByName("login")[0].value;
+            var email = document.getElementsByName("email")[0].value;
+            var password = document.getElementsByName("password")[0].value;
+            if (login == '' || email == '' || password == '') {
+                result = false;
+            }
+            if (!result) {
+                alert("Укажите email, логин и пароль")
+            }
+            return result;
+        }
+    </script>
     <style>
         body{
             background-color: #8db4fc; /* Цвет фона веб-страницы */
@@ -23,7 +38,7 @@
 <body>
 <br>
 <div class="container-fluid">
-<form action="${pageContext.servletContext.contextPath}/create" method='post'>
+<form action="${pageContext.servletContext.contextPath}/create" method='post' onsubmit="return validate();">
     Name : <input type='text' name="name"/>
     <br>
     Login : <input type='text' name="login"/>
