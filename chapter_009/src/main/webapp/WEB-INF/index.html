@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function valid() {
+            var pwd = $('#pwd').val();
+            var usr = $('#usr').val();
+
+            if (!usr) {
+                alert("Введите имя");
+            }
+            if (!pwd) {
+                alert("Введите пароль");
+            }
+            return false;
+        }
+        function addRow() {
+            //получаем значение поля usr
+            var name = $('#usr').val();
+            var password = $('#pwd').val();
+            //получаем ссылку на последний элемент в таблице.
+            //и после него добавляем html
+            $('#table tr:last').after('<tr><td>' + name +'</td><td>' + password +'</td></tr>');
+        }
+        function validate() {
+            var result = true;
+            var first_name = document.getElementsByName("first_name")[0].value;
+            if (!first_name) {
+                result = false;
+            }
+            if (!result) {
+                alert("Вы не указали имя")
+            }
+            return result;
+        }
+    </script>
+    <style>
+        form{
+            margin: 2%;
+        }
+    </style>
+</head>
+<body>
+<br>
+<div class="table-responsive">
+    <form>
+        <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" class="form-control" title="Enter user name." id="usr">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+        </div>
+        <button type="button" class="btn btn-default" onclick="return valid();">Submit</button>
+    </form>
+</div>
+<br>
+<button type="button" class="btn btn-default" onclick="addRow();">Add row</button>
+<br>
+<div class="table-responsive">
+    <table class="table" id ="table">
+        <thead>
+        <tr>
+            <th>name</th>
+            <th>password</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Anna</td>
+            <td>1234</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
