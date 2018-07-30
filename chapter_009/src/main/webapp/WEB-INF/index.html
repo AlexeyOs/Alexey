@@ -39,6 +39,23 @@
             }
             return result;
         }
+        function addRowAjax() {
+            var request = $.ajax({
+                type: "POST",
+                url: "/jsonadd",
+                data: data,
+                success: success,
+                dataType: "json"
+            });
+
+            request.done(function(msg) {
+                $("#usr").html(msg);
+            });
+
+            request.fail(function(jqXHR, textStatus) {
+                alert( "Request failed: " + textStatus );
+            });
+        }
     </script>
     <style>
         form{
@@ -63,6 +80,9 @@
 </div>
 <br>
 <button type="button" class="btn btn-default" onclick="addRow();">Add row</button>
+<br>
+<br>
+<button type="button" class="btn btn-default" onclick="addRowAjax();">Add row ajax</button>
 <br>
 <div class="table-responsive">
     <table class="table" id ="table">

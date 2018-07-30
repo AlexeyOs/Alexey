@@ -72,6 +72,15 @@
         </init-param>
         <load-on-startup>7</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>JsonServlet</servlet-name>
+        <servlet-class>osetsky.httpprotocol.JsonServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>8</load-on-startup>
+    </servlet>
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>osetsky.httpprotocol.AuthFilter</filter-class>
@@ -106,7 +115,10 @@
         <servlet-name>Edit Role</servlet-name>
         <url-pattern>/editrole</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>JsonServlet</servlet-name>
+        <url-pattern>/jsonadd</url-pattern>
+    </servlet-mapping>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
         <url-pattern>*</url-pattern>
