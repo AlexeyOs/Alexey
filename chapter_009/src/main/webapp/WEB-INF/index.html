@@ -26,7 +26,7 @@
             var password = $('#pwd').val();
             //получаем ссылку на последний элемент в таблице.
             //и после него добавляем html
-            $('#table tr:last').after('<tr><td>' + name +'</td><td>' + password +'</td></tr>');
+            $('#table').find('tr:last').after('<tr><td>' + name +'</td><td>' + password +'</td></tr>');
         }
         function validate() {
             var result = true;
@@ -40,21 +40,29 @@
             return result;
         }
         function addRowAjax() {
+            var userObj = {
+                "userName": $('#usr').val(),
+                "password": $('#pwd').val()
+            };
+
+            var userJson = JSON.stringify(userObj);
+
+            var url = "http://localhost:8082/items/jsonadd";
+
             var request = $.ajax({
-                type: "POST",
-                url: "/jsonadd",
-                data: data,
-                success: success,
-                dataType: "json"
+                url: url,
+                method: "post",
+                data: userJson,
+                contentType: "application/json",
+                error: function(message) {
+                    console.log(message);
+                },
+                success: function(data) {
+                    $('#table').find('tr:last').after(data);
+                }
             });
 
-            request.done(function(msg) {
-                $("#usr").html(msg);
-            });
 
-            request.fail(function(jqXHR, textStatus) {
-                alert( "Request failed: " + textStatus );
-            });
         }
     </script>
     <style>

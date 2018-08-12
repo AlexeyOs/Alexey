@@ -1,38 +1,48 @@
 package osetsky.httpprotocol;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by koldy on 17.07.2018.
  */
 public class JsonServlet extends HttpServlet {
+    /**
+     * Метод обрабатывает JSON запрос от AJAX.
+     * Метод корректно принимает запрос если запустить chrome с указанными ниже параметрами,
+     * иначе из-за настроек безопасности метод может не выполнится
+     * chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
+     */
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String userName = "Anonymous";
+        String password = "p";
+        StringBuilder sb = new StringBuilder();
+        String line = null;
         // Принял Json обект, прочитал content
         BufferedReader reader = req.getReader();
         // преобразовываю обект в StringBuilder
-        StringBuilder builder = new StringBuilder();
-        String aux = "";
-        while ((aux = reader.readLine()) != null) {
-            builder.append(aux);
-        }
+        while ((line = reader.readLine()) != null)
+            sb.append(line);
 
-        String text = builder.toString();
-        // с помощью библиотеки jakson преобразовываю в объект.
-        final ObjectMapper mapper = new ObjectMapper();
-        final JsonNode studentNode = mapper.readTree(text);
-        // храню в ConcurrentHashMap
-        Map<String, Object> map = mapper.readValue(studentNode, HashMap.class);
-        new ConcurrentHashMap<>(map);
+        try {
+            JSONObject jsonObject = new JSONObject(sb.toString());
+            userName = jsonObject.getString("userName");
+            password = jsonObject.getString("password");
+        } catch (JSONException e) {
+            throw new IOException("Error parsing JSON request string");
+        }
+        String greetings = "<tr><td>" + userName + "</td><td>"+ password + "</td></tr>";
+
+        resp.setContentType("text/plain");
+        resp.getWriter().write(greetings);
     }
+
 }
