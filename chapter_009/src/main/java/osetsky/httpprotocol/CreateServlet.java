@@ -30,7 +30,9 @@ public class CreateServlet extends HttpServlet {
         String password = req.getParameter("password");
         int role = Integer.parseInt(req.getParameter("role"));
         String createDate = req.getParameter("createDate");
-        this.logic.add(name, login, email, password, role, createDate);
+        String country = req.getParameter("country");
+        String city = req.getParameter("city");
+        this.logic.add(name, login, email, password, role, createDate, country, city);
         resp.sendRedirect(String.format("%s/list", req.getContextPath()));
     }
 }

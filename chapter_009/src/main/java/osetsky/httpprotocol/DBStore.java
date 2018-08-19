@@ -62,7 +62,9 @@ public class DBStore implements Store {
                     + "EMAIL VARCHAR,"
                     + "PASSWORD VARCHAR,"
                     + "ROLE INTEGER REFERENCES roles(id),"
-                    + "createDate VARCHAR)");
+                    + "createDate VARCHAR,"
+                    + "country VARCHAR,"
+                    + "city VARCHAR)");
             psTableUsers.execute();
             psTableUsers.close();
             boolean insertAdmin = true;
@@ -93,11 +95,14 @@ public class DBStore implements Store {
      * Добавление записей в таблицу.
      */
     @Override
-    public void add(String name,  String login, String email, String password, int role, String createDate) {
+    public void add(String name,  String login, String email,
+                    String password, int role, String createDate,
+                    String country, String city) {
         try {
             //вставка
             Connection connection = dataSource.getConnection();
-            PreparedStatement st = connection.prepareStatement("INSERT INTO users(name, login, email, password, role, createDate) values(?, ?, ?, ?, ?, ?)");
+            PreparedStatement st = connection.prepareStatement("INSERT INTO users(name," +
+                    " login, email, password, role, createDate) values(?, ?, ?, ?, ?, ?)");
             st.setString(1, name);
             st.setString(2, login);
             st.setString(3, email);
@@ -112,7 +117,9 @@ public class DBStore implements Store {
     }
 
     @Override
-    public void update(String id, String name, String login, String email, String password, String createDate) {
+    public void update(String id, String name, String login,
+                       String email, String password, String createDate,
+                       String country, String city) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement st = connection.prepareStatement(
                 "UPDATE users SET "
@@ -121,13 +128,17 @@ public class DBStore implements Store {
                         + " email = ?,"
                         + " password = ?,"
                         + " createDate = ?"
+                        + " country = ?,"
+                        + " city = ?"
                         + "WHERE id = ?")) {
             st.setString(1, name);
             st.setString(2, login);
             st.setString(3, email);
             st.setString(4, password);
             st.setString(5, createDate);
-            st.setInt(6, Integer.parseInt(id));
+            st.setString(6, password);
+            st.setString(7, createDate);
+            st.setInt(8, Integer.parseInt(id));
             st.execute();
             st.close();
         } catch (SQLException e) {
@@ -153,7 +164,7 @@ public class DBStore implements Store {
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement st = connection.prepareStatement(
-                    "select id,name,login, email, password, role, createDate from users");
+                    "select id, name, login, email, password, role, createDate from users");
             List<User> arr = new ArrayList<>();
             ResultSet resultSet = st.executeQuery();
             while (resultSet.next()){

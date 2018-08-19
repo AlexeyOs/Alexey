@@ -14,7 +14,7 @@
             var login = document.getElementsByName("login")[0].value;
             var email = document.getElementsByName("email")[0].value;
             var password = document.getElementsByName("password")[0].value;
-            if (login == '' || email == '' || password == '') {
+            if (!login || !email || !password) {
                 result = false;
             }
             if (!result) {
@@ -53,6 +53,11 @@
     </select>
     <br>
     CreateDate : <input type='text' name="createDate"/>
+    <br>
+    Country : <input type='text' name="country"/>
+    <br>
+    City : <input type='text' name="city"/>
+    <br>
     <input type='submit'>
 </form>
 </div>

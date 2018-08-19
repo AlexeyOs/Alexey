@@ -37,7 +37,9 @@ public class EditServlet  extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String createDate = req.getParameter("createDate");
-        this.logic.update(id, name, login, email, password,createDate);
+        String country = req.getParameter("country");
+        String city = req.getParameter("city");
+        this.logic.update(id, name, login, email, password, createDate, country, city);
         resp.sendRedirect(String.format("%s/edit", req.getContextPath()));
     }
 }

@@ -34,6 +34,10 @@
     <br>
     CreateDate : <input type='text' name='createDate' value="${user.createDate}"/>
     <br>
+    Country : <input type='text' name="country"/>
+    <br>
+    City : <input type='text' name="city"/>
+    <br>
     <input type='submit'>
 </form>
     <c:if test="${admin.role == 1}">

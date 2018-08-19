@@ -20,7 +20,8 @@ public class ValidateService implements Store{
      * Добавление записей в таблицу.
      */
     @Override
-    public void add(String name, String login, String email, String password, int role, String createDate) {
+    public void add(String name, String login, String email, String password,
+                    int role, String createDate, String country, String city) {
         //проверяет есть ли такой пользователь в базе, если пользователь уникальный, то добавляет нового.
         boolean repeat = false;
         User newuser = new User(name, login, email, password, role, createDate);
@@ -31,7 +32,7 @@ public class ValidateService implements Store{
             }
         }
         if(!repeat){
-            logic.add(name, login, email, password, role, createDate);
+            logic.add(name, login, email, password, role, createDate, country, city);
         }
     }
 
@@ -40,10 +41,12 @@ public class ValidateService implements Store{
      * Изменение данных из таблицы.
      */
     @Override
-    public void update(String id, String name, String login, String email, String password, String createDate) {
+    public void update(String id, String name, String login,
+                       String email, String password, String createDate,
+                       String country, String city) {
         //проверяет есть ли такой id в базе, если есть, то обновляет пользователя
         if (logic.findBy(id) != null) {
-            logic.update(id, name, login, email, password, createDate);
+            logic.update(id, name, login, email, password, createDate, country, city);
         }
     }
 
