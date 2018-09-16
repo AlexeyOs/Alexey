@@ -40,7 +40,7 @@ public class EditServlet  extends HttpServlet {
         String country = req.getParameter("country");
         String city = req.getParameter("city");
         this.logic.update(id, name, login, email, password, createDate, country, city);
-        resp.sendRedirect(String.format("%s/edit", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/listrole", req.getContextPath()));
     }
 }
 

@@ -22,14 +22,16 @@ public class EditServletTest {
         EditServlet controller = new EditServlet();
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
-        when(request.getParameter("name")).thenReturn("root");
-        when(request.getParameter("login")).thenReturn("root");
-        when(request.getParameter("email")).thenReturn("root@root");
-        when(request.getParameter("password")).thenReturn("");
+        when(request.getParameter("name")).thenReturn("admin");
+        when(request.getParameter("login")).thenReturn("admin");
+        when(request.getParameter("email")).thenReturn("alexeyosetsky@gmail.com");
+        when(request.getParameter("password")).thenReturn("1234");
         when(request.getParameter("createDate")).thenReturn("08.06.2018");
+        when(request.getParameter("country")).thenReturn("Russia");
+        when(request.getParameter("city")).thenReturn("Krasnodar");
         controller.doPost(request, response);
-        User user = ValidateService.getInstance().findBy("6");
+        User user = ValidateService.getInstance().findBy("1");
 
-        assertThat(user.getId(), is("6"));
+        assertThat(user.getId(), is("1"));
     }
 }

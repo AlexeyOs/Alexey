@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Слой Logic, который между Servlet и DB, Memory.
  */
-public class ValidateService implements Store{
+public class ValidateService implements Store {
     private final DBStore logic = DBStore.getInstance();
     private static final ValidateService INSTANCE = new ValidateService();
     public static ValidateService getInstance() {
@@ -24,14 +24,14 @@ public class ValidateService implements Store{
                     int role, String createDate, String country, String city) {
         //проверяет есть ли такой пользователь в базе, если пользователь уникальный, то добавляет нового.
         boolean repeat = false;
-        User newuser = new User(name, login, email, password, role, createDate);
+        User newuser = new User(name, login, email, password, role, createDate, country, city);
         List<User> listUsers = logic.findAll();
         for (User user:listUsers) {
-            if (user.equals(newuser)){
+            if (user.equals(newuser)) {
                 repeat = true;
             }
         }
-        if(!repeat){
+        if (!repeat) {
             logic.add(name, login, email, password, role, createDate, country, city);
         }
     }
@@ -128,10 +128,10 @@ public class ValidateService implements Store{
      * Находит пользователя по введенному имени и паролю.
      * @return boolean параметр.
      */
-    public User findByLoginAndPass(String login, String password){
+    public User findByLoginAndPass(String login, String password) {
         List<User> users = findAll();
         for (User user : users) {
-            if (user.getLogin().equals(login) && user.getPassword().equals(password)){
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
                 return user;
             }
         }
@@ -141,7 +141,7 @@ public class ValidateService implements Store{
     /**
      * Проверка наличия пользователя.
      */
-    public boolean isCredentional(String login, String password){
+    public boolean isCredentional(String login, String password) {
         boolean exists = false;
         List<User> users = logic.findAll();
         for (User user : users) {
@@ -156,7 +156,7 @@ public class ValidateService implements Store{
      * Проверяет наличие администраторской роли у пользователи, чтобы предоставить доступ к редаутированию всех пользователей.
      * @return boolean параметр.
      */
-    public boolean checkAdminRoles(){
+    public boolean checkAdminRoles() {
         return logic.checkAdminRoles();
     }
 }

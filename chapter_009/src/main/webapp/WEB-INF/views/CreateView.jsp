@@ -56,7 +56,11 @@
     <br>
     Country : <input type='text' name="country"/>
     <br>
-    City : <input type='text' name="city"/>
+    City : <select name="city">
+    <option><c:out value="Krasnodar">Krasnodar</c:out></option>
+    <option><c:out value="Moscow">Moscow</c:out></option>
+    <option><c:out value="Saint Petersburg">Saint Petersburg</c:out></option>
+    </select>
     <br>
     <input type='submit'>
 </form>

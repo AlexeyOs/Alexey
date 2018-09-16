@@ -34,9 +34,13 @@
     <br>
     CreateDate : <input type='text' name='createDate' value="${user.createDate}"/>
     <br>
-    Country : <input type='text' name="country"/>
+    Country : <input type='text' name="country" value="${user.country}"/>
     <br>
-    City : <input type='text' name="city"/>
+    City : <select name="city" value="user.city">
+    <option><c:out value="Krasnodar">Krasnodar</c:out></option>
+    <option><c:out value="Moscow">Moscow</c:out></option>
+    <option><c:out value="Saint Petersburg">Saint Petersburg</c:out></option>
+    </select>
     <br>
     <input type='submit'>
 </form>

@@ -29,8 +29,9 @@ public class JsonServlet extends HttpServlet {
         // Принял Json обект, прочитал content
         BufferedReader reader = req.getReader();
         // преобразовываю обект в StringBuilder
-        while ((line = reader.readLine()) != null)
+        while ((line = reader.readLine()) != null) {
             sb.append(line);
+        }
 
         try {
             JSONObject jsonObject = new JSONObject(sb.toString());
@@ -39,7 +40,7 @@ public class JsonServlet extends HttpServlet {
         } catch (JSONException e) {
             throw new IOException("Error parsing JSON request string");
         }
-        String greetings = "<tr><td>" + userName + "</td><td>"+ password + "</td></tr>";
+        String greetings = "<tr><td>" + userName + "</td><td>" + password + "</td></tr>";
 
         resp.setContentType("text/plain");
         resp.getWriter().write(greetings);

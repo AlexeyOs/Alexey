@@ -16,7 +16,6 @@ import java.io.IOException;
  * Created by koldy on 01.06.2018.
  */
 public class SigninController extends HttpServlet {
-    private static final Logger log = LoggerFactory.getLogger(SigninController.class);
     private final ValidateService logic = ValidateService.getInstance();
 
     @Override

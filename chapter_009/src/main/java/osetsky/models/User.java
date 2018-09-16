@@ -12,8 +12,18 @@ public class User {
     private String password;
     private int role;
     private String createDate;
+    private String country;
+    private String city;
 
-    public User(String id, String name,String login, String email, String password, int role, String createDate) {
+    public User(String id,
+                String name,
+                String login,
+                String email,
+                String password,
+                int role,
+                String createDate,
+                String country,
+                String city) {
         this.id = id;
         this.name = name;
         this.login = login;
@@ -21,15 +31,19 @@ public class User {
         this.password = password;
         this.role = role;
         this.createDate = createDate;
+        this.country = country;
+        this.city = city;
     }
 
-    public User(String name, String login, String email, String password, int role, String createDate) {
+    public User(String name, String login, String email, String password, int role, String createDate, String country, String city) {
         this.name = name;
         this.login = login;
         this.email = email;
         this.password = password;
         this.role = role;
         this.createDate = createDate;
+        this.country = country;
+        this.city = city;
     }
     public void setId(String id) {
         this.id = id;
@@ -66,5 +80,13 @@ public class User {
     }
     public String getCreateDate() {
         return createDate;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

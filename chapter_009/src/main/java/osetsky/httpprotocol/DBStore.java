@@ -20,10 +20,8 @@ public class DBStore implements Store {
         return INSTANCE;
     }
 
-    public static BasicDataSource getDataSource()
-    {
-        if (dataSource == null)
-        {
+    public static BasicDataSource getDataSource() {
+        if (dataSource == null) {
             BasicDataSource ds = new BasicDataSource();
             ds.setUrl("jdbc:postgresql://localhost:5432/java_a_from_z");
             ds.setUsername("postgres");
@@ -36,8 +34,7 @@ public class DBStore implements Store {
         return dataSource;
     }
 
-    private DBStore()
-    {
+    private DBStore() {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException ex) {
@@ -71,7 +68,7 @@ public class DBStore implements Store {
             PreparedStatement psSelectCheckAdmin = connection.prepareStatement("SELECT NAME FROM ROLES WHERE ID = 1");
             ResultSet resultSet = psSelectCheckAdmin.executeQuery();
             if (resultSet.next()) {
-                if (resultSet.getString("name").equals("admin")){
+                if (resultSet.getString("name").equals("admin")) {
                     insertAdmin = false;
                 }
             }
@@ -101,8 +98,8 @@ public class DBStore implements Store {
         try {
             //вставка
             Connection connection = dataSource.getConnection();
-            PreparedStatement st = connection.prepareStatement("INSERT INTO users(name," +
-                    " login, email, password, role, createDate) values(?, ?, ?, ?, ?, ?)");
+            PreparedStatement st = connection.prepareStatement("INSERT INTO users(name,"
+                    + " login, email, password, role, createDate) values(?, ?, ?, ?, ?, ?)");
             st.setString(1, name);
             st.setString(2, login);
             st.setString(3, email);
@@ -127,7 +124,7 @@ public class DBStore implements Store {
                         + " login = ?,"
                         + " email = ?,"
                         + " password = ?,"
-                        + " createDate = ?"
+                        + " createDate = ?,"
                         + " country = ?,"
                         + " city = ?"
                         + "WHERE id = ?")) {
@@ -136,7 +133,7 @@ public class DBStore implements Store {
             st.setString(3, email);
             st.setString(4, password);
             st.setString(5, createDate);
-            st.setString(6, password);
+            st.setString(6, country);
             st.setString(7, createDate);
             st.setInt(8, Integer.parseInt(id));
             st.execute();
@@ -164,17 +161,19 @@ public class DBStore implements Store {
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement st = connection.prepareStatement(
-                    "select id, name, login, email, password, role, createDate from users");
+                    "select id, name, login, email, password, role, createDate, country, city from users");
             List<User> arr = new ArrayList<>();
             ResultSet resultSet = st.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 arr.add(new User(resultSet.getString("id"),
                         resultSet.getString("name"),
                         resultSet.getString("login"),
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getInt("role"),
-                        resultSet.getString("createDate")));
+                        resultSet.getString("createDate"),
+                        resultSet.getString("country"),
+                        resultSet.getString("city")));
             }
             st.close();
             return arr;
@@ -187,7 +186,7 @@ public class DBStore implements Store {
     @Override
     public User findBy(String id) {
         try (Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement("select name, login, email, password, role, createDate from USERS where id =" + id)) {
+            PreparedStatement statement = connection.prepareStatement("select name, login, email, password, role, createDate, country, city from USERS where id =" + id)) {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return new User(id,
@@ -196,7 +195,9 @@ public class DBStore implements Store {
                         resultSet.getString("email"),
                         resultSet.getString("password"),
                         resultSet.getInt("role"),
-                        resultSet.getString("createDate"));
+                        resultSet.getString("createDate"),
+                        resultSet.getString("country"),
+                        resultSet.getString("city"));
             }
             statement.close();
         } catch (SQLException e) {
@@ -268,7 +269,7 @@ public class DBStore implements Store {
                     "select id,name, description, addcontent, updatecontent, seealluser from roles");
             List<Role> arr = new ArrayList<>();
             ResultSet resultSet = st.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 arr.add(new Role(resultSet.getString("id"),
                         resultSet.getString("name"),
                         resultSet.getString("description"),
