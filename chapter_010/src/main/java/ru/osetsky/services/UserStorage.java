@@ -16,11 +16,11 @@ public class UserStorage {
         User user = new User();
         user.setLogin("test");
         session.save(user);
-//        try {
-//            System.out.println(session.createQuery("from User").list());
-//        } catch (Exception e){
-//            System.out.println(e);
-//        }
+        try {
+            System.out.println(session.createQuery("from User").list());
+        } catch (Exception e){
+            System.out.println(e);
+        }
         session.getTransaction().commit();
         session.close();
         factory.close();

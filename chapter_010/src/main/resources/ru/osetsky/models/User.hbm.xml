@@ -5,6 +5,6 @@
       </id>
       <property name="login" column="login"/>
       <property name="password" column="password"/>
-      <property name="created" column="created"/>
+      <property name="created" column="create_date"/>
   </class>
 </hibernate-mapping>

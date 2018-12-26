@@ -25,15 +25,16 @@ public class User {
     public String getLogin() {
         return login;
     }
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public String getPassword() {
         return password;
     }
-
-    public Timestamp getCreated() {
-        return created;
-    }
-
     public void setCreated(Timestamp created) {
         this.created = created;
+    }
+    public Timestamp getCreated() {
+        return created;
     }
 }

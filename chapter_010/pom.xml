@@ -12,11 +12,22 @@
     <artifactId>chapter_010</artifactId>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/javassist/javassist &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>javassist</groupId>-->
+            <!--<artifactId>javassist</artifactId>-->
+            <!--<version>3.12.1.GA</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.postgresql/postgresql &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.postgresql</groupId>-->
+            <!--<artifactId>postgresql</artifactId>-->
+            <!--<version>42.1.4</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.1.4</version>
+            <version>9.4.1212.jre7</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
