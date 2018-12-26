@@ -1,24 +1,41 @@
 package ru.osetsky.models;
 
-import java.util.List;
 
 public class Item {
-    private User author;
-    private List<Item> items;
+    private String id;
+    private String desc;
+    private String created;
+    private String done;
 
-    public List<Item> getItems() {
-        return items;
+    public String getId() {
+        return id;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public User getAuthor() {
-        return author;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getDone() {
+        return done;
+    }
+
+    public void setDone(String done) {
+        this.done = done;
     }
 }
