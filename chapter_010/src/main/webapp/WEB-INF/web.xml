@@ -1,0 +1,17 @@
+<web-app>
+
+    <servlet>
+        <servlet-name>ItemServlet</servlet-name>
+        <servlet-class>ru.osetsky.servlets.ItemServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ItemServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>
