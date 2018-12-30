@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function addRow() {
+            //получаем значение поля itm
+            var dsc = $('#dsc').val();
+            var crd = $('#crd').val();
+            var don = $('#don').val();
+            //получаем ссылку на последний элемент в таблице.
+            //и после него добавляем html
+            $('#table').find('tr:last').after('<tr><td>' + dsc +'</td><td>' + crd +'</td><td>' + don +'</td></tr>');
+        }
+        function addRowAjax() {
+            // addRow();
+            var taskObj = {
+                "description": $('#dsc').val(),
+                "created": $('#crd').val(),
+                "done": $('#don').val()
+            };
+            var taskJson = JSON.stringify(taskObj);
+            var url = "http://localhost:8082/itemAdd";
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: taskJson,
+                async: false,
+                success: function (data, text) {
+                    alert(text);
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                }
+            });
+        }
+    </script>
+    <style>
+        form{
+            margin: 2%;
+        }
+    </style>
+</head>
+<body>
+<br>
+<div class="table-responsive">
+    <form>
+        <div class="form-group">
+            <label for="dsc">Description:</label>
+            <input type="text" class="form-control" title="Enter description task." id="dsc">
+        </div>
+        <div class="form-group">
+            <label for="crd">Created:</label>
+            <input type="text" class="form-control" id="crd">
+        </div>
+        <div class="form-group">
+            <label for="don">Done:</label>
+            <input type="text" class="form-control" id="don">
+        </div>
+        <br>
+        <button type="button" class="btn btn-default" onclick="addRowAjax();">Add row ajax</button>
+    </form>
+</div>
+
+<br>
+<div class="table-responsive">
+    <table class="table" id ="table">
+        <thead>
+        <tr>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Done</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--<tr>-->
+            <!--<td>First task</td>-->
+            <!--<th>02.03.2018</th>-->
+            <!--<td>just do it</td>-->
+        <!--</tr>-->
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

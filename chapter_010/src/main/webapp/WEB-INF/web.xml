@@ -2,7 +2,7 @@
 
     <servlet>
         <servlet-name>ItemServlet</servlet-name>
-        <servlet-class>ru.osetsky.servlets.ItemServlet</servlet-class>
+        <servlet-class>ru.osetsky.servlets.ItemAdd</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -10,8 +10,23 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <servlet>
+        <servlet-name>ItemList</servlet-name>
+        <servlet-class>ru.osetsky.servlets.ItemList</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>ItemServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/itemAdd</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ItemList</servlet-name>
+        <url-pattern>/itemAll</url-pattern>
     </servlet-mapping>
 </web-app>
