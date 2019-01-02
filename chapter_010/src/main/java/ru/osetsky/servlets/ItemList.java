@@ -31,20 +31,20 @@ public class ItemList extends HttpServlet {
                 .buildSessionFactory();
         Session session = factory.openSession();
         session.beginTransaction();
-        String greetings ="";
+        StringBuilder stringBuilder = new StringBuilder();
         List<Item> itemList = session.createQuery("from Item").list();
         for (Item item1 : itemList){
-            greetings = greetings + "<tr><td>" + item1.getDesc() + "</td><td>1</td><td>" + item1.getDone() + "</td></tr>";
-            LOG.debug(greetings);
-            LOG.debug("Desc: " + item1.getDesc());
-            LOG.debug("Created: " + item1.getCreated());
-            LOG.debug("Done: " + item1.getDone());
+            stringBuilder.append("<tr><td>");
+            stringBuilder.append(item1.getDesc());
+            stringBuilder.append("</td><td>1</td><td>");
+            stringBuilder.append(item1.getDone());
+            stringBuilder.append("</td></tr>");
         }
         session.getTransaction().commit();
         session.close();
         factory.close();
 
         resp.setContentType("text/plain");
-        resp.getWriter().write(greetings);
+        resp.getWriter().write(stringBuilder.toString());
     }
 }

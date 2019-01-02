@@ -32,12 +32,36 @@
                 url: url,
                 data: taskJson,
                 async: false,
-                success: function (data, text) {
-                    alert(text);
-                },
-                error: function (request, status, error) {
+                success: [function (data) {
+                    selectAllAjax();
+                    $('#table').find('tr:last').after(data);
+                }],
+                error: [function (request) {
                     alert(request.responseText);
-                }
+                }]
+            });
+        }
+        function selectAllAjax() {
+            // addRow();
+            var taskObj = {
+                "description": $('#dsc').val(),
+                "created": $('#crd').val(),
+                "done": $('#don').val()
+            };
+            var taskJson = JSON.stringify(taskObj);
+            var url = "http://localhost:8082/itemAll";
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: taskJson,
+                async: false,
+                success: [function (data) {
+                    $('#table').find('tr:last').after(data);
+                }],
+                error: [function (request) {
+                    alert(request.responseText);
+                }]
             });
         }
     </script>
@@ -70,7 +94,7 @@
 
 <br>
 <div class="table-responsive">
-    <table class="table" id ="table">
+    <table class="table" id ="table" onload="selectAllAjax()">
         <thead>
         <tr>
             <th>Description</th>
