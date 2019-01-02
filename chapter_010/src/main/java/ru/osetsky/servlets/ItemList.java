@@ -18,14 +18,6 @@ public class ItemList extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(ItemAdd.class);
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        String line = null;
-        // Принял Json обект, прочитал content
-        BufferedReader reader = req.getReader();
-        // преобразовываю обект в StringBuilder
-        while ((line = reader.readLine()) != null) {
-            sb.append(line);
-        }
         SessionFactory factory = new Configuration()
                 .configure()
                 .buildSessionFactory();
@@ -36,8 +28,14 @@ public class ItemList extends HttpServlet {
         for (Item item1 : itemList){
             stringBuilder.append("<tr><td>");
             stringBuilder.append(item1.getDesc());
-            stringBuilder.append("</td><td>1</td><td>");
-            stringBuilder.append(item1.getDone());
+            stringBuilder.append("</td><td>");
+            stringBuilder.append(item1.getCreated());
+            stringBuilder.append("</td><td>");
+            if (item1.getDone()) {
+                stringBuilder.append("<input type=\"checkbox\" id=\"" + item1.getId() + "\" checked onchange=\"taskReady(id)\">");
+            } else {
+                stringBuilder.append("<input type=\"checkbox\" id=\"" + item1.getId() + "\" onchange=\"taskReady(id)\">");
+            }
             stringBuilder.append("</td></tr>");
         }
         session.getTransaction().commit();
