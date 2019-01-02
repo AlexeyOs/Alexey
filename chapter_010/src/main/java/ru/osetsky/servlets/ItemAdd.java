@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Date;
 
 public class ItemAdd extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(ItemAdd.class);
@@ -53,7 +54,9 @@ public class ItemAdd extends HttpServlet {
         session.beginTransaction();
         Item item = new Item();
         item.setDesc(description);
-        item.setDone(done);
+        Date date = new Date();
+        item.setCreated(null);
+        item.setDone(Boolean.parseBoolean(done));
         session.save(item);
         session.getTransaction().commit();
         session.close();

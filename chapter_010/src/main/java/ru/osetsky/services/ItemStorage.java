@@ -17,7 +17,7 @@ public class ItemStorage {
         Item item = new Item();
 //        item.setId("0");
         item.setDesc("test");
-        item.setDone("test");
+        item.setDone(false);
         session.save(item);
         try {
             System.out.println(session.createQuery("from Item").list());

@@ -1,11 +1,13 @@
 package ru.osetsky.models;
 
 
+import java.sql.Timestamp;
+
 public class Item {
     private String id;
     private String desc;
-    private String created;
-    private String done;
+    private Timestamp created;
+    private boolean done;
 
     public String getId() {
         return id;
@@ -23,19 +25,19 @@ public class Item {
         this.desc = desc;
     }
 
-    public String getCreated() {
+    public Timestamp getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(Timestamp created) {
         this.created = created;
     }
 
-    public String getDone() {
+    public boolean getDone() {
         return done;
     }
 
-    public void setDone(String done) {
+    public void setDone(boolean done) {
         this.done = done;
     }
 }
