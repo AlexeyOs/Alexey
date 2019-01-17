@@ -1,8 +1,5 @@
 package ru.osetsky.servlets;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -14,11 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Date;
 
 public class ItemAdd extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(ItemAdd.class);
-    private Item item;
+    private final ValidateService logic = ValidateService.getInstance();
     /**
      * Метод обрабатывает JSON запрос от AJAX.
      * Метод корректно принимает запрос если запустить chrome с указанными ниже параметрами,
@@ -35,35 +31,16 @@ public class ItemAdd extends HttpServlet {
         while ((line = reader.readLine()) != null) {
             sb.append(line);
         }
-        String description;
-        String created;
-        String done;
+        Item item = new Item();
         try {
             JSONObject jsonObject = new JSONObject(sb.toString());
-            description = jsonObject.getString("description");
-            created = jsonObject.getString("created");
-            done = jsonObject.getString("done");
+            item.setDesc(jsonObject.getString("description"));
+//            item.setCreated(jsonObject.getString("created"));
+            item.setDone(Boolean.parseBoolean(jsonObject.getString("done")));
         } catch (JSONException e) {
             throw new IOException("Error parsing JSON request string");
         }
-
-        SessionFactory factory = new Configuration()
-                .configure()
-                .buildSessionFactory();
-        Session session = factory.openSession();
-        session.beginTransaction();
-        Item item = new Item();
-        item.setDesc(description);
-        Date date = new Date();
-        item.setCreated(null);
-        item.setDone(Boolean.parseBoolean(done));
-        session.save(item);
-        session.getTransaction().commit();
-        session.close();
-        factory.close();
-        String greetings ="<tr><td>" + description + "</td><td>" + created + "</td><td>" + done + "</td></tr>";
-
         resp.setContentType("text/plain");
-        resp.getWriter().write(greetings);
+        resp.getWriter().write(logic.addStr(item));
     }
 }
