@@ -15,34 +15,29 @@ public class MemoreStore implements Store {
     public static MemoreStore getInstance() {
         return INSTANCE;
     }
+    private  SessionFactory factory = new Configuration()
+            .configure()
+            .buildSessionFactory();
 
     /**
      * Добавление записей в таблицу.
      */
     @Override
     public void add(Item item) {
-        SessionFactory factory = new Configuration()
-                .configure()
-                .buildSessionFactory();
         Session session = factory.openSession();
         session.beginTransaction();
         session.save(item);
         session.getTransaction().commit();
         session.close();
-        factory.close();
     }
 
     @Override
     public List<Item> getAll() {
-        SessionFactory factory = new Configuration()
-                .configure()
-                .buildSessionFactory();
         Session session = factory.openSession();
         session.beginTransaction();
         List<Item> itemList = session.createQuery("from Item").list();
         session.getTransaction().commit();
         session.close();
-        factory.close();
         return itemList;
     }
 
