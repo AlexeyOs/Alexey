@@ -2,6 +2,10 @@ package ru.osetsky;
 
 
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import static org.junit.Assert.assertNotNull;
 
 public class UserStorageTest {
 
@@ -12,4 +16,11 @@ public class UserStorageTest {
         storage.add(new User());
     }
 
+    @Test
+    public void whenLoadContextShouldGetBeans() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
+        UserStorage memory = context.getBean(UserStorage.class);
+        memory.add(new User());
+        assertNotNull(memory);
+    }
 }
