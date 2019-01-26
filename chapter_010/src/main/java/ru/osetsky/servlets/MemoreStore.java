@@ -15,7 +15,7 @@ public class MemoreStore implements Store {
     public static MemoreStore getInstance() {
         return INSTANCE;
     }
-    private  SessionFactory factory = new Configuration()
+    private final  SessionFactory factory = new Configuration()
             .configure()
             .buildSessionFactory();
 
