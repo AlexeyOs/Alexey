@@ -9,5 +9,7 @@ import java.util.List;
  */
 public interface Store {
     public void add(Item item);
+    public void edit(Item item);
+    public void delete(Item item);
     public List<Item> getAll();
 }

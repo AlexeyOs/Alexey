@@ -26,6 +26,16 @@ public class ValidateService implements Store {
         logic.add(item);
     }
 
+    @Override
+    public void edit(Item item) {
+        logic.edit(item);
+    }
+
+    @Override
+    public void delete(Item item) {
+        logic.edit(item);
+    }
+
     public String addStr(Item item) {
         String greetings = "";
         try {

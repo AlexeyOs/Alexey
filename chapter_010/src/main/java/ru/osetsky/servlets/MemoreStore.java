@@ -44,6 +44,22 @@ public class MemoreStore implements Store {
     }
 
     @Override
+    public void edit(Item item) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        session.update(item);
+        session.close();
+    }
+
+    @Override
+    public void delete(Item item) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        session.delete(item);
+        session.close();
+    }
+
+    @Override
     public List<Item> getAll() {
         return this.tx(session -> session.createQuery("from Item").list());
     }
