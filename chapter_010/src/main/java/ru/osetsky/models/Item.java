@@ -1,13 +1,23 @@
 package ru.osetsky.models;
 
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 
+@Entity
+@Table(name = "items")
 public class Item {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private String id;
+    @Column(name = "description")
     private String desc;
+    @Column(name = "create_date")
     private Timestamp created;
+    @Column(name = "done")
     private boolean done;
+
 
     public String getId() {
         return id;

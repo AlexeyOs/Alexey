@@ -13,6 +13,7 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
 
-        <mapping resource="ru/osetsky/models/Item.hbm.xml" />
+        <!--<mapping resource="ru/osetsky/models/Item.hbm.xml" />-->
+        <mapping class="ru.osetsky.models.Item"/>
     </session-factory>
 </hibernate-configuration>
