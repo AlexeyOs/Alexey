@@ -8,28 +8,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
-        function addRowAjax() {
-            var taskObj = {
-                "description": $('#dsc').val(),
-                "created": $('#crd').val(),
-                "done": $('#don').val()
-            };
-            var taskJson = JSON.stringify(taskObj);
-            var url = "http://localhost:8082/itemAdd";
-
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: taskJson,
-                async: false,
-                success: [function (data) {
-                    selectAllAjax();
-                }],
-                error: [function (request) {
-                    alert(request.responseText);
-                }]
-            });
-        }
+        document.onreadystatechange = function(){
+            if(document.readyState === 'complete') {
+                selectAllAjax();
+            }
+        };
         function selectAllAjax() {
             var taskObj = {
                 "description": $('#dsc').val(),
@@ -64,6 +47,9 @@
                 alert(false);
             }
         }
+        function redirect(){
+            document.location = 'http://localhost:8082/itemAdd';
+        }
     </script>
     <style>
         form{
@@ -73,28 +59,10 @@
 </head>
 <body>
 <br>
-<div class="table-responsive">
-    <form>
-        <div class="form-group">
-            <label for="dsc">Description:</label>
-            <input type="text" class="form-control" title="Enter description task." id="dsc">
-        </div>
-        <div class="form-group">
-            <label for="crd">Created:</label>
-            <input type="datetime" class="form-control" id="crd">
-        </div>
-        <div class="form-group">
-            <label for="don">Done:</label>
-            <input type="text" class="form-control" id="don">
-        </div>
-        <br>
-        <button type="button" class="btn btn-default" onclick="addRowAjax();">Add row ajax</button>
-    </form>
-</div>
-
+<button type="button" class="btn btn-default" onclick="redirect();">Add car</button>
 <br>
 <div class="table-responsive">
-    <table class="table" id ="table" onload="selectAllAjax()">
+    <table class="table" id ="table">
         <thead>
         <tr>
             <th>Description</th>
@@ -104,9 +72,6 @@
         </thead>
         <tbody>
         <tr>
-            <!--<td>First task</td>-->
-            <!--<th>02.03.2018</th>-->
-            <!--<td><input type="checkbox" id="1" checked onchange="taskReady(id)"></td>-->
         </tr>
         </tbody>
     </table>

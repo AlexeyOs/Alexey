@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.osetsky.models.Item;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,12 @@ import java.io.IOException;
 public class ItemAdd extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(ItemAdd.class);
     private final ValidateService logic = ValidateService.getInstance();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/views/ItemAdd.jsp").forward(req, resp);
+    }
+
     /**
      * Метод обрабатывает JSON запрос от AJAX.
      * Метод корректно принимает запрос если запустить chrome с указанными ниже параметрами,
