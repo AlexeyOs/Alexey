@@ -1,9 +1,9 @@
-package osetsky.httpprotocol;
+package ru.osetsky.httpprotocol;
 
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import osetsky.models.Role;
-import osetsky.models.User;
+import ru.osetsky.models.Role;
+import ru.osetsky.models.User;
 
 import java.sql.*;
 import java.util.ArrayList;

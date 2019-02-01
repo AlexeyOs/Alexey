@@ -1,7 +1,9 @@
-package osetsky.httpprotocol;
+package ru.osetsky.httpprotocol;
 
 import org.junit.Test;
-import osetsky.models.User;
+import ru.osetsky.httpprotocol.EditServlet;
+import ru.osetsky.httpprotocol.ValidateService;
+import ru.osetsky.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

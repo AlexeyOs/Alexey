@@ -1,7 +1,7 @@
-package osetsky.httpprotocol;
+package ru.osetsky.httpprotocol;
 
-import osetsky.models.Role;
-import osetsky.models.User;
+import ru.osetsky.models.Role;
+import ru.osetsky.models.User;
 
 import java.util.List;
 

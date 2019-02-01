@@ -1,4 +1,4 @@
-package osetsky.httpprotocol;
+package ru.osetsky.httpprotocol;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class CreateServlet extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/views/CreateView.jsp").forward(req, resp);
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //создание пользователя
         resp.setContentType("text/html");
         String name = req.getParameter("name");

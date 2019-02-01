@@ -5,4 +5,4 @@
  * пользователя с атрибутами name, login, email, createDate
  * в базу postgreeSql.
  */
-package osetsky.httpprotocol;
+package ru.osetsky.httpprotocol;

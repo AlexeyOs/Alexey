@@ -1,8 +1,9 @@
-package osetsky.httpprotocol;
+package ru.osetsky.httpprotocol;
 
 import org.junit.Test;
-import osetsky.models.Role;
-import osetsky.models.User;
+import ru.osetsky.httpprotocol.EditRole;
+import ru.osetsky.httpprotocol.ValidateService;
+import ru.osetsky.models.Role;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

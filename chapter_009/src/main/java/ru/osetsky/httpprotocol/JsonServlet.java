@@ -1,4 +1,4 @@
-package osetsky.httpprotocol;
+package ru.osetsky.httpprotocol;
 
 import org.json.JSONException;
 import org.json.JSONObject;

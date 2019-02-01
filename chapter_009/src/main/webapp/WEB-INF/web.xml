@@ -2,7 +2,7 @@
 
     <servlet>
         <servlet-name>ListServlet</servlet-name>
-        <servlet-class>osetsky.httpprotocol.ListServlet</servlet-class>
+        <servlet-class>ru.osetsky.httpprotocol.ListServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -11,7 +11,7 @@
     </servlet>
     <servlet>
         <servlet-name>EditServlet</servlet-name>
-        <servlet-class>osetsky.httpprotocol.EditServlet</servlet-class>
+        <servlet-class>ru.osetsky.httpprotocol.EditServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -20,7 +20,7 @@
     </servlet>
     <servlet>
         <servlet-name>CreateServlet</servlet-name>
-        <servlet-class>osetsky.httpprotocol.CreateServlet</servlet-class>
+        <servlet-class>ru.osetsky.httpprotocol.CreateServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -29,7 +29,7 @@
     </servlet>
     <servlet>
         <servlet-name>Users Controller Servlet</servlet-name>
-        <servlet-class>osetsky.httpprotocol.UsersController</servlet-class>
+        <servlet-class>ru.osetsky.httpprotocol.UsersController</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -38,7 +38,7 @@
     </servlet>
     <servlet>
         <servlet-name>Signin</servlet-name>
-        <servlet-class>osetsky.httpprotocol.SigninController</servlet-class>
+        <servlet-class>ru.osetsky.httpprotocol.SigninController</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -47,7 +47,7 @@
     </servlet>
     <servlet>
         <servlet-name>List Role</servlet-name>
-        <servlet-class>osetsky.httpprotocol.ListRole</servlet-class>
+        <servlet-class>ru.osetsky.httpprotocol.ListRole</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -56,7 +56,7 @@
     </servlet>
     <servlet>
         <servlet-name>Create Role</servlet-name>
-        <servlet-class>osetsky.httpprotocol.CreateRole</servlet-class>
+        <servlet-class>ru.osetsky.httpprotocol.CreateRole</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -65,7 +65,7 @@
     </servlet>
     <servlet>
         <servlet-name>Edit Role</servlet-name>
-        <servlet-class>osetsky.httpprotocol.EditRole</servlet-class>
+        <servlet-class>ru.osetsky.httpprotocol.EditRole</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -74,7 +74,7 @@
     </servlet>
     <servlet>
         <servlet-name>JsonServlet</servlet-name>
-        <servlet-class>osetsky.httpprotocol.JsonServlet</servlet-class>
+        <servlet-class>ru.osetsky.httpprotocol.JsonServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -83,7 +83,7 @@
     </servlet>
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>osetsky.httpprotocol.AuthFilter</filter-class>
+        <filter-class>ru.osetsky.httpprotocol.AuthFilter</filter-class>
     </filter>
 
 

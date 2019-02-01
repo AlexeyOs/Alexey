@@ -1,4 +1,4 @@
-package osetsky.models;
+package ru.osetsky.models;
 
 
 /**

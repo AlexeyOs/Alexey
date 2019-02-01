@@ -1,4 +1,4 @@
-package osetsky.models;
+package ru.osetsky.models;
 
 /**
  * Created by koldy on 29.06.2018.
