@@ -24,6 +24,12 @@
             <label for="don">Done:</label>
             <input type="text" class="form-control" id="don">
         </div>
+            <form method="post" action="uploadFile" enctype="multipart/form-data">
+                Select file to upload:
+                <input type="file" name="uploadFile" />
+                <br/><br/>
+                <input type="submit" value="Upload"/>
+            </form>
         <br>
         <button type="button" class="btn btn-default" onclick="addRowAjax();">Done</button>
     </form>
