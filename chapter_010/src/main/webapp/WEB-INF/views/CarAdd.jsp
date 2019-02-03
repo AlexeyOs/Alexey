@@ -9,14 +9,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         function addCarAjax() {
+            alert(1);
             var taskObj = {
                 "brand": $('#brnd').val(),
                 "model": $('#mdl').val(),
-                "price": $('#prc').val(),
-                "image": $('#img').val()
+                "price": $('#prc').val()
             };
             var taskJson = JSON.stringify(taskObj);
-            var url = "http://localhost:8082/carAdd";
+            var url = "http://localhost:8082/uploadFile";
             $.ajax({
                 type: "POST",
                 url: url,
@@ -49,14 +49,15 @@
         <label for="prc">Price:</label>
         <input type="text" class="form-control" id="prc">
     </div>
+    <br/>
     <form method="post" action="uploadFile" enctype="multipart/form-data">
         Select file to upload:
-        <input type="file" name="uploadFile" id="img" />
+        <input type="file" name="uploadFile" accept=".gif,.jpg,.jpeg,.png"/>
         <br/><br/>
-        <%--<input type="submit" value="Upload" id="img"/>--%>
+        <input type="submit" value="Upload" onclick="addCarAjax();"/>
     </form>
-    <br>
     <button type="button" class="btn btn-default" onclick="addCarAjax();">Done</button>
+
 </form>
 </body>
 </html>
