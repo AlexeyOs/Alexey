@@ -58,8 +58,8 @@ public class ValidateService implements Store<Car> {
 
     public String getAllStr() {
         StringBuilder stringBuilder = new StringBuilder();
-        List<Car> items = new ArrayList<>();
-        items = logic.getAll();
+        List<Car> cars = new ArrayList<>();
+        cars = logic.getAll();
 //        for (Item item : items){
 //            stringBuilder.append("<tr><td>");
 //            stringBuilder.append(item.getDesc());
