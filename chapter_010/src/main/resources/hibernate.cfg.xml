@@ -12,8 +12,9 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
-
+        <!--<property name="hibernate.dialect">ru.osetsky.servlets.CustomPostgreSQLDialect</property>-->
+        <property name="hibernate.jdbc.use_streams_for_binary">false</property>
         <!--<mapping resource="ru/osetsky/models/Item.hbm.xml" />-->
-        <mapping class="ru.osetsky.models.Item"/>
+        <mapping class="ru.osetsky.models.Car"/>
     </session-factory>
 </hibernate-configuration>

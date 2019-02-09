@@ -1,7 +1,6 @@
 package ru.osetsky.models;
 
 import javax.persistence.*;
-import java.io.ByteArrayOutputStream;
 
 @Entity
 @Table(name = "cars")
@@ -10,7 +9,8 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private String id;
-    @Column(name = "image")
+    @Lob
+    @Column(name = "image3")
     private byte[] image;
     @Column(name = "brand")
     private String brand;

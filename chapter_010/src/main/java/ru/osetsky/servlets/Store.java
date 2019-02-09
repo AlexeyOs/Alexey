@@ -1,15 +1,14 @@
 package ru.osetsky.servlets;
 
-import ru.osetsky.models.Item;
 
 import java.util.List;
 
 /**
  * Created by koldy on 17.01.2019.
  */
-public interface Store {
-    public void add(Item item);
-    public void edit(Item item);
-    public void delete(Item item);
-    public List<Item> getAll();
+public interface Store<T> {
+    public void add(T item);
+    public void edit(T item);
+    public void delete(T item);
+    public List<T> getAll();
 }

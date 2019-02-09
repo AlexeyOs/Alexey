@@ -47,7 +47,7 @@ public class ItemAdd extends HttpServlet {
         } catch (JSONException e) {
             throw new IOException("Error parsing JSON request string");
         }
-        resp.setContentType("text/plain");
-        resp.getWriter().write(logic.addStr(item));
+//        resp.setContentType("text/plain");
+//        resp.getWriter().write(logic.addStr(item));
     }
 }

@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import ru.osetsky.models.Car;
 import ru.osetsky.models.Item;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.function.Function;
 /**
  * Created by koldy on 17.01.2019.
  */
-public class MemoreStore implements Store {
+public class MemoreStore implements Store<Car> {
     private static final MemoreStore INSTANCE = new MemoreStore();
     public static MemoreStore getInstance() {
         return INSTANCE;
@@ -39,12 +40,12 @@ public class MemoreStore implements Store {
      * Добавление записей в таблицу.
      */
     @Override
-    public void add(Item item) {
+    public void add(Car item) {
         this.tx(session -> session.save(item));
     }
 
     @Override
-    public void edit(Item item) {
+    public void edit(Car item) {
         Session session = factory.openSession();
         session.beginTransaction();
         session.update(item);
@@ -52,7 +53,7 @@ public class MemoreStore implements Store {
     }
 
     @Override
-    public void delete(Item item) {
+    public void delete(Car item) {
         Session session = factory.openSession();
         session.beginTransaction();
         session.delete(item);
@@ -60,8 +61,8 @@ public class MemoreStore implements Store {
     }
 
     @Override
-    public List<Item> getAll() {
-        return this.tx(session -> session.createQuery("from Item").list());
+    public List<Car> getAll() {
+        return this.tx(session -> session.createQuery("from Car").list());
     }
 
 }

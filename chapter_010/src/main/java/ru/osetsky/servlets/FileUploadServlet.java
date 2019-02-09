@@ -15,10 +15,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
+import java.sql.Blob;
 import java.util.List;
 
 public class FileUploadServlet extends HttpServlet {
+
+    private final ValidateService logic = ValidateService.getInstance();
     private static final long serialVersionUID = 1L;
 
     // location to store file uploaded
@@ -33,12 +35,12 @@ public class FileUploadServlet extends HttpServlet {
      * Upon receiving file upload submission, parses the request to read
      * upload data and saves the file on disk.
      */
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req,
+                          HttpServletResponse resp) throws ServletException, IOException {
         StringBuilder sb = new StringBuilder();
         String line = null;
         // Принял Json обект, прочитал content
-        BufferedReader reader = request.getReader();
+        BufferedReader reader = req.getReader();
         // преобразовываю обект в StringBuilder
         while ((line = reader.readLine()) != null) {
             sb.append(line);
@@ -46,9 +48,11 @@ public class FileUploadServlet extends HttpServlet {
         Car car = new Car();
         try {
             JSONObject jsonObject = new JSONObject(sb.toString());
+            car.setId("0");
             car.setBrand(jsonObject.getString("brand"));
             car.setModel(jsonObject.getString("model"));
             car.setPrice(jsonObject.getString("price"));
+//            car.setImage(new Blob(new byte[10]));
         } catch (JSONException e) {
             throw new IOException("Error parsing JSON request string");
         }
@@ -56,13 +60,13 @@ public class FileUploadServlet extends HttpServlet {
 
 
         // checks if the request actually contains upload file
-        if (!ServletFileUpload.isMultipartContent(request)) {
-            // if not, we stop here
-            PrintWriter writer = response.getWriter();
-            writer.println("Error: Form must has enctype=multipart/form-data.");
-            writer.flush();
-            return;
-        }
+//        if (!ServletFileUpload.isMultipartContent(req)) {
+//            // if not, we stop here
+//            PrintWriter writer = resp.getWriter();
+//            writer.println("Error: Form must has enctype=multipart/form-data.");
+//            writer.flush();
+//            return;
+//        }
 
         // configures upload settings
         DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -93,7 +97,7 @@ public class FileUploadServlet extends HttpServlet {
         try {
             // parses the request's content to extract file data
             @SuppressWarnings("unchecked")
-            List<FileItem> formItems = upload.parseRequest(request);
+            List<FileItem> formItems = upload.parseRequest(req);
 
             if (formItems != null && formItems.size() > 0) {
                 // iterates over form's fields
@@ -106,17 +110,23 @@ public class FileUploadServlet extends HttpServlet {
 
                         // saves the file on disk
                         item.write(storeFile);
-                        request.setAttribute("message",
+                        req.setAttribute("message",
                                 "Upload has been done successfully!");
                     }
                 }
             }
         } catch (Exception ex) {
-            request.setAttribute("message",
+            req.setAttribute("message",
                     "There was an error: " + ex.getMessage());
         }
+//        car.setImage(uploadPath.getBytes());
         // redirects client to message page
-        getServletContext().getRequestDispatcher("/message.jsp").forward(
-                request, response);
+//        getServletContext().getRequestDispatcher("/message.jsp").forward(
+//                req, resp);
+
+        resp.setContentType("text/plain");
+        System.out.println("DB call");
+        logic.add(car);
+//        resp.getWriter().write(logic.addStr(car));
     }
 }
