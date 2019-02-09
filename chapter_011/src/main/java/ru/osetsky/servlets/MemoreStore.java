@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import ru.osetsky.models.Car;
-import ru.osetsky.models.Item;
 
 import java.util.List;
 import java.util.function.Function;
@@ -40,23 +39,23 @@ public class MemoreStore implements Store<Car> {
      * Добавление записей в таблицу.
      */
     @Override
-    public void add(Car item) {
-        this.tx(session -> session.save(item));
+    public void add(Car car) {
+        this.tx(session -> session.save(car));
     }
 
     @Override
-    public void edit(Car item) {
+    public void edit(Car car) {
         Session session = factory.openSession();
         session.beginTransaction();
-        session.update(item);
+        session.update(car);
         session.close();
     }
 
     @Override
-    public void delete(Car item) {
+    public void delete(Car car) {
         Session session = factory.openSession();
         session.beginTransaction();
-        session.delete(item);
+        session.delete(car);
         session.close();
     }
 

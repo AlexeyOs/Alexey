@@ -3,7 +3,6 @@ package ru.osetsky.servlets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.osetsky.models.Car;
-import ru.osetsky.models.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,21 +22,21 @@ public class ValidateService implements Store<Car> {
      * Добавление записей в таблицу.
      */
     @Override
-    public void add(Car item) {
-        logic.add(item);
+    public void add(Car car) {
+        logic.add(car);
     }
 
     @Override
-    public void edit(Car item) {
-        logic.edit(item);
+    public void edit(Car car) {
+        logic.edit(car);
     }
 
     @Override
-    public void delete(Car item) {
-        logic.edit(item);
+    public void delete(Car car) {
+        logic.edit(car);
     }
 
-    public String addStr(Car item) {
+    public String addStr(Car car) {
         String greetings = "";
 //        try {
 //            logic.add(item);

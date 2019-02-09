@@ -13,11 +13,6 @@
     <artifactId>chapter_011</artifactId>
 
     <dependencies>
-        <!--<dependency>-->
-        <!--<groupId>org.postgresql</groupId>-->
-        <!--<artifactId>postgresql</artifactId>-->
-        <!--<version>9.4.1212.jre7</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -29,12 +24,12 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.4.0.Final</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>javax.servlet</groupId>-->
-        <!--<artifactId>javax.servlet-api</artifactId>-->
-        <!--<version>4.0.1</version>-->
-        <!--<scope>compile</scope>-->
-        <!--</dependency>-->
+        <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.1</version>
+        <scope>compile</scope>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
         <dependency>
             <groupId>javax.servlet</groupId>

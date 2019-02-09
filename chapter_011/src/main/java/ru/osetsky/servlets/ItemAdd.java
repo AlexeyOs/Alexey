@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.osetsky.models.Item;
+import ru.osetsky.models.Car;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,12 +38,12 @@ public class ItemAdd extends HttpServlet {
         while ((line = reader.readLine()) != null) {
             sb.append(line);
         }
-        Item item = new Item();
+        Car item = new Car();
         try {
             JSONObject jsonObject = new JSONObject(sb.toString());
-            item.setDesc(jsonObject.getString("description"));
+//            item.setDesc(jsonObject.getString("description"));
 //            item.setCreated(jsonObject.getString("created"));
-            item.setDone(Boolean.parseBoolean(jsonObject.getString("done")));
+//            item.setDone(Boolean.parseBoolean(jsonObject.getString("done")));
         } catch (JSONException e) {
             throw new IOException("Error parsing JSON request string");
         }
