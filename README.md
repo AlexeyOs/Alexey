@@ -9,16 +9,14 @@
 <ul> Написан алгоритм пузырьковая сортировки. </ul>
 
 ![chapter_001](/imagesForReadme/chapter_001.png)
-<ul>test2</ul>
-<a href="url"><img src="/imagesForReadme/chapter_001.png" align="left" height="48" width="48" ></a>
-![chapter_001](https://user-images.githubusercontent.com/19537611/39668254-47a9dde8-50d1-11e8-99da-e0cca85e0ed7.png)
-   
+
+ 
 ### chapter_002
 -----------------------------------------------------------------------------------------
 ООП:
 <ul> Треккер(добавляет, удаляет, редактирует, ищет данные в базе SQLite)</ul>
 
-![chapter_002](https://user-images.githubusercontent.com/19537611/39668374-97e27eac-50d4-11e8-8c05-8ba98079cfe4.png)
+![chapter_002](/imagesForReadme/chapter_002.png)
  
 
 ### chapter_003
@@ -27,14 +25,14 @@ Collections (List, Set, Map, Tree, Queue):
 <ul> Итераторы для четных и простых чисел </ul>
 <ul> Дерево поиска</ul>
 
-![chapter_003](https://user-images.githubusercontent.com/19537611/39668377-b58dd938-50d4-11e8-861d-12d8d44852da.png)
+![chapter_003](/imagesForReadme/chapter_003.png)
 
 ### chapter_007
 -----------------------------------------------------------------------------------------
 Multithreading:
 <ul> Реализовал поиск слова 'java' в файлах с расширение xml и txt, с помощью потоков </ul>
 
-![chapter_007](https://user-images.githubusercontent.com/19537611/39668380-ccfaed22-50d4-11e8-92dc-f832a2374fff.png)
+![chapter_007](/imagesForReadme/chapter_007.png)
 
 ### chapter_008
 -----------------------------------------------------------------------------------------
