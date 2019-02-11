@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ItemList extends HttpServlet {
-    private static final Logger LOG = LoggerFactory.getLogger(ItemAdd.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ItemList.class);
     private final ValidateService logic = ValidateService.getInstance();
 
     @Override

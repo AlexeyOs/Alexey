@@ -11,7 +11,7 @@ import java.util.List;
  * Слой Logic, который между Servlet и DB, Memory.
  */
 public class ValidateService implements Store<Car> {
-    private static final Logger LOG = LoggerFactory.getLogger(ItemAdd.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ValidateService.class);
     private final MemoreStore logic = MemoreStore.getInstance();
     private static final ValidateService INSTANCE = new ValidateService();
     public static ValidateService getInstance() {

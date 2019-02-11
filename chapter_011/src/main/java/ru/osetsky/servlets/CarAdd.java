@@ -18,7 +18,7 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class CarAdd extends HttpServlet {
-    private static final Logger LOG = LoggerFactory.getLogger(ItemAdd.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CarAdd.class);
     private final ValidateService logic = ValidateService.getInstance();
     private static final long serialVersionUID = 1L;
 
