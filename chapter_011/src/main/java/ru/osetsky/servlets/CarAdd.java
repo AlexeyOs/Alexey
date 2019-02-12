@@ -56,7 +56,6 @@ public class CarAdd extends HttpServlet {
         } catch (JSONException e) {
             throw new IOException("Error parsing JSON request string");
         }
-////        resp.setContentType("text/plain");
         // checks if the request actually contains upload file
         if (!ServletFileUpload.isMultipartContent(req)) {
             // if not, we stop here
@@ -110,7 +109,7 @@ public class CarAdd extends HttpServlet {
                         item.write(storeFile);
                         // save to JSON
                         byte[] fileContent = Files.readAllBytes(storeFile.toPath());
-//                        car.setImage(fileContent);
+                        car.setImage(fileContent);
                         req.setAttribute("message",
                                 "Upload has been done successfully!");
                     }
@@ -121,8 +120,9 @@ public class CarAdd extends HttpServlet {
                     "There was an error: " + ex.getMessage());
         }
         // redirects client to message page
-        getServletContext().getRequestDispatcher("/message.jsp").forward(
-                req, resp);
+//        getServletContext().getRequestDispatcher("/message.jsp").forward(
+//                req, resp);
 //        resp.getWriter().write(logic.addStr(car));
+        logic.add(car);
     }
 }

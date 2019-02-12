@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import ru.osetsky.models.Car;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -63,6 +64,8 @@ public class ValidateService implements Store<Car> {
         for (Car car : cars){
             stringBuilder.append("<tr><td>");
             stringBuilder.append(car.getBrand());
+            stringBuilder.append("</td><td>");
+            stringBuilder.append(Arrays.toString(car.getImage()));
             stringBuilder.append("</td><td>");
             stringBuilder.append(car.getModel());
             stringBuilder.append("</td><td>");
