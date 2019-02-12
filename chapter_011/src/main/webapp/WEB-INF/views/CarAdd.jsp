@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>File Upload Demo</title>
+    <title>Add car</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -39,7 +39,6 @@
     </script>
 </head>
 <body>
-    <%--<form method="post" action="carAdd" enctype="multipart/form-data">--%>
         <div class="form-group">
             <label for="brnd">Brand:</label>
             <input type="text" class="form-control" title="Enter description task." id="brnd">
@@ -54,8 +53,7 @@
         </div>
         Select file to upload:
         <input type="file" name="uploadFile" id="file"/>
-        <br/><br/>
-        <input type="submit" value="Upload" onclick="addCarAjax();" />
-    <%--</form>--%>
+        <br/>
+        <input type="submit" value="Done" onclick="addCarAjax();" />
 </body>
 </html>

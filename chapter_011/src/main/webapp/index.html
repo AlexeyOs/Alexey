@@ -20,7 +20,7 @@
                 "done": $('#don').val()
             };
             var taskJson = JSON.stringify(taskObj);
-            var url = "http://localhost:8082/itemAll";
+            var url = "http://localhost:8082/carAll";
 
             $.ajax({
                 type: "POST",
@@ -65,9 +65,9 @@
     <table class="table" id ="table">
         <thead>
         <tr>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Done</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Price</th>
         </tr>
         </thead>
         <tbody>

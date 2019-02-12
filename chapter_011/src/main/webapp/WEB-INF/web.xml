@@ -1,8 +1,8 @@
 <web-app>
 
     <servlet>
-        <servlet-name>ItemList</servlet-name>
-        <servlet-class>ru.osetsky.servlets.ItemList</servlet-class>
+        <servlet-name>CarList</servlet-name>
+        <servlet-class>ru.osetsky.servlets.CarList</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
@@ -21,8 +21,8 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>ItemList</servlet-name>
-        <url-pattern>/itemAll</url-pattern>
+        <servlet-name>CarList</servlet-name>
+        <url-pattern>/carAll</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

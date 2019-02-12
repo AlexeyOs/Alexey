@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ItemList extends HttpServlet {
-    private static final Logger LOG = LoggerFactory.getLogger(ItemList.class);
+public class CarList extends HttpServlet {
+    private static final Logger LOG = LoggerFactory.getLogger(CarList.class);
     private final ValidateService logic = ValidateService.getInstance();
 
     @Override

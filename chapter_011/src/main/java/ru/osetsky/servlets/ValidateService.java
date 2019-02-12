@@ -60,19 +60,16 @@ public class ValidateService implements Store<Car> {
         StringBuilder stringBuilder = new StringBuilder();
         List<Car> cars = new ArrayList<>();
         cars = logic.getAll();
-//        for (Item item : items){
-//            stringBuilder.append("<tr><td>");
-//            stringBuilder.append(item.getDesc());
-//            stringBuilder.append("</td><td>");
-//            stringBuilder.append(item.getCreated());
-//            stringBuilder.append("</td><td>");
-//            if (item.getDone()) {
-//                stringBuilder.append("<input type=\"checkbox\" id=\"" + item.getId() + "\" checked onchange=\"taskReady(id)\">");
-//            } else {
-//                stringBuilder.append("<input type=\"checkbox\" id=\"" + item.getId() + "\" onchange=\"taskReady(id)\">");
-//            }
-//            stringBuilder.append("</td></tr>");
-//        }
+        for (Car car : cars){
+            stringBuilder.append("<tr><td>");
+            stringBuilder.append(car.getBrand());
+            stringBuilder.append("</td><td>");
+            stringBuilder.append(car.getModel());
+            stringBuilder.append("</td><td>");
+            stringBuilder.append(car.getPrice());
+            stringBuilder.append("</td><td>");
+            stringBuilder.append("</td></tr>");
+        }
         return stringBuilder.toString();
     }
 }
