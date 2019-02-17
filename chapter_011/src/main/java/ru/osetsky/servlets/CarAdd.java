@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.file.Files;
+import java.util.Base64;
 import java.util.List;
 
 public class CarAdd extends HttpServlet {
@@ -33,9 +34,7 @@ public class CarAdd extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/views/CarAdd.jsp").forward(
-                req, resp);
-//        req.getRequestDispatcher("/WEB-INF/views/CarAdd.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/CarAdd.jsp").forward(req, resp);
 
     }
 
@@ -110,6 +109,22 @@ public class CarAdd extends HttpServlet {
                         // save to JSON
                         byte[] fileContent = Files.readAllBytes(storeFile.toPath());
                         car.setImage(fileContent);
+                        InputStream inputStream =  new ByteArrayInputStream(car.getImage());
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[4096];
+                        int bytesRead = -1;
+
+                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, bytesRead);
+                        }
+
+                        byte[] imageBytes = outputStream.toByteArray();
+
+                        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+                        inputStream.close();
+                        outputStream.close();
+                        car.setBase64Image(base64Image);
                         req.setAttribute("message",
                                 "Upload has been done successfully!");
                     }
@@ -119,10 +134,6 @@ public class CarAdd extends HttpServlet {
             req.setAttribute("message",
                     "There was an error: " + ex.getMessage());
         }
-        // redirects client to message page
-//        getServletContext().getRequestDispatcher("/message.jsp").forward(
-//                req, resp);
-//        resp.getWriter().write(logic.addStr(car));
         logic.add(car);
     }
 }

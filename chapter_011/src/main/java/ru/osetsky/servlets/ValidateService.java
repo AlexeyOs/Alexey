@@ -75,4 +75,16 @@ public class ValidateService implements Store<Car> {
         }
         return stringBuilder.toString();
     }
+
+    public Car getById(int id) {
+        List<Car> cars = new ArrayList<>();
+        cars = logic.getAll();
+        for (Car car : cars) {
+            if (car.getId().equals(String.valueOf(id))){
+                return car;
+            }
+        }
+        return null;
+    }
+
 }

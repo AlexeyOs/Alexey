@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
 <head>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -28,52 +29,58 @@
                 data: taskJson,
                 async: false,
                 success: [function (data) {
-                    $('#table').find('tr:last').after(data);
+                    // $('#table').find('tr:last').after(data);
                 }],
                 error: [function (request) {
                     alert(request.responseText);
                 }]
             });
         }
-        function taskReady(text) {
-
-            if (false !== document.getElementById(text).checked)
-            {
-                document.getElementById(text).checked = true;
-                alert(true);
-                alert(text);
-            } else {
-                document.getElementById(text).checked = false;
-                alert(false);
-            }
-        }
-        function redirect(){
-            document.location = 'http://localhost:8082/carAdd';
-        }
+    // function taskReady(text) {
+    //
+    //     if (false !== document.getElementById(text).checked)
+    //     {
+    //         document.getElementById(text).checked = true;
+    //         alert(true);
+    //         alert(text);
+    //     } else {
+    //         document.getElementById(text).checked = false;
+    //         alert(false);
+    //     }
+    // }
+    // function redirect(){
+    //     document.location = 'http://localhost:8082/carAdd';
+    // }
     </script>
-    <style>
-        form{
-            margin: 2%;
-        }
-    </style>
+    <%--<style>--%>
+        <%--form{--%>
+            <%--margin: 2%;--%>
+        <%--}--%>
+    <%--</style>--%>
 </head>
 <body>
-<br>
-<button type="button" class="btn btn-default" onclick="redirect();">Add car</button>
-<br>
 <div class="table-responsive">
     <table class="table" id ="table">
         <thead>
         <tr>
+            <%--<th>Id</th>--%>
+            <%--<th>Image</th>--%>
             <th>Brand</th>
-            <th>Image</th>
             <th>Model</th>
             <th>Price</th>
         </tr>
         </thead>
         <tbody>
+        <%--<td><img src="data:image/jpg;base64,${car.base64Image}" width="240" height="300"/></td>--%>
+        <%--<c:forEach var="car" items="${cars}">--%>
         <tr>
+            <%--<td><c:out value="${car.id}"></c:out></td>--%>
+            <%--<td><c:out value="${car.base64}"/></td>--%>
+            <td><c:out value="${car.brand}"/></td>
+            <td><c:out value="${car.model}"/></td>
+            <td><c:out value="${car.price}"/></td>
         </tr>
+        <%--</c:forEach>--%>
         </tbody>
     </table>
 </div>

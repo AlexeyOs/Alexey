@@ -12,6 +12,8 @@ public class Car {
     @Lob
     @Column(name = "image3")
     private byte[] image;
+    @Column(name = "base64")
+    private String base64Image;
     @Column(name = "brand")
     private String brand;
     @Column(name = "model")
@@ -57,5 +59,13 @@ public class Car {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getBase64Image() {
+        return base64Image;
+    }
+
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
     }
 }
