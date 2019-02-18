@@ -14,8 +14,7 @@
             var data;
             data = new FormData();
             data.append('file', $('#file')[0].files[0]);
-
-            var url = "http://localhost:8082/carAdd";
+            var url = "http://localhost:8082/carAdd";;
             $.ajax({
                 type: "POST",
                 url: url,
@@ -29,7 +28,7 @@
                 contentType: false,
                 enctype:"multipart/form-data",
                 success: [function (data) {
-                    $('#table').find('tr:last').after(data);
+                    // $('#table').find('tr:last').after(data);
                 }],
                 error: [function (request) {
                     alert(request.responseText);
