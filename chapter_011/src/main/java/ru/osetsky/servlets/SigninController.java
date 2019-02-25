@@ -1,6 +1,6 @@
 package ru.osetsky.servlets;
 
-//import ru.osetsky.models.User;
+import ru.osetsky.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,14 +25,14 @@ public class SigninController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-//        if (ValidateService.getInstance().isCredentional(login, password)) {
-//            HttpSession session = req.getSession();
-//            session.setAttribute("login", login);
-//            User user = logic.findByLoginAndPass(login, password);
-//            resp.sendRedirect(String.format("%s/edit?" + user.getId(), req.getContextPath()));
-//        } else {
-//            req.setAttribute("error", "Credentional invalid");
-//            doGet(req, resp);
-//        }
+        if (ValidateService.getInstance().isCredentional(login, password)) {
+            HttpSession session = req.getSession();
+            session.setAttribute("login", login);
+            User user = logic.findByLoginAndPass(login, password);
+            resp.sendRedirect(String.format("%s/edit?" + user.getId(), req.getContextPath()));
+        } else {
+            req.setAttribute("error", "Credentional invalid");
+            doGet(req, resp);
+        }
     }
 }

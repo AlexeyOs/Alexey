@@ -17,14 +17,14 @@ public class ListServlet extends HttpServlet {
     private final ValidateService logic = ValidateService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("usersParam",  logic.findAll());
+//        req.setAttribute("usersParam",  logic.findAll());
         req.getRequestDispatcher("/WEB-INF/views/ListView.jsp").forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //удаление пользователя
         resp.setContentType("text/html");
-        this.logic.delete(req.getQueryString());
+//        this.logic.delete(req.getQueryString());
         resp.sendRedirect(String.format("%s/list", req.getContextPath()));
     }
 }

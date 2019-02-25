@@ -1,16 +1,28 @@
 package ru.osetsky.models;
 
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Created by koldy on 19.04.2018.
  */
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private String id;
+    @Column(name = "image3")
     private String name;
+    @Column(name = "login")
     private String login;
     private String email;
+    @Column(name = "password")
     private String password;
     private int role;
+    @Column(name = "create_date")
     private String createDate;
     private String country;
     private String city;

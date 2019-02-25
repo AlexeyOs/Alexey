@@ -3,6 +3,7 @@ package ru.osetsky.servlets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.osetsky.models.Car;
+import ru.osetsky.models.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,6 +85,35 @@ public class ValidateService implements Store<Car> {
                 return car;
             }
         }
+        return null;
+    }
+
+    /**
+     * Проверка наличия пользователя.
+     */
+    public boolean isCredentional(String login, String password) {
+        boolean exists = false;
+//        List<User> users = logic.findAll();
+//        for (User user : users) {
+//            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+//                exists = true;
+//                break;
+//            }
+//        }
+        return exists;
+    }
+
+    /**
+     * Находит пользователя по введенному имени и паролю.
+     * @return boolean параметр.
+     */
+    public User findByLoginAndPass(String login, String password) {
+//        List<User> users = findAll();
+//        for (User user : users) {
+//            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+//                return user;
+//            }
+//        }
         return null;
     }
 

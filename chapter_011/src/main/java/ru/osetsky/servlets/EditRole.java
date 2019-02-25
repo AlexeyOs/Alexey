@@ -21,7 +21,7 @@ public class EditRole extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         id = req.getQueryString();
-        req.setAttribute("role",  logic.findByRole(id));
+//        req.setAttribute("role",  logic.findByRole(id));
         req.getRequestDispatcher("/WEB-INF/views/EditRole.jsp").forward(req, resp);
     }
 
@@ -34,7 +34,7 @@ public class EditRole extends HttpServlet {
         boolean addcontent = Boolean.parseBoolean(req.getParameter("addcontent"));
         boolean updatecontent = Boolean.parseBoolean(req.getParameter("updatecontent"));
         boolean seealluser = Boolean.parseBoolean(req.getParameter("seealluser"));
-        this.logic.updateRole(id, name, description, addcontent, updatecontent, seealluser);
+//        this.logic.updateRole(id, name, description, addcontent, updatecontent, seealluser);
         resp.sendRedirect(String.format("%s/listrole", req.getContextPath()));
     }
 }
