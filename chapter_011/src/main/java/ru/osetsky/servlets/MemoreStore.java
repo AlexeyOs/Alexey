@@ -5,7 +5,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import ru.osetsky.models.Car;
+import ru.osetsky.models.User;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
@@ -62,6 +69,10 @@ public class MemoreStore implements Store<Car> {
     @Override
     public List<Car> getAll() {
         return this.tx(session -> session.createQuery("from Car").list());
+    }
+
+    public List<User> findAll() {
+        return this.tx(session -> session.createQuery("from User").list());
     }
 
 }

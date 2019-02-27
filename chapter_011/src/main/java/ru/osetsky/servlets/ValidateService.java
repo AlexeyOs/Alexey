@@ -6,7 +6,6 @@ import ru.osetsky.models.Car;
 import ru.osetsky.models.User;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,16 +37,6 @@ public class ValidateService implements Store<Car> {
         logic.edit(car);
     }
 
-    public String addStr(Car car) {
-        String greetings = "";
-//        try {
-//            logic.add(item);
-//            greetings ="<tr><td>" + item.getDesc() + "</td><td>" + item.getCreated() + "</td><td>" + item.getDone() + "</td></tr>";
-//        } catch (Exception e) {
-//            LOG.error(String.valueOf(e));
-//        }
-        return greetings;
-    }
 
     /**
      *
@@ -58,24 +47,6 @@ public class ValidateService implements Store<Car> {
         return logic.getAll();
     }
 
-    public String getAllStr() {
-        StringBuilder stringBuilder = new StringBuilder();
-        List<Car> cars = new ArrayList<>();
-        cars = logic.getAll();
-        for (Car car : cars){
-            stringBuilder.append("<tr><td>");
-            stringBuilder.append(car.getBrand());
-            stringBuilder.append("</td><td>");
-            stringBuilder.append(Arrays.toString(car.getImage()));
-            stringBuilder.append("</td><td>");
-            stringBuilder.append(car.getModel());
-            stringBuilder.append("</td><td>");
-            stringBuilder.append(car.getPrice());
-            stringBuilder.append("</td><td>");
-            stringBuilder.append("</td></tr>");
-        }
-        return stringBuilder.toString();
-    }
 
     public Car getById(int id) {
         List<Car> cars = new ArrayList<>();
@@ -93,27 +64,37 @@ public class ValidateService implements Store<Car> {
      */
     public boolean isCredentional(String login, String password) {
         boolean exists = false;
-//        List<User> users = logic.findAll();
-//        for (User user : users) {
-//            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
-//                exists = true;
-//                break;
-//            }
-//        }
+        List<User> users = logic.findAll();
+        for (User user : users) {
+            if (user.getLogin().contains(login) && user.getPassword().contains(password)) {
+                exists = true;
+                break;
+            }
+        }
         return exists;
     }
+
+    /**
+     *
+     * Получение данных из таблицы.
+     */
+//    @Override
+    public List<User>  findAll() {
+        return logic.findAll();
+    }
+
 
     /**
      * Находит пользователя по введенному имени и паролю.
      * @return boolean параметр.
      */
     public User findByLoginAndPass(String login, String password) {
-//        List<User> users = findAll();
-//        for (User user : users) {
-//            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
-//                return user;
-//            }
-//        }
+        List<User> users = findAll();
+        for (User user : users) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
         return null;
     }
 
