@@ -1,46 +1,77 @@
 package ru.osetsky.models;
 
+import javax.persistence.*;
+
 /**
  * Created by koldy on 29.06.2018.
  */
+
+@Entity
+@Table(name = "roles")
 public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private String id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
+    @Column(name = "addcontent")
     private boolean addcontent;
+    @Column(name = "updatecontent")
     private boolean updatecontent;
+    @Column(name = "seealluser")
     private boolean seealluser;
 
-    public Role(String id, String name, String description, boolean addcontent, boolean updatecontent, boolean seealluser) {
+    public void setId(String id) {
         this.id = id;
-        this.name = name;
-        this.description = description;
-        this.addcontent = addcontent;
-        this.updatecontent = updatecontent;
-        this.seealluser = seealluser;
     }
 
     public String getId() {
         return id;
     }
 
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public boolean isAddcontent() {
+    public void setAddcontent(boolean addcontent) {
+        this.addcontent = addcontent;
+    }
+
+    public boolean getAddcontent() {
         return addcontent;
     }
 
-    public boolean isUpdatecontent() {
+    public void setUpdatecontent(boolean updatecontent) {
+        this.updatecontent = updatecontent;
+    }
+
+    public boolean getUpdatecontent() {
         return updatecontent;
     }
 
-    public boolean isSeealluser() {
+    public void setSeealluser(boolean seealluser) {
+        this.seealluser = seealluser;
+    }
+
+    public boolean getSeealluser() {
         return seealluser;
     }
+
+
 }

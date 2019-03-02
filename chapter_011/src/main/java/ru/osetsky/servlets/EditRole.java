@@ -21,7 +21,7 @@ public class EditRole extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         id = req.getQueryString();
-//        req.setAttribute("role",  logic.findByRole(id));
+        req.setAttribute("role",  logic.findRoleBy(id));
         req.getRequestDispatcher("/WEB-INF/views/EditRole.jsp").forward(req, resp);
     }
 
@@ -29,12 +29,13 @@ public class EditRole extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // редактирование пользователя
         resp.setContentType("text/html");
-        String name = req.getParameter("name");
-        String description = req.getParameter("description");
-        boolean addcontent = Boolean.parseBoolean(req.getParameter("addcontent"));
-        boolean updatecontent = Boolean.parseBoolean(req.getParameter("updatecontent"));
-        boolean seealluser = Boolean.parseBoolean(req.getParameter("seealluser"));
-//        this.logic.updateRole(id, name, description, addcontent, updatecontent, seealluser);
+        Role role = new Role();
+        role.setName(req.getParameter("name"));
+        role.setDescription(req.getParameter("description"));
+        role.setAddcontent(Boolean.parseBoolean(req.getParameter("addcontent")));
+        role.setUpdatecontent(Boolean.parseBoolean(req.getParameter("updatecontent")));
+        role.setSeealluser(Boolean.parseBoolean(req.getParameter("seealluser")));
+        this.logic.editRole(role);
         resp.sendRedirect(String.format("%s/listrole", req.getContextPath()));
     }
 }

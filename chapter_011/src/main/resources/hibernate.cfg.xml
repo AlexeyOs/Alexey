@@ -13,7 +13,10 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
         <property name="hibernate.jdbc.use_streams_for_binary">false</property>
+        <!--<property name="hbm2ddl.auto">create</property>-->
+        <!--<property name="javax.persistence.schema-generation.database.action">drop-and-create</property>-->
         <mapping class="ru.osetsky.models.Car"/>
         <mapping class="ru.osetsky.models.User"/>
+        <mapping class="ru.osetsky.models.Role"/>
     </session-factory>
 </hibernate-configuration>

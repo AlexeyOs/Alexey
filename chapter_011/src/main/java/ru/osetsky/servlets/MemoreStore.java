@@ -5,21 +5,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import ru.osetsky.models.Car;
+import ru.osetsky.models.Role;
 import ru.osetsky.models.User;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
 /**
  * Created by koldy on 17.01.2019.
  */
-public class MemoreStore implements Store<Car> {
+public class MemoreStore implements CarStore<Car>, UserStore<User>, RoleStore<Role> {
     private static final MemoreStore INSTANCE = new MemoreStore();
     public static MemoreStore getInstance() {
         return INSTANCE;
@@ -46,12 +40,12 @@ public class MemoreStore implements Store<Car> {
      * Добавление записей в таблицу.
      */
     @Override
-    public void add(Car car) {
+    public void addCar(Car car) {
         this.tx(session -> session.save(car));
     }
 
     @Override
-    public void edit(Car car) {
+    public void editCar(Car car) {
         Session session = factory.openSession();
         session.beginTransaction();
         session.update(car);
@@ -59,7 +53,7 @@ public class MemoreStore implements Store<Car> {
     }
 
     @Override
-    public void delete(Car car) {
+    public void deleteCar(Car car) {
         Session session = factory.openSession();
         session.beginTransaction();
         session.delete(car);
@@ -67,12 +61,84 @@ public class MemoreStore implements Store<Car> {
     }
 
     @Override
-    public List<Car> getAll() {
+    public List<Car> getAllCars() {
         return this.tx(session -> session.createQuery("from Car").list());
     }
 
-    public List<User> findAll() {
+
+    /**
+     * Добавление записей в таблицу.
+     */
+    @Override
+    public void addUser(User user) {
+        this.tx(session -> session.save(user));
+    }
+
+    @Override
+    public void editUser(User user) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        session.update(user);
+        session.close();
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        session.delete(user);
+        session.close();
+    }
+
+    @Override
+    public List<User> getAllUsers() {
         return this.tx(session -> session.createQuery("from User").list());
     }
 
+    @Override
+    public void addRole(Role role) {
+        this.tx(session -> session.save(role));
+    }
+
+    @Override
+    public void editRole(Role role) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        session.update(role);
+        session.close();
+    }
+
+    @Override
+    public void deleteRole(Role role) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        session.delete(role);
+        session.close();
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return this.tx(session -> session.createQuery("from Role").list());
+    }
+
+
+    /**
+     * Проверяет наличие администраторской роли у пользователи, чтобы предоставить доступ к редаутированию всех пользователей.
+     * @return boolean параметр.
+     */
+    public boolean checkAdminRoles() {
+//        try (Connection connection = dataSource.getConnection();
+//             PreparedStatement statement = connection.prepareStatement("select u.name, u.login, u.email, u.password from USERS u, ROLES r where r.name = 'admin'")) {
+//            ResultSet resultSet = statement.executeQuery();
+//            if (resultSet.next()) {
+//                if (resultSet.getString("name") != null) {
+//                    return true;
+//                }
+//            }
+//            statement.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+        return false;
+    }
 }

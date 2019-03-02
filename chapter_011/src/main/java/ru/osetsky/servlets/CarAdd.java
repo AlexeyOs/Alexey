@@ -134,6 +134,6 @@ public class CarAdd extends HttpServlet {
             req.setAttribute("message",
                     "There was an error: " + ex.getMessage());
         }
-        logic.add(car);
+        logic.addCar(car);
     }
 }

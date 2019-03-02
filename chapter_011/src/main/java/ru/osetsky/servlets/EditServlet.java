@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 
 /**
  * Created by koldy on 26.05.2018.
@@ -21,10 +22,10 @@ public class EditServlet  extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         id = req.getQueryString();
-//        req.setAttribute("user",  logic.findBy(id));
-//        if (logic.checkAdminRoles()) {
-//            req.setAttribute("admin", logic.findBy(id));
-//        }
+        req.setAttribute("user",  logic.findUserBy(id));
+        if (logic.checkAdminRoles()) {
+            req.setAttribute("admin", logic.findUserBy(id));
+        }
         req.getRequestDispatcher("/WEB-INF/views/EditView.jsp").forward(req, resp);
     }
 
@@ -32,14 +33,15 @@ public class EditServlet  extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // редактирование пользователя
         resp.setContentType("text/html");
-        String name = req.getParameter("name");
-        String login = req.getParameter("login");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        String createDate = req.getParameter("createDate");
-        String country = req.getParameter("country");
-        String city = req.getParameter("city");
-//        this.logic.update(id, name, login, email, password, createDate, country, city);
+        User user = new User();
+        user.setName(req.getParameter("name"));
+        user.setLogin(req.getParameter("login"));
+        user.setEmail(req.getParameter("email"));
+        user.setPassword(req.getParameter("password"));
+        user.setCreateDate(Timestamp.valueOf(req.getParameter("createDate")));
+        user.setCountry(req.getParameter("country"));
+        user.setCity(req.getParameter("city"));
+        this.logic.editUser(user);
         resp.sendRedirect(String.format("%s/listrole", req.getContextPath()));
     }
 }

@@ -18,17 +18,8 @@ public class CarList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-//        Car book = logic.getById(11);
-
-        request.setAttribute("cars", logic.getAll());
+        request.setAttribute("cars", logic.getAllCars());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/views/CarList.jsp");
         requestDispatcher.forward(request, response);
     }
-
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-////        List<Car> cars = logic.getAll();
-//        getServletContext().setAttribute("car", logic.getById(11));
-//        req.getRequestDispatcher("/CarList.jsp").forward(req, resp);
-//    }
 }

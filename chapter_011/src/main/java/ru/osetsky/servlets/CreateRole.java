@@ -2,6 +2,7 @@ package ru.osetsky.servlets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.osetsky.models.Role;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,14 +23,14 @@ public class CreateRole extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //создание пользователя
         resp.setContentType("text/html");
-        String name = req.getParameter("name");
-        String description = req.getParameter("description");
-        boolean addcontent = Boolean.parseBoolean(req.getParameter("addcontent"));
-        boolean updatecontent = Boolean.parseBoolean(req.getParameter("updatecontent"));
-        boolean seealluser = Boolean.parseBoolean(req.getParameter("seealluser"));
-//        this.logic.addRole(name, description, addcontent, updatecontent, seealluser);
+        Role role = new Role();
+        role.setName(req.getParameter("name"));
+        role.setDescription(req.getParameter("description"));
+        role.setAddcontent(Boolean.parseBoolean(req.getParameter("addcontent")));
+        role.setUpdatecontent(Boolean.parseBoolean(req.getParameter("updatecontent")));
+        role.setSeealluser(Boolean.parseBoolean(req.getParameter("seealluser")));
+        this.logic.addRole(role);
         resp.sendRedirect(String.format("%s/listrole", req.getContextPath()));
     }
 }

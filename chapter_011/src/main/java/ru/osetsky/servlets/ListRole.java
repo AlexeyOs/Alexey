@@ -2,6 +2,7 @@ package ru.osetsky.servlets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.osetsky.models.Role;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +18,7 @@ public class ListRole extends HttpServlet {
     private final ValidateService logic = ValidateService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        req.setAttribute("roles",  logic.findAllRoles());
+        req.setAttribute("roles",  logic.getAllRoles());
         req.getRequestDispatcher("/WEB-INF/views/ListRole.jsp").forward(req, resp);
     }
 
@@ -25,7 +26,9 @@ public class ListRole extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //удаление пользователя
         resp.setContentType("text/html");
-//        this.logic.deleteRole(req.getQueryString());
+        Role role = new Role();
+        role.setId(req.getQueryString());
+        this.logic.deleteRole(role);
         resp.sendRedirect(String.format("%s/listrole", req.getContextPath()));
     }
 }

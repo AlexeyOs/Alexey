@@ -2,6 +2,7 @@ package ru.osetsky.servlets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.osetsky.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,14 +18,16 @@ public class ListServlet extends HttpServlet {
     private final ValidateService logic = ValidateService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        req.setAttribute("usersParam",  logic.findAll());
+        req.setAttribute("usersParam",  logic.getAllUsers());
         req.getRequestDispatcher("/WEB-INF/views/ListView.jsp").forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //удаление пользователя
         resp.setContentType("text/html");
-//        this.logic.delete(req.getQueryString());
+        User user = new User();
+        user.setId(req.getQueryString());
+        this.logic.deleteUser(user);
         resp.sendRedirect(String.format("%s/list", req.getContextPath()));
     }
 }
