@@ -29,7 +29,8 @@ public class SigninController extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("login", login);
             User user = logic.findByLoginAndPass(login, password);
-            resp.sendRedirect(String.format("%s/edit?" + user.getId(), req.getContextPath()));
+            resp.sendRedirect(String.format("%s/carAll",req.getContextPath()));
+//            resp.sendRedirect(String.format("%s/edit?" + user.getId(), req.getContextPath()));
         } else {
             req.setAttribute("error", "Credentional invalid");
             doGet(req, resp);

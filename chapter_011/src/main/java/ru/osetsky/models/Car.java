@@ -12,7 +12,7 @@ public class Car {
     @Lob
     @Column(name = "image3")
     private byte[] image;
-    @Column(name = "base64")
+    @Column(name = "base64", length = 10485760)
     private String base64Image;
     @Column(name = "brand")
     private String brand;

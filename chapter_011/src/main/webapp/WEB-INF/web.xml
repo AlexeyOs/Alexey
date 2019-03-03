@@ -49,22 +49,13 @@
         <load-on-startup>5</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>Users Controller Servlet</servlet-name>
-        <servlet-class>ru.osetsky.servlets.UsersController</servlet-class>
-        <init-param>
-            <param-name>debug</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <load-on-startup>6</load-on-startup>
-    </servlet>
-    <servlet>
         <servlet-name>Signin</servlet-name>
         <servlet-class>ru.osetsky.servlets.SigninController</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
         </init-param>
-        <load-on-startup>7</load-on-startup>
+        <load-on-startup>6</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>List Role</servlet-name>
@@ -73,7 +64,7 @@
             <param-name>debug</param-name>
             <param-value>true</param-value>
         </init-param>
-        <load-on-startup>8</load-on-startup>
+        <load-on-startup>7</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>Create Role</servlet-name>
@@ -82,7 +73,7 @@
             <param-name>debug</param-name>
             <param-value>true</param-value>
         </init-param>
-        <load-on-startup>9</load-on-startup>
+        <load-on-startup>8</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>Edit Role</servlet-name>
@@ -91,7 +82,7 @@
             <param-name>debug</param-name>
             <param-value>true</param-value>
         </init-param>
-        <load-on-startup>10</load-on-startup>
+        <load-on-startup>9</load-on-startup>
     </servlet>
 
     <filter>
