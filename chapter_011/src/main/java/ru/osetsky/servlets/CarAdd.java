@@ -52,6 +52,7 @@ public class CarAdd extends HttpServlet {
             car.setBrand(req.getHeader("brand"));
             car.setModel(req.getHeader("model"));
             car.setPrice(req.getHeader("price"));
+            car.setStatus(true);
         } catch (JSONException e) {
             throw new IOException("Error parsing JSON request string");
         }

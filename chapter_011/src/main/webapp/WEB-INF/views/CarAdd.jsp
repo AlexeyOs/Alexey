@@ -35,9 +35,14 @@
                 }]
             });
         }
+        function redirect(){
+            document.location = 'http://localhost:8082/carAll';
+        }
     </script>
 </head>
 <body>
+        <br>
+        <button type="button" class="btn btn-default" onclick="redirect();">All cars</button>
         <div class="form-group">
             <label for="brnd">Brand:</label>
             <input type="text" class="form-control" title="Enter description task." id="brnd">

@@ -54,6 +54,7 @@
             <th>Brand</th>
             <th>Model</th>
             <th>Price</th>
+            <th>Status</th>
         </tr>
         </thead>
         <tbody>
@@ -63,6 +64,7 @@
             <td><c:out value="${car.brand}"/></td>
             <td><c:out value="${car.model}"/></td>
             <td><c:out value="${car.price}"/></td>
+            <td><input type="checkbox" checked='<c:out value="${car.status}"/>' onchange="" title="Sale status"/></td>
         </tr>
         </c:forEach>
         </tbody>

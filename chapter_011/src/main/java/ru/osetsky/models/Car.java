@@ -20,6 +20,8 @@ public class Car {
     private String model;
     @Column(name = "price")
     private String price;
+    @Column(name = "status")
+    private boolean status;
 
     public String getId() {
         return id;
@@ -67,5 +69,13 @@ public class Car {
 
     public void setBase64Image(String base64Image) {
         this.base64Image = base64Image;
+    }
+
+    public boolean getStatus() {
+       return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
