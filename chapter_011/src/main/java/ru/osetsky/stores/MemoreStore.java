@@ -1,4 +1,4 @@
-package ru.osetsky.servlets;
+package ru.osetsky.stores;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,6 +7,7 @@ import org.hibernate.cfg.Configuration;
 import ru.osetsky.models.Car;
 import ru.osetsky.models.Role;
 import ru.osetsky.models.User;
+
 import java.util.List;
 import java.util.function.Function;
 

@@ -45,26 +45,31 @@ public class CarAdd extends HttpServlet {
      * chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
      */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException, ServletException {
         Car car = new Car();
-        try {
-            car.setBrand(req.getHeader("brand"));
-            car.setModel(req.getHeader("model"));
-            car.setPrice(req.getHeader("price"));
-            car.setStatus(true);
-        } catch (JSONException e) {
-            throw new IOException("Error parsing JSON request string");
-        }
-        // checks if the request actually contains upload file
-        if (!ServletFileUpload.isMultipartContent(req)) {
-            // if not, we stop here
-            PrintWriter writer = resp.getWriter();
-            writer.println("Error: Form must has enctype=multipart/form-data.");
-            writer.flush();
+
+        if (checkRequestActuallyContainsUploadFile(req, resp)) {
             return;
         }
 
+        ServletFileUpload upload = configuresUploadSettings();
+        // constructs the directory path to store upload file
+        // this path is relative to application's directory
+        String uploadPath = getServletContext().getRealPath("")
+                + File.separator + UPLOAD_DIRECTORY;
+
+        // creates the directory if it does not exist
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+        car = parseImageFromRequest(upload, uploadPath, req, car);
+
+        logic.addCar(car);
+    }
+
+    private ServletFileUpload configuresUploadSettings() {
         // configures upload settings
         DiskFileItemFactory factory = new DiskFileItemFactory();
         // sets memory threshold - beyond which files are stored in disk
@@ -79,18 +84,32 @@ public class CarAdd extends HttpServlet {
 
         // sets maximum size of request (include file + form data)
         upload.setSizeMax(MAX_REQUEST_SIZE);
+        return upload;
+    }
 
-        // constructs the directory path to store upload file
-        // this path is relative to application's directory
-        String uploadPath = getServletContext().getRealPath("")
-                + File.separator + UPLOAD_DIRECTORY;
-
-        // creates the directory if it does not exist
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdir();
+    private boolean checkRequestActuallyContainsUploadFile(HttpServletRequest req,
+                                                           HttpServletResponse resp) {
+        //checks if the request actually contains upload file
+        if (!ServletFileUpload.isMultipartContent(req)) {
+            // if not, we stop here
+            PrintWriter writer = null;
+            try {
+                writer = resp.getWriter();
+                writer.println("Error: Form must has enctype=multipart/form-data.");
+                writer.flush();
+            } catch (Exception e) {
+                LOG.error("Checks if the request actually contains upload file" + e);
+            }
+            return true;
+        } else {
+            return false;
         }
+    }
 
+    private Car parseImageFromRequest(ServletFileUpload upload,
+                                      String uploadPath,
+                                      HttpServletRequest req,
+                                      Car car) {
         try {
             // parses the request's content to extract file data
             @SuppressWarnings("unchecked")
@@ -104,7 +123,6 @@ public class CarAdd extends HttpServlet {
                         String fileName = new File(item.getName()).getName();
                         String filePath = uploadPath + File.separator + fileName;
                         File storeFile = new File(filePath);
-
                         // saves the file on disk
                         item.write(storeFile);
                         // save to JSON
@@ -135,6 +153,6 @@ public class CarAdd extends HttpServlet {
             req.setAttribute("message",
                     "There was an error: " + ex.getMessage());
         }
-        logic.addCar(car);
+        return car;
     }
 }

@@ -1,4 +1,4 @@
-package ru.osetsky.servlets;
+package ru.osetsky.stores;
 
 import ru.osetsky.models.User;
 
