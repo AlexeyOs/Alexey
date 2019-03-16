@@ -20,7 +20,7 @@
                 "done": $('#don').val()
             };
             var taskJson = JSON.stringify(taskObj);
-            var url = "http://localhost:8082/itemAll";
+            var url = "/itemAll";
 
             $.ajax({
                 type: "POST",
@@ -48,7 +48,7 @@
             }
         }
         function redirect(){
-            document.location = 'http://localhost:8082/itemAdd';
+            document.location = '/itemAdd';
         }
     </script>
     <style>
