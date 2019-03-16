@@ -85,10 +85,6 @@
         <load-on-startup>9</load-on-startup>
     </servlet>
 
-    <filter>
-        <filter-name>AuthFilter</filter-name>
-        <filter-class>ru.osetsky.servlets.AuthFilter</filter-class>
-    </filter>
 
     <servlet-mapping>
         <servlet-name>CarList</servlet-name>
@@ -129,9 +125,5 @@
         <url-pattern>/editrole</url-pattern>
     </servlet-mapping>
 
-    <filter-mapping>
-        <filter-name>AuthFilter</filter-name>
-        <url-pattern>*</url-pattern>
-    </filter-mapping>
 
 </web-app>
