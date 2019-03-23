@@ -23,6 +23,7 @@ public class CreateServlet extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/views/CreateView.jsp").forward(req, resp);
     }
 
+    @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //создание пользователя
         resp.setContentType("text/html");

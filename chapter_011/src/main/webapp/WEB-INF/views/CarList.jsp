@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <title>Bootstrap Example</title>
@@ -16,18 +17,11 @@
             }
         };
         function selectAllAjax() {
-            var taskObj = {
-                "description": $('#dsc').val(),
-                "created": $('#crd').val(),
-                "done": $('#don').val()
-            };
-            var taskJson = JSON.stringify(taskObj);
-            var url = "http://localhost:8082/carAll";
+            var url = "/carAll";
 
             $.ajax({
                 type: "GET",
                 url: url,
-                data: taskJson,
                 async: false,
                 success: [function (data) {
 
@@ -38,23 +32,50 @@
             });
         }
     function redirect(){
-        document.location = 'http://localhost:8082/carAdd';
+        document.location = '/carAdd';
+    }
+    function selectByBrandAjax() {
+        var url = "/lastday";
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            async: false,
+            headers: {
+                'brand': "Avtovaz"
+                    //$('#brnd').val()
+            },
+            success: [function (data) {
+
+            }],
+            error: [function (request) {
+                // alert(request.responseText);
+            }]
+        });
     }
     </script>
 </head>
 <body>
 <br>
-<button type="button" class="btn btn-default" onclick="redirect();">Add car</button>
+<div class="btn">
+    <button type="button" onclick="redirect();">Add car</button>
+</div>
 <br>
 <div class="table-responsive">
     <table class="table" id ="table">
         <thead>
         <tr>
             <th>Image</th>
-            <th>Brand</th>
+            <th>    Brand : <select name="brand" onchange="selectByBrandAjax();" id="brnd">
+                <option><c:out value="Avtovaz">Avtovaz</c:out></option>
+                <option><c:out value="BMW">BMW</c:out></option>
+            </select></th>
             <th>Model</th>
             <th>Price</th>
-            <th>Status</th>
+            <th> Status : <select name="brand" >
+                <option><c:out value="true">true</c:out></option>
+                <option><c:out value="false">false</c:out></option>
+            </select></th>
         </tr>
         </thead>
         <tbody>

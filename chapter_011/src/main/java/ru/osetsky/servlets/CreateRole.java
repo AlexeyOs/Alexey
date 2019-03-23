@@ -22,6 +22,7 @@ public class CreateRole extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/views/CreateRole.jsp").forward(req, resp);
     }
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         Role role = new Role();

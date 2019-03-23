@@ -1,5 +1,6 @@
 package ru.osetsky.stores;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -8,7 +9,9 @@ import ru.osetsky.models.Car;
 import ru.osetsky.models.Role;
 import ru.osetsky.models.User;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -142,4 +145,15 @@ public class MemoreStore implements CarStore<Car>, UserStore<User>, RoleStore<Ro
 //        }
         return false;
     }
+
+    public List<Car> findCarsByMark(String brand) {
+        List<Car> result = new ArrayList<>();
+        try (Session session = factory.openSession()) {
+            Query query = session.createQuery("from Car as c where c.brand = :brand");
+            query.setParameter("brand", brand);
+            result = query.list();
+        }
+        return result;
+    }
+
 }

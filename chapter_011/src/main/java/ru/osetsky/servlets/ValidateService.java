@@ -12,6 +12,7 @@ import ru.osetsky.stores.UserStore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Слой Logic, который между Servlet и DB, Memory.
@@ -164,5 +165,9 @@ public class ValidateService implements CarStore<Car>, UserStore<User>, RoleStor
      */
     public boolean checkAdminRoles() {
         return logic.checkAdminRoles();
+    }
+
+    public List<Car> findCarsByMark(String brand) {
+        return logic.findCarsByMark(brand);
     }
 }

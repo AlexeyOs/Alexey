@@ -85,6 +85,16 @@
         <load-on-startup>9</load-on-startup>
     </servlet>
 
+    <servlet>
+        <servlet-name>CarsOfLastDay</servlet-name>
+        <servlet-class>ru.osetsky.servlets.CarsOfLastDay</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>10</load-on-startup>
+    </servlet>
+
 
     <servlet-mapping>
         <servlet-name>CarList</servlet-name>
@@ -123,6 +133,10 @@
     <servlet-mapping>
         <servlet-name>Edit Role</servlet-name>
         <url-pattern>/editrole</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CarsOfLastDay</servlet-name>
+        <url-pattern>/lastday</url-pattern>
     </servlet-mapping>
 
 

@@ -14,7 +14,7 @@
             var data;
             data = new FormData();
             data.append('file', $('#file')[0].files[0]);
-            var url = "http://localhost:8082/carAdd";;
+            var url = "/carAdd";;
             $.ajax({
                 type: "POST",
                 url: url,
@@ -36,7 +36,7 @@
             });
         }
         function redirect(){
-            document.location = 'http://localhost:8082/carAll';
+            document.location = '/carAll';
         }
     </script>
 </head>
