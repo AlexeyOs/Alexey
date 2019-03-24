@@ -170,4 +170,12 @@ public class ValidateService implements CarStore<Car>, UserStore<User>, RoleStor
     public List<Car> findCarsByMark(String brand) {
         return logic.findCarsByMark(brand);
     }
+
+    public List<Car> checkImage(String image) {
+        if (image.equals("With photo")) {
+            return logic.getImageNotNull();
+        } else {
+            return logic.getImageNull();
+        }
+    }
 }

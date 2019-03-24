@@ -40,6 +40,19 @@
             }
         });
     }
+    function selectByImgAjax() {
+        document.location = '/checkImage';
+
+        var url = "/checkImage";
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            headers: {
+                'image': $('#img').val()
+            }
+        });
+    }
     </script>
 </head>
 <body>
@@ -52,7 +65,11 @@
     <table class="table" id ="table">
         <thead>
         <tr>
-            <th>Image</th>
+            <th>Image : <select name="img" onchange="selectByImgAjax();" id="img">
+                <option><c:out value="Select">All</c:out></option>
+                <option><c:out value="With photo">WithPhoto</c:out></option>
+                <option><c:out value="Without photo">WithoutPhoto</c:out></option>
+            </th>
             <th>    Brand : <select name="brand" onchange="selectByBrandAjax();" id="brnd">
                 <option><c:out value="Select">All</c:out></option>
                 <option><c:out value="Avtovaz">Avtovaz</c:out></option>

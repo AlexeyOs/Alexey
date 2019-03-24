@@ -156,4 +156,23 @@ public class MemoreStore implements CarStore<Car>, UserStore<User>, RoleStore<Ro
         return result;
     }
 
+
+    public List<Car> getImageNotNull() {
+        List<Car> result = new ArrayList<>();
+        try (Session session = factory.openSession()) {
+            Query query = session.createQuery("from Car as c where c.base64Image is not null");
+            result = query.list();
+        }
+        return result;
+    }
+
+    public List<Car> getImageNull() {
+        List<Car> result = new ArrayList<>();
+        try (Session session = factory.openSession()) {
+            Query query = session.createQuery("from Car as c where c.base64Image is null");
+            result = query.list();
+        }
+        return result;
+    }
+
 }
