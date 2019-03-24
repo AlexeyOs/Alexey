@@ -21,36 +21,23 @@
 
             $.ajax({
                 type: "GET",
-                url: url,
-                async: false,
-                success: [function (data) {
-
-                }],
-                error: [function (request) {
-                    // alert(request.responseText);
-                }]
+                url: url
             });
         }
     function redirect(){
         document.location = '/carAdd';
     }
     function selectByBrandAjax() {
+        document.location = '/lastday';
+
         var url = "/lastday";
 
         $.ajax({
             type: "GET",
             url: url,
-            async: false,
             headers: {
-                'brand': "Avtovaz"
-                    //$('#brnd').val()
-            },
-            success: [function (data) {
-
-            }],
-            error: [function (request) {
-                // alert(request.responseText);
-            }]
+                'brand': $('#brnd').val()
+            }
         });
     }
     </script>
@@ -67,6 +54,7 @@
         <tr>
             <th>Image</th>
             <th>    Brand : <select name="brand" onchange="selectByBrandAjax();" id="brnd">
+                <option><c:out value="Select">All</c:out></option>
                 <option><c:out value="Avtovaz">Avtovaz</c:out></option>
                 <option><c:out value="BMW">BMW</c:out></option>
             </select></th>
