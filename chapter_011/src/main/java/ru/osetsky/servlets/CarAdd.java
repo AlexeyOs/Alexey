@@ -39,15 +39,11 @@ public class CarAdd extends HttpServlet {
     }
 
     /**
-     * Метод обрабатывает JSON запрос от AJAX.
-     * Метод корректно принимает запрос если запустить chrome с указанными ниже параметрами,
-     * иначе из-за настроек безопасности метод может не выполнится
-     * chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
-        Car car = new Car();
+        Car car = convertCarFromJson(req);
 
         if (checkRequestActuallyContainsUploadFile(req, resp)) {
             return;
@@ -85,6 +81,14 @@ public class CarAdd extends HttpServlet {
         // sets maximum size of request (include file + form data)
         upload.setSizeMax(MAX_REQUEST_SIZE);
         return upload;
+    }
+
+    private Car convertCarFromJson(HttpServletRequest req) throws IOException {
+        Car car = new Car();
+        car.setBrand(req.getHeader("brand"));
+        car.setModel(req.getHeader("model"));
+        car.setPrice(req.getHeader("price"));
+        return car;
     }
 
     private boolean checkRequestActuallyContainsUploadFile(HttpServletRequest req,
