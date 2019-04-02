@@ -1,0 +1,173 @@
+<web-app>
+
+    <!-- Creates the Spring Container shared by all Servlets and Filters-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Process application requests -->
+    <servlet>
+        <servlet-name>appServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring-context.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CarList</servlet-name>
+        <servlet-class>ru.osetsky.servlets.CarList</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CarAdd</servlet-name>
+        <servlet-class>ru.osetsky.servlets.CarAdd</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ListServlet</servlet-name>
+        <servlet-class>ru.osetsky.servlets.ListServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>EditServlet</servlet-name>
+        <servlet-class>ru.osetsky.servlets.EditServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>4</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateServlet</servlet-name>
+        <servlet-class>ru.osetsky.servlets.CreateServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>5</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Signin</servlet-name>
+        <servlet-class>ru.osetsky.servlets.SigninController</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>6</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>List Role</servlet-name>
+        <servlet-class>ru.osetsky.servlets.ListRole</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>7</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Create Role</servlet-name>
+        <servlet-class>ru.osetsky.servlets.CreateRole</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>8</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Edit Role</servlet-name>
+        <servlet-class>ru.osetsky.servlets.EditRole</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>9</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CarsOfLastDay</servlet-name>
+        <servlet-class>ru.osetsky.servlets.CarsOfLastDay</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>10</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CarsOfImage</servlet-name>
+        <servlet-class>ru.osetsky.servlets.CarsOfImage</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>11</load-on-startup>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>CarList</servlet-name>
+        <url-pattern>/carAll</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CarAdd</servlet-name>
+        <url-pattern>/carAdd</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ListServlet</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditServlet</servlet-name>
+        <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Signin</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>List Role</servlet-name>
+        <url-pattern>/listrole</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Create Role</servlet-name>
+        <url-pattern>/createrole</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Edit Role</servlet-name>
+        <url-pattern>/editrole</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CarsOfLastDay</servlet-name>
+        <url-pattern>/lastday</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CarsOfImage</servlet-name>
+        <url-pattern>/checkImage</url-pattern>
+    </servlet-mapping>
+
+
+</web-app>
