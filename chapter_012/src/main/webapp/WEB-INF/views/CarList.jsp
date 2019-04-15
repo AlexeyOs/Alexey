@@ -66,9 +66,10 @@
         <thead>
         <tr>
             <th>Image : <select name="img" onchange="selectByImgAjax();" id="img">
-                <option><c:out value="Select">All</c:out></option>
-                <option><c:out value="With photo">WithPhoto</c:out></option>
-                <option><c:out value="Without photo">WithoutPhoto</c:out></option>
+                    <option><c:out value="Select">All</c:out></option>
+                    <option><c:out value="With photo">WithPhoto</c:out></option>
+                    <option><c:out value="Without photo">WithoutPhoto</c:out></option>
+                </select>
             </th>
             <th>    Brand : <select name="brand" onchange="selectByBrandAjax();" id="brnd">
                 <option><c:out value="Select">All</c:out></option>
