@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/editrole" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/signin" access="permitAll()"/>
+        <!--<security:form-login login-page="/login"-->
+                    <!--default-target-url="/forum/0"-->
+                    <!--always-use-default-target="true"-->
+                    <!--authentication-failure-url="/login?error"-->
+                    <!--username-parameter="username"-->
+                    <!--password-parameter="password"/>-->
+        <security:form-login login-page="/signin"
+                             default-target-url="/carAll"
+                             authentication-failure-url="/signin?error=error"/>
+        <security:logout logout-success-url="/signin"/>
+        <security:csrf disabled="true"/>
+    </security:http>
+
+
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:user-service>
+                    <security:user name="user" password="123" authorities="ROLE_USER" />
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+
+
+</beans>

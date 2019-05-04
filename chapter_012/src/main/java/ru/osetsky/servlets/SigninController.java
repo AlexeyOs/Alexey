@@ -1,12 +1,11 @@
 package ru.osetsky.servlets;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.osetsky.models.User;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,7 +15,7 @@ import java.io.IOException;
 /**
  * Created by koldy on 01.06.2018.
  */
-@Component
+@Controller
 public class SigninController {
     private final ValidateService logic = ValidateService.getInstance();
 

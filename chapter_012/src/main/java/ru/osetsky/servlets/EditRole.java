@@ -3,6 +3,7 @@ package ru.osetsky.servlets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.osetsky.models.Role;
@@ -16,7 +17,7 @@ import java.io.IOException;
 /**
  * Created by koldy on 29.06.2018.
  */
-@Component
+@Controller
 public class EditRole {
     private static final Logger LOG = LoggerFactory.getLogger(EditServlet.class);
     private final ValidateService logic = ValidateService.getInstance();
