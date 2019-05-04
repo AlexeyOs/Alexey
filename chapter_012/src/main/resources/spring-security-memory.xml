@@ -11,12 +11,6 @@
     <security:http auto-config="true">
         <security:intercept-url pattern="/editrole" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/signin" access="permitAll()"/>
-        <!--<security:form-login login-page="/login"-->
-                    <!--default-target-url="/forum/0"-->
-                    <!--always-use-default-target="true"-->
-                    <!--authentication-failure-url="/login?error"-->
-                    <!--username-parameter="username"-->
-                    <!--password-parameter="password"/>-->
         <security:form-login login-page="/signin"
                              default-target-url="/carAll"
                              authentication-failure-url="/signin?error=error"/>
