@@ -21,13 +21,13 @@ public class ListRole {
     private static final Logger LOG = LoggerFactory.getLogger(EditServlet.class);
     private final ValidateService logic = ValidateService.getInstance();
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/listrole", method = RequestMethod.GET)
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("roles",  logic.getAllRoles());
         req.getRequestDispatcher("/WEB-INF/views/ListRole.jsp").forward(req, resp);
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    @RequestMapping(value = "/listrole", method = RequestMethod.POST)
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //удаление пользователя
         resp.setContentType("text/html");
