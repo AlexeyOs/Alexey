@@ -5,11 +5,13 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.osetsky.models.Car;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,10 +41,13 @@ public class CarAdd extends HttpServlet {
 
     }
 
+    @Autowired
+    ServletContext context;
     /**
      */
     @RequestMapping(value = "/carAdd", method = RequestMethod.POST)
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(
+            HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         Car car = convertCarFromJson(req);
 
@@ -53,7 +58,7 @@ public class CarAdd extends HttpServlet {
         ServletFileUpload upload = configuresUploadSettings();
         // constructs the directory path to store upload file
         // this path is relative to application's directory
-        String uploadPath = getServletContext().getRealPath("")
+        String uploadPath = context.getRealPath("")
                 + File.separator + UPLOAD_DIRECTORY;
 
         // creates the directory if it does not exist

@@ -28,7 +28,7 @@
                 contentType: false,
                 enctype:"multipart/form-data",
                 success: [function (data) {
-                    // $('#table').find('tr:last').after(data);
+                    alert("Successfully added car")
                 }],
                 error: [function (request) {
                     alert(request.responseText);
