@@ -4,7 +4,7 @@ public class ThreadState {
     /**
      * Нить main должна дождаться завершения двух созданных нитей и вывести на консоль сообщение, что работа завершена.
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Thread first = new Thread(
                 () -> System.out.println(Thread.currentThread().getName())
         );
@@ -15,14 +15,14 @@ public class ThreadState {
         );
         second.start();
         boolean finish = false;
-        while (first.getState() != Thread.State.TERMINATED || second.getState() != Thread.State.TERMINATED) {
-           if (first.getState() == Thread.State.TERMINATED && second.getState() == Thread.State.TERMINATED){
+
+        while (!finish) {
+           if (first.getState() == Thread.State.TERMINATED
+                   && second.getState() == Thread.State.TERMINATED
+                   && !finish){
                System.out.println("Work completed");
                finish = true;
            }
-        }
-        if (!finish) {
-            System.out.println("Work completed");
         }
     }
 }
