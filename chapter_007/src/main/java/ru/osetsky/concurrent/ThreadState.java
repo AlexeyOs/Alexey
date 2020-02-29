@@ -14,14 +14,12 @@ public class ThreadState {
                 () -> System.out.println(Thread.currentThread().getName())
         );
         second.start();
-        boolean finish = false;
 
-        while (!finish) {
+        while (true) {
            if (first.getState() == Thread.State.TERMINATED
-                   && second.getState() == Thread.State.TERMINATED
-                   && !finish){
+                   && second.getState() == Thread.State.TERMINATED){
                System.out.println("Work completed");
-               finish = true;
+               break;
            }
         }
     }
