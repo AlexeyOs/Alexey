@@ -1,23 +1,29 @@
 package ru.osetsky.lambda;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class SearchAtt {
 
-    public static Predicate<Attachment> filterSize() {
-        return p -> p.getSize() > 100;
+    public static List<Attachment> filterSize(List<Attachment> list) {
+        Predicate predicate = attach -> ((Attachment) attach).getSize() > 100;
+        return filter(list, predicate);
     }
 
-    public static Predicate<Attachment> filterName() {
-        return p -> p.getName().contains("bug");
+    public static List<Attachment> filterName(List<Attachment> list) {
+        Predicate predicate = attach -> ((Attachment) attach).getName().contains("bug");
+        return filter(list, predicate);
     }
 
     public static List<Attachment> filter(List<Attachment> list,
-                                          Predicate<Attachment> predicate) {
-        return list.stream()
-                .filter( predicate )
-                .collect(Collectors.<Attachment>toList());
+                                          Predicate predicate) {
+        List<Attachment> result = new ArrayList<Attachment>();
+        for (Attachment element: list) {
+            if (predicate.test(element)) {
+                result.add(element);
+            }
+        }
+        return result;
     }
 
 }
