@@ -6,17 +6,17 @@ import java.util.function.Predicate;
 public class SearchAtt {
 
     public static List<Attachment> filterSize(List<Attachment> list) {
-        Predicate predicate = attach -> ((Attachment) attach).getSize() > 100;
+        Predicate<Attachment> predicate = attach -> attach.getSize() > 100;
         return filter(list, predicate);
     }
 
     public static List<Attachment> filterName(List<Attachment> list) {
-        Predicate predicate = attach -> ((Attachment) attach).getName().contains("bug");
+        Predicate<Attachment>  predicate = attach -> attach.getName().contains("bug");
         return filter(list, predicate);
     }
 
     public static List<Attachment> filter(List<Attachment> list,
-                                          Predicate predicate) {
+                                          Predicate<Attachment> predicate) {
         List<Attachment> result = new ArrayList<Attachment>();
         for (Attachment element: list) {
             if (predicate.test(element)) {
